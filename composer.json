@@ -1,0 +1,30 @@
+{
+  "name": "timmoh/package_name",
+  "description": "PHP API Client for 3q SDN",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "SDN3Q\\": "src/",
+      "SDN3Q\\Tests\\": "tests/"
+    },
+    "classmap": [
+      "src/"
+    ]
+  },
+  "authors": [
+    {
+      "name": "timo doersching",
+      "email": "timo@doersching.net"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "guzzlehttp/guzzle": "~6.0",
+    "guzzlehttp/psr7": "^1.4",
+    "mintware-de/json-object-mapper": "^1.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0"
+  }
+}
