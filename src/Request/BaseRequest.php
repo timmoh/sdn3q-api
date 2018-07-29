@@ -15,10 +15,11 @@ class BaseRequest {
 	private static   $client   = null;
 	protected static $response = null;
 
-	protected static $subUrl      = '';
-	protected static $requestParm = [];
-	protected static $endpoint    = null;
-	protected static $method      = 'get';
+	protected static $subUrl       = '';
+	protected static $requestParm  = [];
+	protected static $possibleParm = [];
+	protected static $endpoint     = null;
+	protected static $method       = 'get';
 
 	function __construct( $apiKey = null, $apiVersion = 2 ) {
 		self::$client     = new \GuzzleHttp\Client();
@@ -43,6 +44,12 @@ class BaseRequest {
 		return implode( '/', $url );
 	}
 
+	/**
+	 * Build API Header
+	 *
+	 * @return array
+	 * @throws NoApiKey
+	 */
 	private function apiHeader() {
 		if ( empty( self::$apiKey ) ) {
 			throw new NoApiKey();
@@ -53,9 +60,19 @@ class BaseRequest {
 		return $header;
 	}
 
+	/**
+	 * Build Parm for Request
+	 * @return array
+	 */
 	private function buildReqeustParm() {
+		$parms = [];
+		foreach ( static::$possibleParm AS $key ) {
+			if ( isset( static::$requestParm[ $key ] ) && ! empty( static::$requestParm[ $key ] ) ) {
+				$parms[ $key ] = static::$requestParm[ $key ];
+			}
+		}
 
-		return json_encode( static::$requestParm );
+		return $parms;
 	}
 
 	protected function getResponse() {
@@ -72,51 +89,10 @@ class BaseRequest {
 
 			return self::$response;
 
-		} catch ( \GuzzleHttp\Exception\RequestException $e ){
-			$errorResponse = json_decode( $e->getResponse()->getBody( true )->getContents() , true );
+		} catch ( \GuzzleHttp\Exception\RequestException $e ) {
+			$errorResponse = json_decode( $e->getResponse()->getBody( true )->getContents(), true );
 			throw new ApiException( $errorResponse['message'], $e->getResponse()->getStatusCode() );
 		}
 
-}
-
-
-private
-function checkResponse( $response ) {
-	//if ( $e->getResponse()->getStatusCode() == '400' ) {
-}
-
-/**
- * @param $e
- *
- * @deprecated
- * @return mixed
- * @throws ApiException
- */
-public
-function StatusCodeHandling( $e ) {
-	if ( $e->getResponse()->getStatusCode() == '400' ) {
-		$response = json_decode( $e->getResponse()->getBody( true )->getContents() );
-		throw new ApiException( $response[ message ] );
-
-	} elseif ( $e->getResponse()->getStatusCode() == '422' ) {
-		$response = json_decode( $e->getResponse()->getBody( true )->getContents() );
-
-		return $response;
-	} elseif ( $e->getResponse()->getStatusCode() == '500' ) {
-		$response = json_decode( $e->getResponse()->getBody( true )->getContents() );
-
-		return $response;
-	} elseif ( $e->getResponse()->getStatusCode() == '401' ) {
-		$response = json_decode( $e->getResponse()->getBody( true )->getContents() );
-
-		return $response;
-	} elseif ( $e->getResponse()->getStatusCode() == '403' ) {
-		$response = json_decode( $e->getResponse()->getBody( true )->getContents() );
-
-		return $response;
-	} else {
-		$response = json_decode( $e->getResponse()->getBody( true )->getContents() );
-		throw new ApiException( $response[ message ] );
 	}
-}
 }

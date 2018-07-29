@@ -6,12 +6,6 @@ use MintWare\JOM\ObjectMapper;
 use SDN3Q\Model\Channel;
 use SDN3Q\Request\BaseRequest;
 
-/*
-
-GET /api/v2/channels Return a collection of available Channels
-/api/v2/channels/{ChannelId}
-GET /api/v2/channels/{ChannelId} Return a Channel
-*/
 
 class Channels extends BaseRequest {
 	protected static $endpoint = 'channels';

@@ -79,6 +79,8 @@ class Projects extends BaseRequest {
 	 */
 	public static function postProject( string $label, int $streamTypeId ) {
 		self::$method = 'post';
+		self::$possibleParm= ['label','streamTypeId'];
+
 		try {
 
 			self::$requestParm['label']        = $label;
