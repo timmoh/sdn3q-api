@@ -1,7 +1,6 @@
 <?php
-namespace SDN3Q\Model;
 
-use MintWare\JOM\JsonField;
+namespace SDN3Q\Model;
 
 
 class ChannelStatus extends BaseModel {
@@ -10,6 +9,6 @@ class ChannelStatus extends BaseModel {
 	 * @var boolean
 	 * @JsonField(name="IsOnline", type="boolean")
 	 */
-	public $IsOnline;
+	public $isOnline;
 
 }

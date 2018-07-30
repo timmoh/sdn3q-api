@@ -9,13 +9,13 @@ class Channel extends BaseModel {
 	 * @var int
 	 * @JsonField(name="Id", type="int")
 	 */
-	public $Id;
+	public $id;
 	/**
 	 * Status of the Channel
 	 * @var \SDN3Q\Model\ChannelStatus
 	 * @JsonField(type="\SDN3Q\Model\ChannelStatus")
 	 */
-	public $ChannelStatus;
+	public $channelStatus;
 
 	/**
 	 * Project
@@ -23,18 +23,18 @@ class Channel extends BaseModel {
 	 * @var \SDN3Q\Model\Project
 	 * @JsonField(type="\SDN3Q\Model\Project")
 	 */
-	public $Project;
+	public $project;
 	/**
 	 * Time of creation
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="CreatedAt", type="datetime")
+	 * @JsonField(name="CreatedAt", type="\DateTime")
 	 */
-	public $CreatedAt;
+	public $createdAt;
 	/**
 	 * Time of last update
-	 * @var datetime
-	 * @JsonField(name="LastUpdatedAt", type="datetime")
+	 * @var \DateTime
+	 * @JsonField(name="LastUpdatedAt", type="\DateTime")
 	 */
-	public $LastUpdatedAt;
+	public $lastUpdatedAt;
 }

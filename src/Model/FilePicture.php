@@ -10,7 +10,7 @@ class FilePicture extends BaseModel {
 	 * @var int
 	 * @JsonField(name="FilePictureId", type="int")
 	 */
-	public $FilePictureId;
+	public $filePictureId;
 
 	/**
 	 * URI of FilePicture
@@ -18,7 +18,7 @@ class FilePicture extends BaseModel {
 	 * @var string
 	 * @JsonField(name="URI", type="string")
 	 */
-	public $URI;
+	public $uri;
 
 
 	/**
@@ -27,7 +27,7 @@ class FilePicture extends BaseModel {
 	 * @var string
 	 * @JsonField(name="ThumbURI", type="string")
 	 */
-	public $ThumbURI;
+	public $thumbUri;
 
 	/**
 	 * If FilePicture was uploaded, that is the URI of the uploaded Picture
@@ -35,7 +35,7 @@ class FilePicture extends BaseModel {
 	 * @var string
 	 * @JsonField(name="SrcPictureURI", type="string")
 	 */
-	public $SrcPictureURI;
+	public $srcPictureUri;
 
 
 	/**
@@ -44,7 +44,7 @@ class FilePicture extends BaseModel {
 	 * @var string
 	 * @JsonField(name="IsStandard", type="boolean")
 	 */
-	public $IsStandard;
+	public $isStandard;
 
 
 }

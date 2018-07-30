@@ -10,14 +10,14 @@ class FileFormat extends BaseModel {
 	 * @var int
 	 * @JsonField(name="FileFormatId", type="int")
 	 */
-	public $FileFormatId;
+	public $fileFormatId;
 	/**
 	 * Title
 	 *
 	 * @var string
 	 * @JsonField(name="Label", type="string")
 	 */
-	public $Label;
+	public $label;
 
 	/**
 	 * MIMEType
@@ -25,7 +25,7 @@ class FileFormat extends BaseModel {
 	 * @var string
 	 * @JsonField(name="MIME-Type", type="string")
 	 */
-	public $MIMEType;
+	public $mimeType;
 
 	/**
 	 * VideoCodec
@@ -33,7 +33,7 @@ class FileFormat extends BaseModel {
 	 * @var string
 	 * @JsonField(name="VideoCodec", type="string")
 	 */
-	public $VideoCodec;
+	public $videoCodec;
 
 	/**
 	 * VideoHeight
@@ -41,6 +41,6 @@ class FileFormat extends BaseModel {
 	 * @var int
 	 * @JsonField(name="VideoHeight", type="int")
 	 */
-	public $VideoHeight;
+	public $videoHeight;
 
 }

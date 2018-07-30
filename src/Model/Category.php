@@ -1,7 +1,6 @@
 <?php
-namespace SDN3Q\Model;
 
-use MintWare\JOM\JsonField;
+namespace SDN3Q\Model;
 
 class Category extends BaseModel {
 	/**
@@ -17,7 +16,7 @@ class Category extends BaseModel {
 	 * @var string
 	 * @JsonField(name="Label", type="string")
 	 */
-	public $Label;
+	public $label;
 
 
 	/**
@@ -26,12 +25,12 @@ class Category extends BaseModel {
 	 * @var int
 	 * @JsonField(name="CustomId", type="int")
 	 */
-	public $CustomId;
+	public $customId;
 	/**
 	 * URI of the Project Thumbnail
 	 *
 	 * @var string
 	 * @JsonField(name="ThumbURI", type="string")
 	 */
-	public $ThumbURI;
+	public $thumbUri;
 }

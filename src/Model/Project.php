@@ -15,14 +15,14 @@ class Project extends BaseModel {
 	 * @var \SDN3Q\Model\StreamType
 	 * @JsonField(type="\SDN3Q\Model\StreamType")
 	 */
-	public $StreamType;
+	public $streamType;
 
 	/**
 	 *
 	 * @var \SDN3Q\Model\Category
 	 * @JsonField(type="\SDN3Q\Model\Category")
 	 */
-	public $Category;
+	public $category;
 
 	/**
 	 * Title
@@ -30,15 +30,15 @@ class Project extends BaseModel {
 	 * @var string
 	 * @JsonField(name="Label", type="string")
 	 */
-	public $Label;
+	public $label;
 
 	/**
-	 *    Project SecurityKey
+	 * Project SecurityKey
 	 *
 	 * @var string
 	 * @JsonField(name="SecurityKey", type="string")
 	 */
-	public $SecurityKey;
+	public $securityKey;
 
 
 	/**
@@ -47,7 +47,7 @@ class Project extends BaseModel {
 	 * @var string
 	 * @JsonField(name="ThumbURI", type="string")
 	 */
-	public $ThumbURI;
+	public $thumbUri;
 
 	/**
 	 * Time of creation
@@ -55,7 +55,7 @@ class Project extends BaseModel {
 	 * @var \DateTime
 	 * @JsonField(name="CreatedAt", type="\DateTime")
 	 */
-	public $CreatedAt;
+	public $createdAt;
 
 	/**
 	 * Time of Last Update
@@ -63,14 +63,14 @@ class Project extends BaseModel {
 	 * @var \DateTime
 	 * @JsonField(name="LastUpdatedAt", type="\DateTime")
 	 */
-	public $LastUpdatedAt;
+	public $lastUpdatedAt;
 
 	/**
 	 * expires enabled
 	 * @var boolean
 	 * @JsonField(name="Expires", type="boolean")
 	 */
-	public $Expires;
+	public $expires;
 
 	/**
 	 * Time of expires
@@ -78,7 +78,7 @@ class Project extends BaseModel {
 	 * @var \DateTime
 	 * @JsonField(name="ExpiresAt", type="\DateTime")
 	 */
-	public $ExpiresAt;
+	public $expiresAt;
 }
 
 

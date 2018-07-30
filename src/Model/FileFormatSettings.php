@@ -10,14 +10,14 @@ class FileFormatSettings extends BaseModel {
 	 * @var int
 	 * @JsonField(name="VideoBitRate", type="int")
 	 */
-	public $VideoBitRate;
+	public $videoBitRate;
 	/**
 	 * VideoProfile
 	 *
 	 * @var string
 	 * @JsonField(name="VideoProfile", type="string")
 	 */
-	public $VideoProfile;
+	public $videoProfile;
 
 
 	/**
@@ -26,7 +26,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="VideoFPS", type="float")
 	 */
-	public $VideoFPS;
+	public $videoFps;
 
 	/**
 	 * AudioBitRate
@@ -34,7 +34,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="AudioBitRate", type="int")
 	 */
-	public $AudioBitRate;
+	public $audioBitRate;
 
 	/**
 	 * AudioSampleRate
@@ -42,7 +42,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="AudioSampleRate", type="int")
 	 */
-	public $AudioSampleRate;
+	public $audioSampleRate;
 
 	/**
 	 * AudioChannels
@@ -50,7 +50,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="AudioChannels", type="int")
 	 */
-	public $AudioChannels;
+	public $audioChannels;
 
 	/**
 	 * FileFormatId
@@ -58,7 +58,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="FileFormatId", type="int")
 	 */
-	public $FileFormatId;
+	public $fileFormatId;
 
 
 	/**
@@ -67,7 +67,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="Label", type="string")
 	 */
-	public $Label;
+	public $label;
 
 	/**
 	 * MIMEType
@@ -75,7 +75,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="MIME-Type", type="string")
 	 */
-	public $MIMEType;
+	public $mimeType;
 
 	/**
 	 * VideoCodec
@@ -83,7 +83,7 @@ class FileFormatSettings extends BaseModel {
 	 * @var string
 	 * @JsonField(name="VideoCodec", type="string")
 	 */
-	public $VideoCodec;
+	public $videoCodec;
 
 	/**
 	 * VideoHeight
@@ -91,6 +91,6 @@ class FileFormatSettings extends BaseModel {
 	 * @var int
 	 * @JsonField(name="VideoHeight", type="int")
 	 */
-	public $VideoHeight;
+	public $videoHeight;
 
 }

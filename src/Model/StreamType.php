@@ -16,5 +16,5 @@ class StreamType {
 	 * @var string
 	 * @JsonField(name="Label", type="string")
 	 */
-	public $Label;
+	public $label;
 }

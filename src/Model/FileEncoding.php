@@ -11,7 +11,7 @@ class FileEncoding  extends BaseModel{
 	 * @var boolean
 	 * @JsonField(name="UseEncoding", type="boolean")
 	 */
-	public $UseEncoding;
+	public $useEncoding;
 
 
 	/**
@@ -19,7 +19,7 @@ class FileEncoding  extends BaseModel{
 	 * @var boolean
 	 * @JsonField(name="UsePremiumEncoding", type="boolean")
 	 */
-	public $UsePremiumEncoding;
+	public $usePremiumEncoding;
 
 
 	/**
@@ -27,14 +27,14 @@ class FileEncoding  extends BaseModel{
 	 * @var boolean
 	 * @JsonField(name="UsePreProcessing", type="boolean")
 	 */
-	public $UsePreProcessing;
+	public $usePreProcessing;
 
 	/**
 	 * Deinterlace during Encoding
 	 * @var boolean
 	 * @JsonField(name="UseDeinterlace", type="boolean")
 	 */
-	public $UseDeinterlace;
+	public $useDeinterlace;
 
 
 	/**
@@ -42,28 +42,28 @@ class FileEncoding  extends BaseModel{
 	 * @var boolean
 	 * @JsonField(name="UseTwoPass", type="boolean")
 	 */
-	public $UseTwoPass;
+	public $useTwoPass;
 
 	/**
 	 * Keep Original Frame Rate (Recommended)
 	 * @var boolean
 	 * @JsonField(name="Expires", type="boolean")
 	 */
-	public $UseBPFrames;
+	public $useBPFrames;
 
 	/**
 	 * Package the Files for DRM
 	 * @var boolean
 	 * @JsonField(name="PackageForDRM", type="boolean")
 	 */
-	public $PackageForDRM;
+	public $packageForDrm;
 
 	/**
 	 * Use Watermark
 	 * @var boolean
 	 * @JsonField(name="UseWatermark", type="boolean")
 	 */
-	public $UseWatermark;
+	public $useWatermark;
 
 
 	/**
@@ -72,7 +72,7 @@ class FileEncoding  extends BaseModel{
 	 * @var string
 	 * @JsonField(name="WatermarkURI", type="string")
 	 */
-	public $WatermarkURI;
+	public $watermarkUri;
 
 
 	/**
@@ -81,7 +81,7 @@ class FileEncoding  extends BaseModel{
 	 * @var string
 	 * @JsonField(name="WatermarkPosition", type="string")
 	 */
-	public $WatermarkPosition;
+	public $watermarkPosition;
 
 	/**
 	 * Position of Watermark
@@ -89,6 +89,6 @@ class FileEncoding  extends BaseModel{
 	 * @var array
 	 * @JsonField(name="FileFormats", type="array")
 	 */
-	public $FileFormats = [];
+	public $fileFormats = [];
 
 }
