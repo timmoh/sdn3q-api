@@ -6,17 +6,6 @@ use MintWare\JOM\ObjectMapper;
 use SDN3Q\Model\Project;
 use SDN3Q\Request\BaseRequest;
 
-/*
-/api/v2/projects
-
-
-POST /api/v2/projects Create a new Project
-/api/v2/projects/{ProjectId}
-DELETE /api/v2/projects/{ProjectId} Delete a Project by Id
-GET /api/v2/projects/{ProjectId} Return Project
-PUT /api/v2/projects/{ProjectId}
-*/
-
 
 class Projects extends BaseRequest {
 	protected static $endpoint = 'projects';

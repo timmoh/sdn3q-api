@@ -4,13 +4,13 @@ PHP-API-Connector (for PHP 7+)
 
 **1.0 Welcome**
 
-GET /api/v2/ You can test Authentication with this function
+✅ GET /api/v2/ You can test Authentication with this function
 
 **1.1 ApiKey**
 
-DELETE /api/v2/apikey You can delete the Authentication Key (APIKEY) for a given user by Username / Password with this function
+✅ DELETE /api/v2/apikey You can delete the Authentication Key (APIKEY) for a given user by Username / Password with this function
 
-GET /api/v2/apikey You can get the Authentication Key (APIKEY) for a given user by Username / Password with this function
+✅ GET /api/v2/apikey You can get the Authentication Key (APIKEY) for a given user by Username / Password with this function
 
 **2.0 Projects**
 
