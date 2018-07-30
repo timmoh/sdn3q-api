@@ -1,6 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
+use MintWare\JOM\JsonField;
 
 class Category extends BaseModel {
 	/**
