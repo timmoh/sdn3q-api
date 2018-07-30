@@ -10,6 +10,12 @@ use SDN3Q\Request\BaseRequest;
 class Channels extends BaseRequest {
 	protected static $endpoint = 'channels';
 
+	/**
+	 * Return a collection of available Channels
+	 *
+	 * @return array
+	 * @throws \Exception
+	 */
 	public static function getChannels() {
 		$projects = [];
 		try {
@@ -18,7 +24,6 @@ class Channels extends BaseRequest {
 			$data     = json_decode( $response, true );
 			if ( count( $data['Channels'] ) > 0 ) {
 				foreach ( $data['Channels'] as $dataProject ) {
-					print_r($dataProject);
 					$projects[] = $mapper->mapJson( json_encode( $dataProject ), Channel::class );
 				}
 			}
@@ -29,16 +34,20 @@ class Channels extends BaseRequest {
 		return $projects;
 	}
 
+	/**
+	 * Return a Channel
+	 * @param int $channelId
+	 *
+	 * @return \SDN3Q\Model\Channel|null
+	 * @throws \Exception
+	 */
 	public static function getChannel( int $channelId ) {
 		$channel = null;
+		parent::$subUrl = $channelId;
 		try {
 			$mapper         = new ObjectMapper();
-			parent::$subUrl = $channelId;
-
 			$response = self::getResponse();
-			print_r( $response );
 
-			//$data    = json_decode( $response, true );
 			$channel = $mapper->mapJson( $response, Channel::class );
 		} catch ( \Exception $e ) {
 			throw $e;

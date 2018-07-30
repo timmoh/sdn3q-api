@@ -95,7 +95,11 @@ class BaseRequest {
 		return $header;
 	}
 
-
+	/**
+	 * @return array
+	 * @throws \SDN3Q\Exception\NoUserName
+	 * @throws \SDN3Q\Exception\NoUserPassword
+	 */
 	private function apiLoginHeader() {
 		if ( empty( self::$userName ) ) {
 			throw new \SDN3Q\Exception\NoUserName();

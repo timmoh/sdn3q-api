@@ -2,7 +2,6 @@
 
 namespace SDN3Q\Request\Channels;
 
-use MintWare\JOM\ObjectMapper;
 use SDN3Q\Request\BaseRequest;
 
 
@@ -12,17 +11,18 @@ class Output extends BaseRequest {
 	/**
 	 * Return Output URIs of a Channel
 	 *
-	 * @param $channelId
+	 * @param int $channelId
 	 *
 	 * @return array
 	 * @throws \Exception
 	 */
-	public static function getOutput( $channelId ) {
+	public static function getOutput( int $channelId ) {
 		$channelOutputURIs = [];
+		parent::$subUrl    = $channelId . '/output';
 		try {
-			parent::$subUrl = $channelId . '/output';
+
 			$response = self::getResponse();
-			$data = json_decode( $response, true );
+			$data     = json_decode( $response, true );
 			foreach ( $data as $value ) {
 				$channelOutputURIs[] = $value;
 			}

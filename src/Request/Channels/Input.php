@@ -1,20 +1,70 @@
 <?php
+
 namespace SDN3Q\Request\Channels;
+
+use MintWare\JOM\ObjectMapper;
+use SDN3Q\Enum\StreamInType;
+use SDN3Q\Model\ChannelInput;
 use SDN3Q\Request\BaseRequest;
 
-/*
-GET /api/v2/channels/{ChannelId}/input Return Input of a Channel
-PUT /api/v2/channels/{ChannelId}/input Change Channel Input
-*/
-class Input extends BaseRequest{
-	protected static $endpoint ='channels';
-	
-	public static function getInput($channelId){
-		throw new \SDN3Q\Exception\NotImplemented();
+class Input extends BaseRequest {
+	protected static $endpoint = 'channels';
+
+
+	/**
+	 * Return Input of a Channel
+	 *
+	 * @param int $channelId
+	 *
+	 * @return ChannelInput
+	 * @throws \Exception
+	 */
+	public static function getInput( int $channelId ) {
+		parent::$subUrl = $channelId . '/input';
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$input    = $mapper->mapJson( $response, ChannelInput::class );
+
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
+
+
+		return $input;
 	}
-	
-	public static function changeInput($channelId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Change Channel Input
+	 *
+	 * @param int          $channelId
+	 * @param StreamInType $streamInType
+	 * @param string|null  $streamInUri
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public static function changeInput( int $channelId, StreamInType $streamInType, string $streamInUri = null ) {
+		parent::$subUrl     = $channelId . '/input';
+		self::$method       = 'put';
+		self::$possibleParm = [
+			'StreamInType',
+			'StreamInURI',
+		];
+		try {
+			self::$requestParm['StreamInType'] = $streamInType;
+			self::$requestParm['StreamInURI']  = $streamInUri;
+			$mapper                            = new ObjectMapper();
+			$response                          = self::getResponse();
+			$input                             = $mapper->mapJson( $response, ChannelInput::class );
+
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
+
+
+		return $input;
+
 	}
 }
 

@@ -4,4 +4,5 @@ namespace SDN3Q\Exception;
 
 class NoApiKey extends \SDN3Q\Exception\ApiException
 {
+	protected $message = 'No ApiKey';
 }

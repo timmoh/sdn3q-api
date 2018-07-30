@@ -64,25 +64,25 @@ PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a Waterm
 
 **3.1 Channel Picture**
 
-GET /api/v2/channels/{ChannelId}/picture Return Channel Picture
+✅ GET /api/v2/channels/{ChannelId}/picture Return Channel Picture
 
-PUT /api/v2/channels/{ChannelId}/picture Put a Channel Picture
+✅ PUT /api/v2/channels/{ChannelId}/picture Put a Channel Picture
 
 **3.2 Channel Metadata**
 
-GET /api/v2/channels/{ChannelId}/metadata Return Metadata of a Channel
+✅ GET /api/v2/channels/{ChannelId}/metadata Return Metadata of a Channel
 
-PUT /api/v2/channels/{ChannelId}/metadata Change Channel Metadata
+✅ PUT /api/v2/channels/{ChannelId}/metadata Change Channel Metadata
 
-PUT /api/v2/channels/{ChannelId}/metadata/boardpicture Put a ChannelMetadata BoardPicture
+✅ PUT /api/v2/channels/{ChannelId}/metadata/boardpicture Put a ChannelMetadata BoardPicture
 
-PUT /api/v2/channels/{ChannelId}/metadata/creditspicture Put a ChannelMetadata CreditsPicture
+✅ PUT /api/v2/channels/{ChannelId}/metadata/creditspicture Put a ChannelMetadata CreditsPicture
 
 **3.3 Channel Input**
 
-GET /api/v2/channels/{ChannelId}/input Return Input of a Channel
+✅ GET /api/v2/channels/{ChannelId}/input Return Input of a Channel
 
-PUT /api/v2/channels/{ChannelId}/input Change Channel Input
+✅ PUT /api/v2/channels/{ChannelId}/input Change Channel Input
 
 **3.4 Channel Output**
 
@@ -98,13 +98,13 @@ PUT /api/v2/channels/{ChannelId}/embedstate Change Playout State of Channels Emb
 
 **3.6 Channel Transcoder**
 
-GET /api/v2/channels/{ChannelId}/formats Return available Channel Transcoder Formats
+✅ GET /api/v2/channels/{ChannelId}/formats Return available Channel Transcoder Formats
 
-LINK /api/v2/channels/{ChannelId}/formats/{ChannelFormatId} Add (link) a ChannelFormat to a Channel and create a new Transcoder
+✅ LINK /api/v2/channels/{ChannelId}/formats/{ChannelFormatId} Add (link) a ChannelFormat to a Channel and create a new Transcoder
 
-UNLINK /api/v2/channels/{ChannelId}/formats/{ChannelFormatId} Remove (unlink) a ChannelFormat from a Channel and remove the Transcoder
+✅ UNLINK /api/v2/channels/{ChannelId}/formats/{ChannelFormatId} Remove (unlink) a ChannelFormat from a Channel and remove the Transcoder
 
-GET /api/v2/channels/{ChannelId}/transcoders Return enabled Channel Transcoders
+✅ GET /api/v2/channels/{ChannelId}/transcoders Return enabled Channel Transcoders
 
 **4.0 Files**
 

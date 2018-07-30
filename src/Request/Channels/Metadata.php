@@ -1,30 +1,133 @@
 <?php
+
 namespace SDN3Q\Request\Channels;
+
+use MintWare\JOM\ObjectMapper;
+use SDN3Q\Model\ChannelMetaData;
 use SDN3Q\Request\BaseRequest;
 
-/*
-GET /api/v2/channels/{ChannelId}/metadata Return Metadata of a Channel
-PUT /api/v2/channels/{ChannelId}/metadata Change Channel Metadata
-PUT /api/v2/channels/{ChannelId}/metadata/boardpicture Put a ChannelMetadata BoardPicture
-PUT /api/v2/channels/{ChannelId}/metadata/creditspicture Put a ChannelMetadata CreditsPicture
-*/
-class Metadata extends BaseRequest{
-	protected static $endpoint ='channels';
-	
-	public static function getMetadata($channelId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+class Metadata extends BaseRequest {
+	protected static $endpoint = 'channels';
+	use \SDN3Q\Request\UploadRequest;
+
+	/**
+	 * Return Metadata of a Channel
+	 *
+	 * @param int $channelId
+	 *
+	 * @return ChannelMetaData|null
+	 * @throws \Exception
+	 */
+	public static function getMetadata( int $channelId ) {
+		$channel        = null;
+		parent::$subUrl = $channelId . '/metadata';
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
+
+
+		return $metaData;
 	}
-	
-	public static function changeMetadata($channelId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Change Channel Metadata
+	 *
+	 * @param int  $channelId
+	 * @param array $parms
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public static function changeMetadata( int $channelId,array $parms = [] ) {
+		self::$method       = 'put';
+		self::$possibleParm = [
+			'Title',
+			'Description',
+			'Tags',
+			'DisplayTitle',
+			'DisplayTitleSecondLine',
+			'BoardTitle',
+			'BoardTitleSecondLine',
+			'CountdownEnd',
+			'ShowChannelCredits',
+			'ChannelCredits',
+			'ChannelCreditsSecondLine',
+		];
+		parent::$subUrl     = $channelId . '/metadata';
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
+		return $metaData;
 	}
-	
-	public static function putBoardPicture($channelId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Put a ChannelMetadata BoardPicture
+	 *
+	 * @param int    $channelId
+	 * @param string $imagePath
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public static function putBoardPicture( int $channelId, string $imagePath ) {
+		self::$method       = 'put';
+		parent::$subUrl = $channelId . '/metadata/boardpicture';
+		self::$allowedUploadMimeType = [ 'image/jpeg', 'image/png' ];
+		try {
+
+			$mime = self::checkMimeType( $imagePath );
+
+			self::$additionalHeader[] = ["Content-type" =>$mime];
+
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
+		return $metaData;
 	}
-	
-	public static function putCreditsPicture($channelId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Put a ChannelMetadata CreditsPicture
+	 *
+	 * @param int    $channelId
+	 * @param string $imagePath
+	 *
+	 * @return mixed
+	 * @throws \Exception
+	 */
+	public static function putCreditsPicture( int $channelId, string $imagePath ) {
+		self::$method       = 'put';
+		parent::$subUrl = $channelId . '/metadata/creditspicture';
+		self::$allowedUploadMimeType = [ 'image/jpeg', 'image/png' ];
+		try {
+			$mime = self::checkMimeType( $imagePath );
+
+			self::$additionalHeader[] = ["Content-type" =>$mime];
+
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+
+		} catch ( \Exception $e ) {
+			throw $e;
+		}
+		return $metaData;
+
+
 	}
 }
 
