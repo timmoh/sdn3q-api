@@ -12,6 +12,7 @@ class Projects extends BaseRequest {
 
 	/**
 	 * Return a collection of available Projects
+	 *
 	 * @return array
 	 * @throws \Exception
 	 */
