@@ -1,5 +1,5 @@
 {
-  "name": "timmoh/sdn3-api",
+  "name": "timmoh/sdn3q-api",
   "description": "PHP API Client for 3q SDN",
   "minimum-stability": "stable",
   "license": "proprietary",
