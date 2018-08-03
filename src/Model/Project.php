@@ -13,14 +13,14 @@ class Project extends BaseModel {
 	/**
 	 *
 	 * @var \SDN3Q\Model\StreamType
-	 * @JsonField(type="\SDN3Q\Model\StreamType")
+	 * @JsonField(name="StreamType", type="\SDN3Q\Model\StreamType")
 	 */
 	public $streamType;
 
 	/**
 	 *
 	 * @var \SDN3Q\Model\Category
-	 * @JsonField(type="\SDN3Q\Model\Category")
+	 * @JsonField(name="Category", type="\SDN3Q\Model\Category")
 	 */
 	public $category;
 

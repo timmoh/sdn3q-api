@@ -13,7 +13,7 @@ class Channel extends BaseModel {
 	/**
 	 * Status of the Channel
 	 * @var \SDN3Q\Model\ChannelStatus
-	 * @JsonField(type="\SDN3Q\Model\ChannelStatus")
+	 * @JsonField(name="ChannelStatus",type="\SDN3Q\Model\ChannelStatus")
 	 */
 	public $channelStatus;
 
@@ -21,7 +21,7 @@ class Channel extends BaseModel {
 	 * Project
 	 *
 	 * @var \SDN3Q\Model\Project
-	 * @JsonField(type="\SDN3Q\Model\Project")
+	 * @JsonField(name="Project",type="\SDN3Q\Model\Project")
 	 */
 	public $project;
 	/**
