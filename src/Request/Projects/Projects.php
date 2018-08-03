@@ -127,7 +127,14 @@ class Projects extends BaseRequest {
       return true;
    }
 
-
+   /**
+    * get Channel Id
+    *
+    * @param int $projectId
+    *
+    * @return int|null
+    * @throws \Exception
+    */
    public static function getChannelId(int $projectId) {
       $channelId = null;
 
