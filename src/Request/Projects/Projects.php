@@ -138,9 +138,9 @@ class Projects extends BaseRequest {
    public static function getChannelId(int $projectId) {
       $channelId = null;
 
-      $client    = new \SDN3Q\Request\Channels\Channels(self::$apiKey);
+      $request    = new \SDN3Q\Request\Channels\Channels(self::$client);
 
-      $channels = $client::getChannels();
+      $channels = $request::getChannels();
 
       foreach ($channels AS $channel) {
          if($projectId==$channel->project->id) {

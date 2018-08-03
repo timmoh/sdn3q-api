@@ -3,18 +3,21 @@
 namespace SDN3Q\Request;
 
 
+use SDN3Q\Client;
 use SDN3Q\Exception\ApiException;
 use SDN3Q\Exception\NoApiKey;
 use SDN3Q\Exception\NoContent;
 
 class BaseRequest {
-	public static $apiVersion = '2';
-	public static $apiKey     = null;
 
-	const API_PROTOCOL = 'https';
-	const API_BASE_URL = 'sdn.3qsdn.com/api';
-	private static   $client   = null;
-	protected static $response = null;
+	private static   $httpclient = null;
+	protected static $response   = null;
+
+   /**
+    * @var \SDN3Q\Client
+    */
+   protected static $client           = null;
+
 
 	protected static $subUrl           = '';
 	protected static $additionalHeader = []; //additional http header
@@ -22,20 +25,18 @@ class BaseRequest {
 	protected static $possibleParm     = []; //possible parameter that could be filled
 	protected static $endpoint         = null;
 	protected static $method           = 'get'; //http method
-	protected static $useApiKey        = true; //use api key (true) or use user/passwort (false)
-	public static    $userName         = null;
-	public static    $userPassword     = null;
 
-	/**
-	 * BaseRequest constructor.
-	 *
-	 * @param string $apiKey
-	 * @param int    $apiVersion
-	 */
-	function __construct( $apiKey = null, $apiVersion = 2 ) {
-		self::$client     = new \GuzzleHttp\Client();
-		self::$apiKey     = $apiKey;
-		self::$apiVersion = $apiVersion;
+
+
+
+   /**
+    * BaseRequest constructor.
+    *
+    * @param \SDN3Q\Client  $client
+    */
+	function __construct( \SDN3Q\Client  $client ) {
+      self::$client = $client;
+		self::$httpclient = new \GuzzleHttp\Client();
 	}
 
 	/**
@@ -43,7 +44,7 @@ class BaseRequest {
 	 * @return string
 	 */
 	private function apiBaseUrl() {
-		return self::API_PROTOCOL . '://' . self::API_BASE_URL . '/v' . self::$apiVersion . '';
+		return self::$client->apiProtocol . '://' . self::$client->baseUrl . '/v' .self::$client->apiVersion . '';
 	}
 
 	/**
@@ -51,7 +52,7 @@ class BaseRequest {
 	 * @return string
 	 */
 	private function apiUrlRequest() {
-		$url = [ self::apiBaseUrl() ];
+	   $url = [ self::apiBaseUrl() ];
 
 		if ( ! empty( static::$endpoint ) ) {
 			$url[] = static::$endpoint;
@@ -63,55 +64,7 @@ class BaseRequest {
 		return implode( '/', $url );
 	}
 
-	/**
-	 * Build API Header
-	 *
-	 * @return array
-	 * @throws NoApiKey
-	 */
-	private function apiHeader() {
-		try {
-			if ( self::$useApiKey ) {
-				return self::apiKeyHeader();
-			} else {
-				return self::apiLoginHeader();
-			}
-		} catch ( \Exception $e ) {
-			throw $e;
-		}
-	}
 
-	/**
-	 * @return array
-	 * @throws NoApiKey
-	 */
-	private function apiKeyHeader() {
-		if ( empty( self::$apiKey ) ) {
-			throw new \SDN3Q\Exception\NoApiKey();
-		}
-
-		$header = [ 'X-AUTH-APIKEY' => self::$apiKey ];
-
-		return $header;
-	}
-
-	/**
-	 * @return array
-	 * @throws \SDN3Q\Exception\NoUserName
-	 * @throws \SDN3Q\Exception\NoUserPassword
-	 */
-	private function apiLoginHeader() {
-		if ( empty( self::$userName ) ) {
-			throw new \SDN3Q\Exception\NoUserName();
-		}
-		if ( empty( self::$userName ) ) {
-			throw new \SDN3Q\Exception\NoUserPassword();
-		}
-
-		$header = [ 'X-AUTH-USERNAME' => self::$userName, 'X-AUTH-PASSWD' => self::$userPassword ];
-
-		return $header;
-	}
 
 	/**
 	 * @return array
@@ -119,7 +72,7 @@ class BaseRequest {
 	 */
 	private function buildHeader() {
 		try {
-			return array_merge( self::$additionalHeader, self::apiHeader() );
+			return array_merge( self::$additionalHeader, self::$client->apiHeader() );
 		} catch ( \Exception $e ) {
 			throw $e;
 		}
@@ -143,10 +96,10 @@ class BaseRequest {
 
 	protected function getResponse() {
 		try {
-			$url = self::apiUrlRequest();
+		   $url = self::apiUrlRequest();
 
 			$request  = new \GuzzleHttp\Psr7\Request( strtoupper( self::$method ), $url );
-			$response = self::$client->send( $request, [
+			$response = self::$httpclient->send($request, [
 				'json'    => static::$requestParm,
 				'headers' => self::buildHeader(),
 			] );
