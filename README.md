@@ -90,11 +90,11 @@ PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a Waterm
 
 **3.5 Channel Embed**
 
-GET /api/v2/channels/{ChannelId}/embed Return the Embed Codes of a Channel
+✅ GET /api/v2/channels/{ChannelId}/embed Return the Embed Codes of a Channel
 
-GET /api/v2/channels/{ChannelId}/embedstate Return the Playout State of Channels Embed Code
+✅ GET /api/v2/channels/{ChannelId}/embedstate Return the Playout State of Channels Embed Code
 
-PUT /api/v2/channels/{ChannelId}/embedstate Change Playout State of Channels Embed Code
+✅ PUT /api/v2/channels/{ChannelId}/embedstate Change Playout State of Channels Embed Code
 
 **3.6 Channel Transcoder**
 

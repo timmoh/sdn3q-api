@@ -25,7 +25,7 @@ class Playout extends BaseRequest{
 	
 	public static function getPlayout(int $projectId,int $fileId,$playoutId=null){
 		if($playoutId){
-			return self::getPlayoutDefault(int $projectId,int $fileId);
+			return self::getPlayoutDefault($projectId,$fileId);
 		} else {
 
 		}		
