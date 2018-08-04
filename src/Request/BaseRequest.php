@@ -3,124 +3,138 @@
 namespace SDN3Q\Request;
 
 
-use SDN3Q\Client;
 use SDN3Q\Exception\ApiException;
-use SDN3Q\Exception\NoApiKey;
 use SDN3Q\Exception\NoContent;
 
 class BaseRequest {
 
-	private static   $httpclient = null;
-	protected static $response   = null;
+   private static   $httpclient = null;
+   protected static $response   = null;
 
    /**
     * @var \SDN3Q\Client
     */
-   protected static $client           = null;
+   protected static $client = null;
 
 
-	protected static $subUrl           = '';
-	protected static $additionalHeader = []; //additional http header
-	protected static $requestParm      = []; //parameter to send via json
-	protected static $possibleParm     = []; //possible parameter that could be filled
-	protected static $endpoint         = null;
-	protected static $method           = 'get'; //http method
-
-
+   protected static $subUrl             = '';
+   protected static $additionalHeader   = []; //additional http header
+   protected static $requestParm        = []; //parameter to send
+   protected static $requestParmAsJson  = true; //send parameter as via json (true)
+   protected static $requestParmAsQuery = false; //send parameter as via query (true
+   protected static $possibleParm       = []; //possible parameter that could be filled
+   protected static $endpoint           = null;
+   protected static $method             = 'get'; //http method
 
 
    /**
     * BaseRequest constructor.
     *
-    * @param \SDN3Q\Client  $client
+    * @param \SDN3Q\Client $client
     */
-	function __construct( \SDN3Q\Client  $client ) {
-      self::$client = $client;
-		self::$httpclient = new \GuzzleHttp\Client();
-	}
+   function __construct(\SDN3Q\Client $client) {
+      self::$client     = $client;
+      self::$httpclient = new \GuzzleHttp\Client();
+   }
 
-	/**
-	 * Build Base URL for API
-	 * @return string
-	 */
-	private function apiBaseUrl() {
-		return self::$client->apiProtocol . '://' . self::$client->baseUrl . '/v' .self::$client->apiVersion . '';
-	}
+   /**
+    * Build Base URL for API
+    * @return string
+    */
+   private function apiBaseUrl() {
+      return self::$client->apiProtocol . '://' . self::$client->baseUrl . '/v' . self::$client->apiVersion . '';
+   }
 
-	/**
-	 * Build complete URL for Api Endpoint
-	 * @return string
-	 */
-	private function apiUrlRequest() {
-	   $url = [ self::apiBaseUrl() ];
+   /**
+    * Build complete URL for Api Endpoint
+    * @return string
+    */
+   private function apiUrlRequest() {
+      $url = [self::apiBaseUrl()];
 
-		if ( ! empty( static::$endpoint ) ) {
-			$url[] = static::$endpoint;
-		}
-		if ( ! empty( static::$subUrl ) ) {
-			$url[] = static::$subUrl;
-		}
+      if (!empty(static::$endpoint)) {
+         $url[] = static::$endpoint;
+      }
+      if (!empty(static::$subUrl)) {
+         $url[] = static::$subUrl;
+      }
+      $returnUrl = implode('/', $url);
 
-		return implode( '/', $url );
-	}
+      //if parameter should be send via query url?foo=bar
+      if (self::$requestParmAsQuery) {
+         $returnUrl .= '?' . http_build_query(self::$requestParm);
+      }
 
 
+      return $returnUrl;
+   }
 
-	/**
-	 * @return array
-	 * @throws \Exception
-	 */
-	private function buildHeader() {
-		try {
-			return array_merge( self::$additionalHeader, self::$client->apiHeader() );
-		} catch ( \Exception $e ) {
-			throw $e;
-		}
 
-	}
+   /**
+    * @return array
+    * @throws \Exception
+    */
+   private function buildHeader() {
+      try {
+         return array_merge(self::$additionalHeader, self::$client->apiHeader());
+      } catch (\Exception $e) {
+         throw $e;
+      }
 
-	/**
-	 * Build Parm for Request
-	 * @return array
-	 */
-	private function buildReqeustParm() {
-		$parms = [];
-		foreach ( static::$possibleParm AS $key ) {
-			if ( isset( static::$requestParm[ $key ] ) && ! empty( static::$requestParm[ $key ] ) ) {
-				$parms[ $key ] = static::$requestParm[ $key ];
-			}
-		}
+   }
 
-		return $parms;
-	}
+   /**
+    * Build Parm for Request
+    * @return array
+    */
+   private function buildReqeustParm() {
+      $parms = [];
+      foreach (static::$possibleParm AS $key) {
+         if (isset(static::$requestParm[$key]) && !empty(static::$requestParm[$key])) {
+            $parms[$key] = static::$requestParm[$key];
+         }
+      }
 
-	protected function getResponse() {
-		try {
-		   $url = self::apiUrlRequest();
+      return $parms;
+   }
 
-			$request  = new \GuzzleHttp\Psr7\Request( strtoupper( self::$method ), $url );
-			$response = self::$httpclient->send($request, [
-				'json'    => static::$requestParm,
-				'headers' => self::buildHeader(),
-			] );
-			self::checkStatusCode( $response->getStatusCode() );
-			self::$response = $response->getBody()->getContents();
+   /**
+    * Get Response
+    *
+    * @return null|string
+    * @throws ApiException
+    * @throws \GuzzleHttp\Exception\GuzzleException
+    */
+   protected function getResponse() {
+      try {
+         $url     = self::apiUrlRequest();
+         $request = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
 
-			return self::$response;
+         $requestParms = ['headers' => self::buildHeader()];
+         if (self::$requestParmAsJson) {
+            $requestParms['json'] = static::$requestParm;
+         }
 
-		} catch ( \GuzzleHttp\Exception\RequestException $e ) {
-			$errorResponse = json_decode( $e->getResponse()->getBody( true )->getContents(), true );
-			throw new ApiException( $errorResponse['message'], $e->getResponse()->getStatusCode() );
-		} catch ( \Exception $e ) {
-			throw $e;
-		}
 
-	}
+         $response = self::$httpclient->send($request, $requestParms);
+         self::checkStatusCode($response->getStatusCode());
+         self::$response = $response->getBody()->getContents();
 
-	private function checkStatusCode( $statusCode ) {
-		if ( $statusCode == 204 ) {
-			throw new NoContent();
-		}
+         return self::$response;
 
-	}
+      } catch (\GuzzleHttp\Exception\RequestException $e) {
+         $errorResponse = json_decode($e->getResponse()->getBody(true)->getContents(), true);
+         throw new ApiException($errorResponse['message'], $e->getResponse()->getStatusCode());
+      } catch (\Exception $e) {
+         throw $e;
+      }
+
+   }
+
+   private function checkStatusCode($statusCode) {
+      if ($statusCode == 204) {
+         throw new NoContent();
+      }
+
+   }
 }
