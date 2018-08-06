@@ -16,7 +16,7 @@ class Transcoder extends BaseRequest {
 	 *
 	 * @param int $channelId
 	 *
-	 * @return array
+	 * @return ChannelTranscoderFormat[]|null
 	 * @throws \Exception
 	 */
 	public static function getFormats( int $channelId ) {
@@ -45,7 +45,7 @@ class Transcoder extends BaseRequest {
 	 * @param int $channelId
 	 * @param int $channelFormatId
 	 *
-	 * @return array
+	 * @return ChannelTranscoderFormat[]|null
 	 * @throws \Exception
 	 */
 	public static function linkFormat( int $channelId, int $channelFormatId ) {
@@ -76,7 +76,7 @@ class Transcoder extends BaseRequest {
 	 * @param int $channelId
 	 * @param int $channelFormatId
 	 *
-	 * @return array
+	 * @return ChannelTranscoderFormat[]|null
 	 * @throws \Exception
 	 */
 	public static function unlinkFormat( int $channelId, int $channelFormatId ) {
@@ -112,7 +112,7 @@ class Transcoder extends BaseRequest {
 	 *
 	 * @param int $channelId
 	 *
-	 * @return mixed
+	 * @return ChannelTranscoderFormat[]|null
 	 * @throws \Exception
 	 */
 	public static function getTranscoder( int $channelId ) {

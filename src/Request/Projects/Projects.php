@@ -13,7 +13,7 @@ class Projects extends BaseRequest {
    /**
     * Return a collection of available Projects
     *
-    * @return array
+    * @return Project[]|null
     * @throws \Exception
     */
    public static function getProjects() {

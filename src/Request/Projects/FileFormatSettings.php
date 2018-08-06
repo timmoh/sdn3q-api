@@ -14,7 +14,7 @@ class FileFormatSettings extends BaseRequest {
 	 *
 	 * @param int $projectId
 	 *
-	 * @return array
+	 * @return FileFormatSettings[]|null
 	 * @throws \Exception
 	 */
 	public static function getFileFormatSettings( int $projectId ) {

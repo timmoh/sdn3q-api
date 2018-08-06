@@ -13,7 +13,7 @@ class Channels extends BaseRequest {
 	/**
 	 * Return a collection of available Channels
 	 *
-	 * @return array
+	 * @return Channel[]|null
 	 * @throws \Exception
 	 */
 	public static function getChannels() {
