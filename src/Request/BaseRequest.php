@@ -41,7 +41,7 @@ class BaseRequest {
     * Build Base URL for API
     * @return string
     */
-   private function apiBaseUrl() {
+   private static function apiBaseUrl() {
       return self::$client->apiProtocol . '://' . self::$client->baseUrl . '/v' . self::$client->apiVersion . '';
    }
 
@@ -49,7 +49,7 @@ class BaseRequest {
     * Build complete URL for Api Endpoint
     * @return string
     */
-   private function apiUrlRequest() {
+   private static function apiUrlRequest() {
       $url = [self::apiBaseUrl()];
 
       if (!empty(static::$endpoint)) {
@@ -74,7 +74,7 @@ class BaseRequest {
     * @return array
     * @throws \Exception
     */
-   private function buildHeader() {
+   private static function buildHeader() {
       try {
          return array_merge(self::$additionalHeader, self::$client->apiHeader());
       } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class BaseRequest {
     * Build Parm for Request
     * @return array
     */
-   private function buildReqeustParm() {
+   private static function buildReqeustParm() {
       $parms = [];
       foreach (static::$possibleParm AS $key) {
          if (isset(static::$requestParm[$key]) && !empty(static::$requestParm[$key])) {
@@ -105,7 +105,7 @@ class BaseRequest {
     * @throws ApiException
     * @throws \GuzzleHttp\Exception\GuzzleException
     */
-   protected function getResponse() {
+   protected static function getResponse() {
       try {
          $url     = self::apiUrlRequest();
          $request = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
@@ -127,11 +127,20 @@ class BaseRequest {
          throw new ApiException($errorResponse['message'], $e->getResponse()->getStatusCode());
       } catch (\Exception $e) {
          throw $e;
+      } finally {
+         self::$subUrl             = '';
+         self::$additionalHeader   = []; //additional http header
+         self::$requestParm        = []; //parameter to send
+         self::$requestParmAsJson  = true; //send parameter as via json (true)
+         self::$requestParmAsQuery = false; //send parameter as via query (true
+         self::$possibleParm       = []; //possible parameter that could be filled
+         self::$endpoint           = null;
+         self::$method             = 'get'; //http method
       }
 
    }
 
-   private function checkStatusCode($statusCode) {
+   private static function checkStatusCode($statusCode) {
       if ($statusCode == 204) {
          throw new NoContent();
       }
