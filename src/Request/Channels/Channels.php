@@ -17,21 +17,21 @@ class Channels extends BaseRequest {
 	 * @throws \Exception
 	 */
 	public static function getChannels() {
-		$projects = [];
+		$channels = [];
 		try {
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
 			$data     = json_decode( $response, true );
 			if ( count( $data['Channels'] ) > 0 ) {
 				foreach ( $data['Channels'] as $dataProject ) {
-					$projects[] = $mapper->mapJson( json_encode( $dataProject ), Channel::class );
+               $channels[] = $mapper->mapJson( json_encode( $dataProject ), Channel::class );
 				}
 			}
 		} catch ( \Exception $e ) {
 			throw $e;
 		}
 
-		return $projects;
+		return $channels;
 	}
 
 	/**
