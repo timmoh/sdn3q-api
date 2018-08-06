@@ -7,13 +7,6 @@ use SDN3Q\Enum\PlayoutState;
 use SDN3Q\Model\ChannelEmbedCodes;
 use SDN3Q\Request\BaseRequest;
 
-/*
-GET /api/v2/channels/{ChannelId}/embed Return the Embed Codes of a Channel
-/api/v2/channels/{ChannelId}/embedstate
-GET /api/v2/channels/{ChannelId}/embedstate Return the Playout State of Channels Embed Code
-PUT /api/v2/channels/{ChannelId}/embedstate
-*/
-
 class Embed extends BaseRequest {
    protected static $endpoint = 'channels';
 
@@ -76,7 +69,7 @@ class Embed extends BaseRequest {
     *
     * @param int $channelId
     *
-    * @return mixed
+    * @return \SDN3Q\Enum\PlayoutState
     * @throws \GuzzleHttp\Exception\GuzzleException
     */
    public static function getEmbedState(int $channelId) {
@@ -97,7 +90,7 @@ class Embed extends BaseRequest {
     * @param int          $channelId
     * @param PlayoutState $playoutState
     *
-    * @return mixed
+    * @return \SDN3Q\Enum\PlayoutState
     * @throws \GuzzleHttp\Exception\GuzzleException
     */
    public static function changeEmbedState(int $channelId, PlayoutState $playoutState) {

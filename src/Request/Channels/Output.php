@@ -15,7 +15,7 @@ class Output extends BaseRequest {
     *
     * @param int $channelId
     *
-    * @return array
+    * @return ChannelOutput
     * @throws \Exception
     */
    public static function getOutput(int $channelId) {

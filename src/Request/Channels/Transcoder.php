@@ -25,7 +25,6 @@ class Transcoder extends BaseRequest {
 		try {
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
-			print_r( $response );
 			$data = json_decode( $response, true );
 			if ( count( $data['ChannelFormats'] ) > 0 ) {
 				foreach ( $data['ChannelFormats'] as $dataValue ) {

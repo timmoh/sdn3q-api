@@ -41,7 +41,7 @@ class Input extends BaseRequest {
 	 * @param StreamInType $streamInType
 	 * @param string|null  $streamInUri
 	 *
-	 * @return mixed
+	 * @return ChannelInput
 	 * @throws \Exception
 	 */
 	public static function changeInput( int $channelId, StreamInType $streamInType, string $streamInUri = null ) {

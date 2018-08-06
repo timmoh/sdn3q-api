@@ -20,8 +20,8 @@ class ChannelInput extends BaseModel {
 	/**
 	 * Connection Details for Input
 	 *
-	 * @var array
-	 * @JsonField(name="StreamInConnection", type="array")
+	 * @var \SDN3Q\Model\StreamInConnection
+	 * @JsonField(name="StreamInConnection", type="\SDN3Q\Model\StreamInConnection")
 	 */
 	public $streamInConnection;
 
