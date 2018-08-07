@@ -3,16 +3,17 @@
 namespace SDN3Q\Model;
 use MintWare\JOM\JsonField;
 
-class StreamType {
+class VideoType {
    /**
-    * Stream Type ID
+    * Videotype Id
+    *
     * @var int
     * @JsonField(name="Id", type="int")
     */
    public $id;
 
    /**
-    * Title
+    * Videotype Label
     *
     * @var string
     * @JsonField(name="Label", type="string")
