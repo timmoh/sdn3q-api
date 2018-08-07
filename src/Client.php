@@ -7,11 +7,12 @@ class Client {
    protected $apiVersion = '2';
    protected $apiKey     = null;
 
-   protected $apiProtocol  = 'https';
-   protected $baseUrl      = 'sdn.3qsdn.com/api';
-   protected $userName     = null;
-   protected $userPassword = null;
-   protected $useApiKey    = true; //use api key (true) or use user/passwort (false)
+   protected $apiProtocol     = 'https';
+   protected $baseUrl         = 'sdn.3qsdn.com/api';
+   protected $userName        = null;
+   protected $userPassword    = null;
+   protected $useHeaderApiKey = true; //use api key (true) as header auth
+   protected $useHeaderUserPW = false; //use use user/passwort (false) as header auth
 
    /**
     * BaseRequest constructor.
@@ -35,7 +36,7 @@ class Client {
    }
 
    public function __set(string $name, $value) {
-      echo $method = 'set' . ucfirst($name);
+      $method = 'set' . ucfirst($name);
       if (method_exists($this, $method)) {
          return $this->$method($value);
       }
@@ -50,18 +51,20 @@ class Client {
     * Build API Header
     *
     * @return array
-    * @throws NoApiKey
+    * @throws \Exception
     */
    public function apiHeader() {
+      $header = [];
       try {
-         if ($this->useApiKey) {
-            return $this->apiKeyHeader();
-         } else {
-            return $this->apiLoginHeader();
+         if ($this->useHeaderApiKey) {
+            $header = $this->apiKeyHeader();
+         } elseif ($this->useHeaderUserPW) {
+            $header = $this->apiLoginHeader();
          }
       } catch (\Exception $e) {
          throw $e;
       }
+      return $header;
    }
 
    /**

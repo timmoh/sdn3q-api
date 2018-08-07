@@ -12,7 +12,8 @@ class ApiKey extends BaseRequest {
 	 */
 	public static function getApiKey() {
 		$data = [];
-		self::$useApiKey = false;
+      self::$client->useHeaderApiKey = false;
+      self::$client->useHeaderUserPW = true;
 		try {
 			$response = self::getResponse();
 			$data     = json_decode( $response, true );
@@ -30,7 +31,8 @@ class ApiKey extends BaseRequest {
 	 */
 	public static function deleteApiKey() {
 		self::$method = 'delete';
-		self::$useApiKey = false;
+		self::$client->useHeaderApiKey = false;
+      self::$client->useHeaderUserPW = true;
 		$data = [];
 		try {
 			$response = self::getResponse();

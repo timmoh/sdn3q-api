@@ -7,8 +7,12 @@ use SDN3Q\Exception\ApiException;
 use SDN3Q\Exception\NoContent;
 
 class BaseRequest {
+   /**
+    * @var \GuzzleHttp\Client
+    */
+   protected static $httpclient = null;
 
-   private static   $httpclient = null;
+
    protected static $response   = null;
 
    /**
@@ -41,7 +45,7 @@ class BaseRequest {
     * Build Base URL for API
     * @return string
     */
-   private static function apiBaseUrl() {
+   protected static function apiBaseUrl() {
       return self::$client->apiProtocol . '://' . self::$client->baseUrl . '/v' . self::$client->apiVersion . '';
    }
 
@@ -49,8 +53,8 @@ class BaseRequest {
     * Build complete URL for Api Endpoint
     * @return string
     */
-   private static function apiUrlRequest() {
-      $url = [self::apiBaseUrl()];
+   protected static function apiUrlRequest() {
+      $url = [static::apiBaseUrl()];
 
       if (!empty(static::$endpoint)) {
          $url[] = static::$endpoint;
@@ -74,8 +78,9 @@ class BaseRequest {
     * @return array
     * @throws \Exception
     */
-   private static function buildHeader() {
+   protected static function buildHeader() {
       try {
+
          return array_merge(self::$additionalHeader, self::$client->apiHeader());
       } catch (\Exception $e) {
          throw $e;
@@ -87,7 +92,7 @@ class BaseRequest {
     * Build Parm for Request
     * @return array
     */
-   private static function buildReqeustParm() {
+   protected static function buildReqeustParm() {
       $parms = [];
       foreach (static::$possibleParm AS $key) {
          if (isset(static::$requestParm[$key]) && !empty(static::$requestParm[$key])) {
@@ -107,19 +112,21 @@ class BaseRequest {
     */
    protected static function getResponse() {
       try {
-         $url     = self::apiUrlRequest();
+         echo $url     = static::apiUrlRequest();
          $request = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
-
-         $requestParms = ['headers' => self::buildHeader()];
+         $requestParms = [];
+         if(!empty(self::buildHeader())){
+            $requestParms = ['headers' => self::buildHeader()];
+         }
          if (self::$requestParmAsJson) {
             $requestParms['json'] = static::$requestParm;
          }
 
 
          $response = self::$httpclient->send($request, $requestParms);
+
          self::checkStatusCode($response->getStatusCode());
          self::$response = $response->getBody()->getContents();
-
          return self::$response;
 
       } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -140,7 +147,14 @@ class BaseRequest {
 
    }
 
-   private static function checkStatusCode($statusCode) {
+   /**
+    * Checks Status of Return Code
+    *
+    * @param $statusCode
+    *
+    * @throws NoContent
+    */
+   protected static function checkStatusCode($statusCode) {
       if ($statusCode == 204) {
          throw new NoContent();
       }
