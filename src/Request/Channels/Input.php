@@ -38,13 +38,13 @@ class Input extends BaseRequest {
 	 * Change Channel Input
 	 *
 	 * @param int          $channelId
-	 * @param StreamInType $streamInType
+	 * @param string $streamInType
 	 * @param string|null  $streamInUri
 	 *
 	 * @return ChannelInput
 	 * @throws \Exception
 	 */
-	public static function changeInput( int $channelId, StreamInType $streamInType, string $streamInUri = null ) {
+	public static function changeInput( int $channelId, string $streamInType, string $streamInUri = null ) {
 		parent::$subUrl     = $channelId . '/input';
 		self::$method       = 'put';
 		self::$possibleParm = [
