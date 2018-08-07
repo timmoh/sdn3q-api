@@ -112,7 +112,7 @@ class BaseRequest {
     */
    protected static function getResponse() {
       try {
-         echo $url     = static::apiUrlRequest();
+         $url     = static::apiUrlRequest();
          $request = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
          $requestParms = [];
          if(!empty(self::buildHeader())){
