@@ -34,7 +34,7 @@ class Embed extends BaseRequest {
          'Popover', //boolean		Show player as popover
          'ActivateAds', //boolean		Enable advertising
          'VASTID', //integer		AdTag Id
-      ];
+	      ];
 
       foreach ($parms AS $key => $value) {
          self::$requestParm[$key] = $value;
@@ -47,15 +47,6 @@ class Embed extends BaseRequest {
          $data = json_decode($response, true);
          $embed = $mapper->mapJson(json_encode($data['ChannelEmbedCodes']), ChannelEmbedCodes::class);
          return $embed;
-         /*
-         if (count($data) > 0) {
-            foreach ($data as $dataValue) {
-               print_r(json_encode($dataValue));
-               echo "\n";
-               $channelEmbeds[] = $mapper->mapJson(json_encode($dataValue), ChannelEmbedCodes::class);
-            }
-         }*/
-
       } catch (\Exception $e) {
          throw $e;
       }

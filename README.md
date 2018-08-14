@@ -108,13 +108,13 @@ PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a Waterm
 
 **4.0 Files**
 
-GET /api/v2/projects/{ProjectId}/files Return a collection of Files in Project.
+✅ GET /api/v2/projects/{ProjectId}/files Return a collection of Files in Project.
 
-POST /api/v2/projects/{ProjectId}/files Create a new File Entity and return the File Upload URI in the Location Header
+✅ POST /api/v2/projects/{ProjectId}/files Create a new File Entity and return the File Upload URI in the Location Header
 
-DELETE /api/v2/projects/{ProjectId}/files/{FileId} Delete a File by Id
+✅ DELETE /api/v2/projects/{ProjectId}/files/{FileId} Delete a File by Id
 
-GET /api/v2/projects/{ProjectId}/files/{FileId} Return a File by Id
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId} Return a File by Id
 
 **4.1 File Metadata**
 

@@ -31,8 +31,6 @@ class Picture extends BaseRequest {
 			$mapper         = new ObjectMapper();
 			parent::$subUrl = $channelId . '/picture';
 			$response       = self::getResponse();
-			print_r( $response );
-			echo "ss";
 			$channelPicture = $mapper->mapJson( $response, ChannelPicture::class );
 		} catch ( NoContent $e ) {
 			return null;
