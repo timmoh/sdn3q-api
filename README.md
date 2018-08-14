@@ -148,15 +148,15 @@ GET /api/v2/projects/{ProjectId}/files/{FileId}/output Return Output URIs of a f
 
 **4.6 File Picture**
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/pictures Return Pictures of a file
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/pictures Return Pictures of a file
 
-POST /api/v2/projects/{ProjectId}/files/{FileId}/pictures Create a new FilePicture and set it as Standard Picture
+✅ POST /api/v2/projects/{ProjectId}/files/{FileId}/pictures Create a new FilePicture and set it as Standard Picture
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/pictures/standard Return the standard (default) Picture of a file
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/pictures/standard Return the standard (default) Picture of a file
 
-DELETE /api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId} Delete this FilePicture
+✅ DELETE /api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId} Delete this FilePicture
 
-PUT /api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId}/standard Set this as Standard (default) FilePicture
+✅ PUT /api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId}/standard Set this as Standard (default) FilePicture
 
 **5.0 Categories**
 

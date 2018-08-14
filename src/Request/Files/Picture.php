@@ -1,40 +1,150 @@
 <?php
+
 namespace SDN3Q\Request\Files;
+
+use MintWare\JOM\ObjectMapper;
+use SDN3Q\Model\FilePicture;
 use SDN3Q\Request\BaseRequest;
 
-/*
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/pictures Return Pictures of a file
-POST /api/v2/projects/{ProjectId}/files/{FileId}/pictures Create a new FilePicture and set it as Standard Picture
-/api/v2/projects/{ProjectId}/files/{FileId}/pictures/standard
-GET /api/v2/projects/{ProjectId}/files/{FileId}/pictures/standard Return the standard (default) Picture of a file
-/api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId}
-DELETE /api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId} Delete this FilePicture
-/api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId}/standard
-PUT /api/v2/projects/{ProjectId}/files/{FileId}/pictures/{FilePictureId}/standard Set this as Standard (default) FilePicture
-*/
-class Picture extends BaseRequest{
-	protected static $endpoint ='projects';
-	
-	public static function getPictures(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+class Picture extends BaseRequest {
+
+	protected static $endpoint = 'projects';
+	use \SDN3Q\Request\UploadRequest;
+
+	/**
+	 * Return Pictures of a file
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 *
+	 * @return FilePicture[]|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function getPictures(int $projectId, int $fileId) {
+		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures';
+		$filePictures   = [];
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$data     = json_decode($response, true);
+			if (count($data['FilePictures']) > 0) {
+				foreach ($data['FilePictures'] as $dataFiles) {
+					$filePictures[] = $mapper->mapJson(json_encode($dataFiles), FilePicture::class);
+				}
+			}
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $filePictures;
 	}
-	
-	public static function postPicture(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Create a new FilePicture and set it as Standard Picture
+	 *
+	 * @param int $projectId
+	 * @param int    $fileId
+	 * @param string $imagePath
+	 *
+	 * @return FilePicture|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function postPicture(int $projectId, int $fileId, string $imagePath) {
+		self::$method                = 'post';
+		parent::$subUrl              = $projectId . '/files/' . $fileId . '/pictures';
+		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+		$picture                     = null;
+		try {
+
+			$mime = self::checkMimeType($imagePath);
+
+			self::$additionalHeader["Content-type"] = $mime;
+
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$picture  = $mapper->mapJson($response, FilePicture::class);
+			return $picture;
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		return $picture;
 	}
-	
-	public static function getPictureDefault(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Return the standard (default) Picture of a file
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 *
+	 * @return FilePicture|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function getPictureDefault(int $projectId, int $fileId) {
+		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/standard';
+		$filePicture    = null;
+		try {
+			$mapper      = new ObjectMapper();
+			$response    = self::getResponse();
+			$filePicture = $mapper->mapJson($response, FilePicture::class);
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $filePicture;
+
 	}
-	
-	public static function deletePicture(int $projectId,int $fileId,int $filePictureId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Delete this FilePicture
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 * @param int $filePictureId
+	 *
+	 * @return FilePicture|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function deletePicture(int $projectId, int $fileId, int $filePictureId) {
+		self::$method   = 'delete';
+		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/' . $filePictureId . '';
+		$filePicture    = null;
+		try {
+			$mapper      = new ObjectMapper();
+			$response    = self::getResponse();
+			$filePicture = $mapper->mapJson($response, FilePicture::class);
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $filePicture;
 	}
-	
-	public static function putPicture(int $projectId,int $fileId,int $filePictureId){
-		throw new \SDN3Q\Exception\NotImplemented();
+
+	/**
+	 * Set this as Standard (default) FilePicture
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 * @param int $filePictureId
+	 *
+	 * @return FilePicture|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function putPicture(int $projectId, int $fileId, int $filePictureId) {
+		self::$method   = 'put';
+		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/' . $filePictureId . '/standard';
+		$filePicture    = null;
+		try {
+			$mapper      = new ObjectMapper();
+			$response    = self::getResponse();
+			$filePicture = $mapper->mapJson($response, FilePicture::class);
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $filePicture;
 	}
-	
-	
+
 }

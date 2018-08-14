@@ -43,7 +43,7 @@ class FilePicture extends BaseModel {
 	/**
 	 * This is the Standard (default) FilePicture
 	 *
-	 * @var string
+	 * @var boolean
 	 * @JsonField(name="IsStandard", type="boolean")
 	 */
 	public $isStandard;
