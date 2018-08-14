@@ -88,7 +88,7 @@ class Metadata extends BaseRequest {
 
 			$mime = self::checkMimeType( $imagePath );
 
-			self::$additionalHeader[] = ["Content-type" =>$mime];
+			self::$additionalHeader["Content-type"] =$mime;
 
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
@@ -116,7 +116,7 @@ class Metadata extends BaseRequest {
 		try {
 			$mime = self::checkMimeType( $imagePath );
 
-			self::$additionalHeader[] = ["Content-type" =>$mime];
+			self::$additionalHeader["Content-type"] =$mime;
 
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();

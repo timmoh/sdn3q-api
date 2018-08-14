@@ -56,7 +56,7 @@ class Picture extends BaseRequest {
 		try {
 			$mime = self::checkMimeType( $imagePath );
 
-			self::$additionalHeader[] = ["Content-type" =>$mime];
+			self::$additionalHeader["Content-type"] =$mime;
 			$mapper         = new ObjectMapper();
 			parent::$subUrl = $channelId . '/picture';
 
