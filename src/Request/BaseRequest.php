@@ -2,7 +2,10 @@
 
 namespace SDN3Q\Request;
 
+use GuzzleHttp\TransferStats;
 use SDN3Q\Exception\ApiException;
+use SDN3Q\Exception\InvalidApiKey;
+use SDN3Q\Exception\InvalidReturnCode;
 use SDN3Q\Exception\NoContent;
 
 class BaseRequest {
@@ -123,10 +126,16 @@ class BaseRequest {
 				$requestParms['json'] = static::$requestParm;
 			}
 
-			$response = self::$httpclient->send($request, $requestParms);
 
+			//for getting the effective Url (to compare it)
+			$requestParms['on_stats'] = function (TransferStats $stats) use (&$effectiveUrl) {
+				$effectiveUrl = $stats->getEffectiveUri();
+			};
+			$response = self::$httpclient->send($request, $requestParms);
 			self::checkStatusCode($response->getStatusCode());
+			self::checkEffectiveUrl($effectiveUrl);
 			self::$response = $response->getBody()->getContents();
+			self::checkResponse(self::$response);
 			self::$responseHeader = $response->getHeaders();
 			return self::$response;
 
@@ -160,5 +169,32 @@ class BaseRequest {
 			throw new NoContent();
 		}
 
+	}
+
+	/**
+	 * Checks Url if its redirected to login page
+	 *
+	 * @param $url
+	 *
+	 * @throws NoContent
+	 */
+	protected static function checkEffectiveUrl(string $url) {
+		$urlParsed = parse_url($url);
+		if (strpos($urlParsed['path'], 'login') > 0) {
+			throw new InvalidApiKey();
+		}
+
+	}
+
+	/**
+	 * @param string $content
+	 *
+	 * @throws InvalidReturnCode
+	 */
+	protected static function checkResponse(string $content) {
+		json_decode($content);
+		if(json_last_error() != JSON_ERROR_NONE){
+			throw new InvalidReturnCode();
+		}
 	}
 }
