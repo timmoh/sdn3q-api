@@ -44,7 +44,7 @@ class File extends BaseModel {
 	 * Properties
 	 *
 	 * @var \SDN3Q\Model\FileProperties
-	 * @JsonField(name="StandardFilePicture", type="\SDN3Q\Model\FileProperties")
+	 * @JsonField(name="Properties", type="\SDN3Q\Model\FileProperties")
 	 */
 	public $properties;
 

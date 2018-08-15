@@ -118,9 +118,9 @@ PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a Waterm
 
 **4.1 File Metadata**
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/metadata Return Metadata of a File
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/metadata Return Metadata of a File
 
-PUT /api/v2/projects/{ProjectId}/files/{FileId}/metadata Change Metadata of a File
+✅ PUT /api/v2/projects/{ProjectId}/files/{FileId}/metadata Change Metadata of a File
 
 **4.2 File Metadata Categories**
 

@@ -1,5 +1,7 @@
 <?php
 namespace SDN3Q\Request\Files;
+use MintWare\JOM\ObjectMapper;
+use SDN3Q\Model\FileMetadata;
 use SDN3Q\Request\BaseRequest;
 
 /*
@@ -8,12 +10,66 @@ PUT /api/v2/projects/{ProjectId}/files/{FileId}/metadata Change Metadata of a Fi
 */
 class Metadata extends BaseRequest{
 	protected static $endpoint ='projects';
-	
+
+
 	public static function getMetadata(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
+		$fileMeta = null;
+		parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$data     = json_decode($response, true);
+			$fileMeta     = $mapper->mapJson(json_encode($data), FileMetadata::class);
+			return $fileMeta;
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		return $fileMeta;
 	}
 	
-	public static function changeMetadata(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
+	public static function changeMetadata(int $projectId,int $fileId, $parms = []){
+		$fileMeta = null;
+		parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
+		self::$method              = 'put';
+		parent::$requestParmAsJson = true;
+		self::$possibleParm = [
+			'Title',//	string	true		Title
+			'DisplayTitle',//	string	false		Display Title (Line 1)
+			'DisplayTitleSecondLine',//	string	false		Display Title (Line 2)
+			'Description',//	string	true		Description
+			'Tags',//	string	false		Tags
+			'Genre',//	string	false		Genre
+			'Series',//	string	false		Series
+			'NativeLanguage',//	string	false		Language
+			'Source',//	string	false		Source
+			'Studio',//	string	false		Studio
+			'Licensor',//	string	false		Licensee
+			'Licensearea',//	string	false		License Area
+			'ProductionCountry',//	string	false		Country of Production
+			'Relationship',//	string	false		Relation
+			'ProgramId',//	string	false		Program-Id
+			'IsPublicAt',//	datetime	false		Release from (Date)
+			'IsPublicUntil',//	datetime	false		Release from (Date)
+			'Lat',//	float	false		Latitude
+			'Lang'//
+		];
+		foreach ($parms AS $key => $value) {
+			self::$requestParm[$key] = $value;
+		}
+
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			print_r($response);
+			$data     = json_decode($response, true);
+			$fileMeta     = $mapper->mapJson(json_encode($data), FileMetadata::class);
+			return $fileMeta;
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		return $fileMeta;
+
 	}
 }
