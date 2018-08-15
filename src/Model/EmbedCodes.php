@@ -3,7 +3,7 @@
 namespace SDN3Q\Model;
 use MintWare\JOM\JsonField;
 
-class ChannelEmbedCodes extends BaseModel {
+class EmbedCodes extends BaseModel {
 
    /**
     * JavaScript
