@@ -1,16 +1,22 @@
 <?php
 namespace SDN3Q\Request\Files;
+use SDN3Q\Model\FileOutputURI;
 use SDN3Q\Request\BaseRequest;
 use MintWare\JOM\ObjectMapper;
-/*
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/output Return Output URIs of a file
-*/
 class Output extends BaseRequest{
 	protected static $endpoint ='projects';
-	
+
+	/**
+	 * Return Output URIs of a file
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 *
+	 * @return FileOutputURI[]|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	public static function getOutput(int $projectId,int $fileId){
-      throw new \SDN3Q\Exception\NotImplemented();
 
       $fileOutputURIs = [];
       parent::$subUrl    =  $projectId .'/files/'.$fileId . '/output';
@@ -18,10 +24,9 @@ class Output extends BaseRequest{
          $mapper   = new ObjectMapper();
          $response = self::getResponse();
          $data     = json_decode($response, true);
-
          if (count($data) > 0) {
             foreach ($data as $dataOutput) {
-               $fileOutputURIs[] = $mapper->mapJson(json_encode($dataOutput), FileOutput::class);
+               $fileOutputURIs[] = $mapper->mapJson(json_encode($dataOutput), FileOutputURI::class);
             }
          }
       } catch (\Exception $e) {

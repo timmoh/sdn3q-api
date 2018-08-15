@@ -144,7 +144,7 @@ UNLINK /api/v2/projects/{ProjectId}/files/{FileId}/metadata/videotype/{Videotype
 
 **4.5 File Output**
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/output Return Output URIs of a file
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/output Return Output URIs of a file
 
 **4.6 File Picture**
 
