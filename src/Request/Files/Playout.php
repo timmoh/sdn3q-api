@@ -49,7 +49,7 @@ class Playout extends BaseRequest {
 	 * @param int   $fileId
 	 * @param array $parms
 	 *
-	 * @return array
+	 * @return EmbedCodes|null
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public static function getPlayoutDefault(int $projectId, int $fileId, $parms = []) {
@@ -93,7 +93,7 @@ class Playout extends BaseRequest {
 	 * @param string|null $playoutId
 	 * @param array       $parms
 	 *
-	 * @return array
+	 * @return EmbedCodes|null
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public static function getPlayout(int $projectId, int $fileId, string $playoutId = null, $parms = []) {
