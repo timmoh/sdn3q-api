@@ -1,35 +1,134 @@
 <?php
+
 namespace SDN3Q\Request\Files;
+
+use MintWare\JOM\ObjectMapper;
+use SDN3Q\Model\EmbedCodes;
+use SDN3Q\Model\FilePlayout;
 use SDN3Q\Request\BaseRequest;
 
 
-/*
-GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts Return Playout Id's of a file
-/api/v2/projects/{ProjectId}/files/{FileId}/playouts/default/embed
-GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts/default/embed Return the Embed Codes of the default Playout of a File
-/api/v2/projects/{ProjectId}/files/{FileId}/playouts/{PlayoutId}/embed
-GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts/{PlayoutId}/embed Return the Embed Codes of the Playout of a File
-*/
-class Playout extends BaseRequest{
-	protected static $endpoint ='projects';
-	
-	public static function getPlayouts(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	
-	public static function getPlayoutDefault(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	
-	public static function getPlayout(int $projectId,int $fileId,$playoutId=null){
-		if($playoutId){
-			return self::getPlayoutDefault($projectId,$fileId);
-		} else {
+class Playout extends BaseRequest {
 
-		}		
-		throw new \SDN3Q\Exception\NotImplemented();
+	protected static $endpoint = 'projects';
+
+	/**
+	 * Return Playout Id's of a file
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 *
+	 * @return Playout[]|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function getPlayouts(int $projectId, int $fileId) {
+		parent::$subUrl = $projectId . '/files/' . $fileId . '/playouts';
+		$playouts       = [];
+
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$data     = json_decode($response, true);
+			if (count($data['FilePlayouts']) > 0) {
+				foreach ($data['FilePlayouts'] as $dataFiles) {
+					$playouts[] = $mapper->mapJson(json_encode($dataFiles), FilePlayout::class);
+				}
+			}
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $playouts;
+	}
+
+	/**
+	 * Return the Embed Codes of the default Playout of a File
+	 *
+	 * @param int $projectId
+	 * @param int   $fileId
+	 * @param array $parms
+	 *
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function getPlayoutDefault(int $projectId, int $fileId, $parms = []) {
+		$embed = null;
+		parent::$subUrl     = $projectId . '/files/' . $fileId . '/playouts/default/embed';
+		self::$requestParmAsJson  = false;
+		self::$requestParmAsQuery = true;
+		self::$possibleParm = [
+			'ContainerId',//	string	false		ID of player DIV tag
+			'Width',//	integer	false		Player width
+			'Height',//	integer	false		Player height
+			'OverrideSettings',//	boolean	false		Overrides the specified settings by embed code
+			'Autostart',//	boolean	false		Start playback automatically
+			'Popover',//	boolean	false		Show player as popover
+			'ActivateAds',//	boolean	false		Enable advertising
+			'VASTID',//	integer	false		AdTag Id
+		];
+		foreach ($parms AS $key => $value) {
+			self::$requestParm[$key] = $value;
+		}
+
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$data     = json_decode($response, true);
+			$embed = $mapper->mapJson(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+			return $embed;
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $embed;
+	}
+
+	/**
+	 * Return the Embed Codes of the Playout of a File
+	 *
+	 * @param int $projectId
+	 * @param int         $fileId
+	 * @param string|null $playoutId
+	 * @param array       $parms
+	 *
+	 * @return array
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function getPlayout(int $projectId, int $fileId, string $playoutId = null, $parms = []) {
+		if (is_null($playoutId)) {
+			return self::getPlayoutDefault($projectId, $fileId);
+		}
+		$embed=null;
+		parent::$subUrl     = $projectId . '/files/' . $fileId . '/playouts/' . $playoutId . '/embed';
+		self::$possibleParm = [
+			'ContainerId',//	string	false		ID of player DIV tag
+			'Width',//	integer	false		Player width
+			'Height',//	integer	false		Player height
+			'OverrideSettings',//	boolean	false		Overrides the specified settings by embed code
+			'Autostart',//	boolean	false		Start playback automatically
+			'Popover',//	boolean	false		Show player as popover
+			'ActivateAds',//	boolean	false		Enable advertising
+			'VASTID',//	integer	false		AdTag Id
+		];
+
+		foreach ($parms AS $key => $value) {
+			self::$requestParm[$key] = $value;
+		}
+
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$data     = json_decode($response, true);
+			$embed = $mapper->mapJson(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+			return $embed;
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $embed;
 	}
 }
 

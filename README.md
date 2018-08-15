@@ -136,11 +136,11 @@ UNLINK /api/v2/projects/{ProjectId}/files/{FileId}/metadata/videotype/{Videotype
 
 **4.4 File Playout**
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts Return Playout Id's of a file
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts Return Playout Id's of a file
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts/default/embed Return the Embed Codes of the default Playout of a File
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts/default/embed Return the Embed Codes of the default Playout of a File
 
-GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts/{PlayoutId}/embed Return the Embed Codes of the Playout of a File
+✅ GET /api/v2/projects/{ProjectId}/files/{FileId}/playouts/{PlayoutId}/embed Return the Embed Codes of the Playout of a File
 
 **4.5 File Output**
 
