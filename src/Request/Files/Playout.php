@@ -18,7 +18,7 @@ class Playout extends BaseRequest {
 	 * @param int $projectId
 	 * @param int $fileId
 	 *
-	 * @return Playout[]|null
+	 * @return FilePlayout[]|null
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public static function getPlayouts(int $projectId, int $fileId) {
