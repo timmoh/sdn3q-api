@@ -192,9 +192,9 @@ class FileMetadata extends BaseModel {
    /**
     * Videotype
     *
-    * @var \SDN3Q\Model\FilePicture[]
-    * @JsonField(name="StandardFilePicture", type="\SDN3Q\Model\FilePicture[]")
+    * @var \SDN3Q\Model\VideoType[]
+    * @JsonField(name="Videotype", type="\SDN3Q\Model\VideoType[]")
     */
-   public $videotypee;
+   public $videotype;
 
 }
