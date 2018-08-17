@@ -6,8 +6,8 @@ use MintWare\JOM\ObjectMapper;
 use SDN3Q\Model\ChannelMetaData;
 use SDN3Q\Request\BaseRequest;
 
-
 class Metadata extends BaseRequest {
+
 	protected static $endpoint = 'channels';
 	use \SDN3Q\Request\UploadRequest;
 
@@ -19,18 +19,17 @@ class Metadata extends BaseRequest {
 	 * @return ChannelMetaData|null
 	 * @throws \Exception
 	 */
-	public static function getMetadata( int $channelId ) {
-		$channel        = null;
+	public static function getMetadata(int $channelId) {
+		$metaData       = null;
 		parent::$subUrl = $channelId . '/metadata';
 		try {
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
-			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+			$metaData = $mapper->mapJson($response, ChannelMetaData::class);
 
-		} catch ( \Exception $e ) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
-
 
 		return $metaData;
 	}
@@ -38,13 +37,14 @@ class Metadata extends BaseRequest {
 	/**
 	 * Change Channel Metadata
 	 *
-	 * @param int  $channelId
+	 * @param int   $channelId
 	 * @param array $parms
 	 *
-	 * @return mixed
+	 * @return ChannelMetaData|null
 	 * @throws \Exception
 	 */
-	public static function changeMetadata( int $channelId,array $parms = [] ) {
+	public static function changeMetadata(int $channelId, array $parms = []) {
+		$metaData           = null;
 		self::$method       = 'put';
 		self::$possibleParm = [
 			'Title',
@@ -63,9 +63,9 @@ class Metadata extends BaseRequest {
 		try {
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
-			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+			$metaData = $mapper->mapJson($response, ChannelMetaData::class);
 
-		} catch ( \Exception $e ) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return $metaData;
@@ -77,24 +77,25 @@ class Metadata extends BaseRequest {
 	 * @param int    $channelId
 	 * @param string $imagePath
 	 *
-	 * @return mixed
+	 * @return ChannelMetaData|null
 	 * @throws \Exception
 	 */
-	public static function putBoardPicture( int $channelId, string $imagePath ) {
-		self::$method       = 'put';
-		parent::$subUrl = $channelId . '/metadata/boardpicture';
-		self::$allowedUploadMimeType = [ 'image/jpeg', 'image/png' ];
+	public static function putBoardPicture(int $channelId, string $imagePath) {
+		$metaData           = null;
+		self::$method                = 'put';
+		parent::$subUrl              = $channelId . '/metadata/boardpicture';
+		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
 		try {
 
-			$mime = self::checkMimeType( $imagePath );
+			$mime = self::checkMimeType($imagePath);
 
-			self::$additionalHeader["Content-type"] =$mime;
+			self::$additionalHeader["Content-type"] = $mime;
 
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
-			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+			$metaData = $mapper->mapJson($response, ChannelMetaData::class);
 
-		} catch ( \Exception $e ) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return $metaData;
@@ -106,27 +107,27 @@ class Metadata extends BaseRequest {
 	 * @param int    $channelId
 	 * @param string $imagePath
 	 *
-	 * @return mixed
+	 * @return ChannelMetaData|null
 	 * @throws \Exception
 	 */
-	public static function putCreditsPicture( int $channelId, string $imagePath ) {
-		self::$method       = 'put';
-		parent::$subUrl = $channelId . '/metadata/creditspicture';
-		self::$allowedUploadMimeType = [ 'image/jpeg', 'image/png' ];
+	public static function putCreditsPicture(int $channelId, string $imagePath) {
+		$metaData           = null;
+		self::$method                = 'put';
+		parent::$subUrl              = $channelId . '/metadata/creditspicture';
+		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
 		try {
-			$mime = self::checkMimeType( $imagePath );
+			$mime = self::checkMimeType($imagePath);
 
-			self::$additionalHeader["Content-type"] =$mime;
+			self::$additionalHeader["Content-type"] = $mime;
 
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
-			$metaData = $mapper->mapJson( $response, ChannelMetaData::class );
+			$metaData = $mapper->mapJson($response, ChannelMetaData::class);
 
-		} catch ( \Exception $e ) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
 		return $metaData;
-
 
 	}
 }

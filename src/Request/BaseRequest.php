@@ -28,14 +28,42 @@ class BaseRequest {
 	 */
 	protected static $client = null;
 
-	protected static $subUrl             = '';
-	protected static $additionalHeader   = []; //additional http header
-	protected static $requestParm        = []; //parameter to send
-	protected static $requestParmAsJson  = true; //send parameter as via json (true)
-	protected static $requestParmAsQuery = false; //send parameter as via query (true
-	protected static $possibleParm       = []; //possible parameter that could be filled
-	protected static $endpoint           = null;
-	protected static $method             = 'get'; //http method
+	protected static $subUrl = '';
+	/**
+	 * additional http header
+	 * @var array
+	 */
+	protected static $additionalHeader = [];
+	/**
+	 * parameter to send via post/put
+	 * @var array
+	 */
+	protected static $requestParm = [];
+	/**
+	 * send parameter as via json (true)
+	 * @var bool
+	 */
+	protected static $requestParmAsJson = true;
+	/**
+	 * send parameter as via query (true)
+	 * @var bool
+	 */
+	protected static $requestParmAsQuery = false;
+	/**
+	 * possible parameter that could be filled
+	 * @var array
+	 */
+	protected static $possibleParm = [];
+	/**
+	 * API Endpoint
+	 * @var string|null
+	 */
+	protected static $endpoint = null;
+	/**
+	 * HTTP Method
+	 * @var string
+	 */
+	protected static $method = 'get';
 
 	/**
 	 * BaseRequest constructor.
@@ -79,12 +107,12 @@ class BaseRequest {
 	}
 
 	/**
+	 * Build Header for HTTP API Request
 	 * @return array
 	 * @throws \Exception
 	 */
 	protected static function buildHeader() {
 		try {
-
 			return array_merge(self::$additionalHeader, self::$client->apiHeader());
 		} catch (\Exception $e) {
 			throw $e;
@@ -108,7 +136,7 @@ class BaseRequest {
 	}
 
 	/**
-	 * Get Response
+	 * Get Response form HTTP Api Request and Check if it's valid
 	 *
 	 * @return null|string
 	 * @throws ApiException
@@ -125,13 +153,10 @@ class BaseRequest {
 			if (self::$requestParmAsJson) {
 				$requestParms['json'] = static::$requestParm;
 			}
-
-
-			//for getting the effective Url (to compare it)
 			$requestParms['on_stats'] = function (TransferStats $stats) use (&$effectiveUrl) {
 				$effectiveUrl = $stats->getEffectiveUri();
 			};
-			$response = self::$httpclient->send($request, $requestParms);
+			$response                 = self::$httpclient->send($request, $requestParms);
 			self::checkStatusCode($response->getStatusCode());
 			self::checkEffectiveUrl($effectiveUrl);
 			self::$response = $response->getBody()->getContents();
@@ -145,26 +170,33 @@ class BaseRequest {
 		} catch (\Exception $e) {
 			throw $e;
 		} finally {
-			self::$subUrl             = '';
-			self::$additionalHeader   = []; //additional http header
-			self::$requestParm        = []; //parameter to send
-			self::$requestParmAsJson  = true; //send parameter as via json (true)
-			self::$requestParmAsQuery = false; //send parameter as via query (true
-			self::$possibleParm       = []; //possible parameter that could be filled
-			self::$endpoint           = null;
-			self::$method             = 'get'; //http method
+			self::resetRequestParameter();
 		}
 
 	}
 
 	/**
+	 * Reset Parameter
+	 */
+	protected static function resetRequestParameter() {
+		self::$subUrl             = '';
+		self::$additionalHeader   = [];
+		self::$requestParm        = [];
+		self::$requestParmAsJson  = true;
+		self::$requestParmAsQuery = false;
+		self::$possibleParm       = [];
+		self::$endpoint           = null;
+		self::$method             = 'get';
+	}
+
+	/**
 	 * Checks Status of Return Code
 	 *
-	 * @param $statusCode
+	 * @param string $statusCode
 	 *
 	 * @throws NoContent
 	 */
-	protected static function checkStatusCode($statusCode) {
+	protected static function checkStatusCode(string $statusCode) {
 		if ($statusCode == 204) {
 			throw new NoContent();
 		}
@@ -174,9 +206,9 @@ class BaseRequest {
 	/**
 	 * Checks Url if its redirected to login page
 	 *
-	 * @param $url
+	 * @param string $url
 	 *
-	 * @throws NoContent
+	 * @throws InvalidApiKey
 	 */
 	protected static function checkEffectiveUrl(string $url) {
 		$urlParsed = parse_url($url);
@@ -193,7 +225,7 @@ class BaseRequest {
 	 */
 	protected static function checkResponse(string $content) {
 		json_decode($content);
-		if(json_last_error() != JSON_ERROR_NONE){
+		if (json_last_error() != JSON_ERROR_NONE) {
 			throw new InvalidReturnCode();
 		}
 	}

@@ -7,11 +7,8 @@ use SDN3Q\Exception\NoContent;
 use SDN3Q\Model\ChannelPicture;
 use SDN3Q\Request\BaseRequest;
 
-/*
-PUT /api/v2/channels/{ChannelId}/picture Put a Channel Picture
-*/
-
 class Picture extends BaseRequest {
+
 	use \SDN3Q\Request\UploadRequest;
 
 	protected static $endpoint = 'channels';
@@ -21,23 +18,22 @@ class Picture extends BaseRequest {
 	 *
 	 * @param int $channelId
 	 *
-	 * @return null|ChannelPicture
+	 * @return ChannelPicture|null
 	 * @throws \Exception
 	 */
-	public static function getPicture( int $channelId ) {
+	public static function getPicture(int $channelId) {
 
-		$channel = null;
+		$channelPicture = null;
 		try {
 			$mapper         = new ObjectMapper();
 			parent::$subUrl = $channelId . '/picture';
 			$response       = self::getResponse();
-			$channelPicture = $mapper->mapJson( $response, ChannelPicture::class );
-		} catch ( NoContent $e ) {
+			$channelPicture = $mapper->mapJson($response, ChannelPicture::class);
+		} catch (NoContent $e) {
 			return null;
-		} catch ( \Exception $e ) {
+		} catch (\Exception $e) {
 			throw $e;
 		}
-
 
 		return $channelPicture;
 	}
@@ -46,27 +42,26 @@ class Picture extends BaseRequest {
 	 * @param int    $channelId
 	 * @param string $pathToImage
 	 *
-	 * @return null|ChannelPicture
+	 * @return ChannelPicture|null
 	 * @throws \Exception
 	 */
-	public static function putPicture( int $channelId, string $imagePath ) {
-		$channel                     = null;
+	public static function putPicture(int $channelId, string $imagePath) {
+		$channelPicture                     = null;
 		self::$method                = 'put';
-		self::$allowedUploadMimeType = [ 'image/jpeg', 'image/png' ];
+		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
 		try {
-			$mime = self::checkMimeType( $imagePath );
+			$mime = self::checkMimeType($imagePath);
 
-			self::$additionalHeader["Content-type"] =$mime;
-			$mapper         = new ObjectMapper();
-			parent::$subUrl = $channelId . '/picture';
+			self::$additionalHeader["Content-type"] = $mime;
+			$mapper                                 = new ObjectMapper();
+			parent::$subUrl                         = $channelId . '/picture';
 
 			$response = self::getResponse();
 
-			$channelPicture = $mapper->mapJson( $response, ChannelPicture::class );
-		} catch ( \Exception $e ) {
+			$channelPicture = $mapper->mapJson($response, ChannelPicture::class);
+		} catch (\Exception $e) {
 			throw $e;
 		}
-
 
 		return $channelPicture;
 	}

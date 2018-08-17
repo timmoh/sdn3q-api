@@ -6,8 +6,6 @@ use MintWare\JOM\ObjectMapper;
 use SDN3Q\Model\FilePicture;
 use SDN3Q\Request\BaseRequest;
 
-
-
 class Picture extends BaseRequest {
 
 	protected static $endpoint = 'projects';
@@ -45,7 +43,7 @@ class Picture extends BaseRequest {
 	/**
 	 * Create a new FilePicture and set it as Standard Picture
 	 *
-	 * @param int $projectId
+	 * @param int    $projectId
 	 * @param int    $fileId
 	 * @param string $imagePath
 	 *

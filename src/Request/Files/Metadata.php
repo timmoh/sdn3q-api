@@ -4,14 +4,19 @@ use MintWare\JOM\ObjectMapper;
 use SDN3Q\Model\FileMetadata;
 use SDN3Q\Request\BaseRequest;
 
-/*
-GET /api/v2/projects/{ProjectId}/files/{FileId}/metadata Return Metadata of a File
-PUT /api/v2/projects/{ProjectId}/files/{FileId}/metadata Change Metadata of a File
-*/
+
 class Metadata extends BaseRequest{
 	protected static $endpoint ='projects';
 
-
+	/**
+	 * Return Metadata of a File
+	 *
+	 * @param int $projectId
+	 * @param int $fileId
+	 *
+	 * @return FileMetadata|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	public static function getMetadata(int $projectId,int $fileId){
 		$fileMeta = null;
 		parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
@@ -27,7 +32,17 @@ class Metadata extends BaseRequest{
 		}
 		return $fileMeta;
 	}
-	
+
+	/**
+	 * Change Metadata of a File
+	 *
+	 * @param int $projectId
+	 * @param int   $fileId
+	 * @param array $parms
+	 *
+	 * @return FileMetadata|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
 	public static function changeMetadata(int $projectId,int $fileId, $parms = []){
 		$fileMeta = null;
 		parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
@@ -61,7 +76,6 @@ class Metadata extends BaseRequest{
 		try {
 			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
-			print_r($response);
 			$data     = json_decode($response, true);
 			$fileMeta     = $mapper->mapJson(json_encode($data), FileMetadata::class);
 			return $fileMeta;
