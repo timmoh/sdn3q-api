@@ -44,7 +44,7 @@ class Embed extends BaseRequest {
 			$response = self::getResponse();
 
 			$data  = json_decode($response, true);
-			$embed = $mapper->mapJson(json_encode($data['EmbedCodes']), EmbedCodes::class);
+			$embed = $mapper->mapJson(json_encode($data['ChannelEmbedCodes']), EmbedCodes::class);
 			return $embed;
 		} catch (\Exception $e) {
 			throw $e;
