@@ -38,23 +38,26 @@ class Input extends BaseRequest {
 	 * @param int         $channelId
 	 * @param string      $streamInType
 	 * @param string|null $streamInUri
+	 * @param bool        $useIngestVersion2
 	 *
 	 * @return ChannelInput
 	 * @throws \Exception
 	 */
-	public static function changeInput(int $channelId, string $streamInType, string $streamInUri = null) {
+	public static function changeInput(int $channelId, string $streamInType, bool $useIngestVersion2 = false, string $streamInUri = null) {
 		parent::$subUrl     = $channelId . '/input';
 		self::$method       = 'put';
 		self::$possibleParm = [
 			'StreamInType',
 			'StreamInURI',
+			'UseIngestVersion2',
 		];
 		try {
-			self::$requestParm['StreamInType'] = $streamInType;
-			self::$requestParm['StreamInURI']  = $streamInUri;
-			$mapper                            = new ObjectMapper();
-			$response                          = self::getResponse();
-			$input                             = $mapper->mapJson($response, ChannelInput::class);
+			self::$requestParm['StreamInType']      = $streamInType;
+			self::$requestParm['StreamInURI']       = $streamInUri;
+			self::$requestParm['UseIngestVersion2'] = $useIngestVersion2;
+			$mapper                                 = new ObjectMapper();
+			$response                               = self::getResponse();
+			$input                                  = $mapper->mapJson($response, ChannelInput::class);
 
 		} catch (\Exception $e) {
 			throw $e;
