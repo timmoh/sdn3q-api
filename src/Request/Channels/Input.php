@@ -35,26 +35,26 @@ class Input extends BaseRequest {
 	/**
 	 * Change Channel Input
 	 *
-	 * @param int         $channelId
-	 * @param string      $streamInType
-	 * @param string|null $streamInUri
-	 * @param bool        $useIngestVersion2
+	 * @param int    $channelId
+	 * @param string $streamInType
+	 * @param bool   $useIngestVersion2
+	 * @param int    $dvrWindow
 	 *
 	 * @return ChannelInput
 	 * @throws \Exception
 	 */
-	public static function changeInput(int $channelId, string $streamInType, bool $useIngestVersion2 = false, string $streamInUri = null) {
+	public static function changeInput(int $channelId, string $streamInType, bool $useIngestVersion2 = false, int $dvrWindow = 0) {
 		parent::$subUrl     = $channelId . '/input';
 		self::$method       = 'put';
 		self::$possibleParm = [
 			'StreamInType',
-			'StreamInURI',
 			'UseIngestVersion2',
+			'DVRWindow',
 		];
 		try {
 			self::$requestParm['StreamInType']      = $streamInType;
-			self::$requestParm['StreamInURI']       = $streamInUri;
 			self::$requestParm['UseIngestVersion2'] = $useIngestVersion2;
+			self::$requestParm['DVRWindow']         = $dvrWindow;
 			$mapper                                 = new ObjectMapper();
 			$response                               = self::getResponse();
 			$input                                  = $mapper->mapJson($response, ChannelInput::class);
