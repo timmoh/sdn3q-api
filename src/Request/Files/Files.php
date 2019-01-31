@@ -120,6 +120,38 @@ class Files extends BaseRequest {
 		}
 		return $uri;
 	}
+	
+	/**
+	 * Return the File Upload URI in the Location Header to replace the source Video File
+	 *
+	 * @param int    $projectId  Project Id
+	 * @param int    $fileId     File Id to get replaced
+	 * @param string $fileName   original File Name
+	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
+	 *
+	 * @return string|null
+	 * @throws \SDN3Q\Exception\NotImplemented
+	 */
+	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
+		$uri                       = null;
+		self::$method              = 'post';
+		parent::$requestParmAsJson = true;
+		parent::$subUrl            = $projectId . '/files/' . $fileId . '/replace';
+
+		self::$requestParm['FileName']   = $fileName;
+		self::$requestParm['FileFormat'] = $fileFormat;
+		try {
+			$mapper   = new ObjectMapper();
+			$response = self::getResponse();
+			$header   = self::$responseHeader;
+			$uri      = $header['Location'][0];
+			return $uri;
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		return $uri;
+	}
 
 	/**
 	 * Delete a File by Id
