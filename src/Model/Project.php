@@ -1,26 +1,26 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class Project extends BaseModel {
 	/**
 	 * @var int
-	 * @JsonField(name="Id", type="int")
+	 * @DataField(name="Id", type="int")
 	 */
 	public $id;
 
 	/**
 	 *
 	 * @var \SDN3Q\Model\StreamType
-	 * @JsonField(name="StreamType", type="\SDN3Q\Model\StreamType")
+	 * @DataField(name="StreamType", type="\SDN3Q\Model\StreamType")
 	 */
 	public $streamType;
 
 	/**
 	 *
 	 * @var \SDN3Q\Model\Category
-	 * @JsonField(name="Category", type="\SDN3Q\Model\Category")
+	 * @DataField(name="Category", type="\SDN3Q\Model\Category")
 	 */
 	public $category;
 
@@ -28,7 +28,7 @@ class Project extends BaseModel {
 	 * Title
 	 *
 	 * @var string
-	 * @JsonField(name="Label", type="string")
+	 * @DataField(name="Label", type="string")
 	 */
 	public $label;
 
@@ -36,7 +36,7 @@ class Project extends BaseModel {
 	 * Project SecurityKey
 	 *
 	 * @var string
-	 * @JsonField(name="SecurityKey", type="string")
+	 * @DataField(name="SecurityKey", type="string")
 	 */
 	public $securityKey;
 
@@ -45,7 +45,7 @@ class Project extends BaseModel {
 	 * URI of the Project Thumbnail
 	 *
 	 * @var string
-	 * @JsonField(name="ThumbURI", type="string")
+	 * @DataField(name="ThumbURI", type="string")
 	 */
 	public $thumbUri;
 
@@ -53,7 +53,7 @@ class Project extends BaseModel {
 	 * Time of creation
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="CreatedAt", type="\DateTime")
+	 * @DataField(name="CreatedAt", type="\DateTime")
 	 */
 	public $createdAt;
 
@@ -61,14 +61,14 @@ class Project extends BaseModel {
 	 * Time of Last Update
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="LastUpdatedAt", type="\DateTime")
+	 * @DataField(name="LastUpdatedAt", type="\DateTime")
 	 */
 	public $lastUpdatedAt;
 
 	/**
 	 * expires enabled
 	 * @var boolean
-	 * @JsonField(name="Expires", type="boolean")
+	 * @DataField(name="Expires", type="boolean")
 	 */
 	public $expires;
 
@@ -76,7 +76,7 @@ class Project extends BaseModel {
 	 * Time of expires
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="ExpiresAt", type="\DateTime")
+	 * @DataField(name="ExpiresAt", type="\DateTime")
 	 */
 	public $expiresAt;
 }

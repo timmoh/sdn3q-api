@@ -2,7 +2,7 @@
 
 
 namespace SDN3Q\Model\Output;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 use SDN3Q\Model\BaseModel;
 
 
@@ -11,7 +11,7 @@ class SourceOutput extends BaseModel {
     * rtmp
     *
     * @var string
-    * @JsonField(name="rtmp", type="string")
+    * @DataField(name="rtmp", type="string")
     */
    public $rtmp;
 
@@ -19,7 +19,7 @@ class SourceOutput extends BaseModel {
     * hls
     *
     * @var string
-    * @JsonField(name="hls", type="string")
+    * @DataField(name="hls", type="string")
     */
    public $hls;
 
@@ -27,7 +27,7 @@ class SourceOutput extends BaseModel {
     * hds
     *
     * @var string
-    * @JsonField(name="hds", type="string")
+    * @DataField(name="hds", type="string")
     */
    public $hds;
 
@@ -35,7 +35,7 @@ class SourceOutput extends BaseModel {
     * dash
     *
     * @var string
-    * @JsonField(name="StreamInConnection", type="string")
+    * @DataField(name="StreamInConnection", type="string")
     */
    public $dash;
 

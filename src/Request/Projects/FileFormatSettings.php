@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Projects;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Request\BaseRequest;
 
 class FileFormatSettings extends BaseRequest {
@@ -19,17 +20,16 @@ class FileFormatSettings extends BaseRequest {
 	 */
 	public static function getFileFormatSettings(int $projectId) {
 		$fileformatsettings = [];
-		parent::$subUrl = $projectId . '/fileformatsettings';
+		parent::$subUrl     = $projectId . '/fileformatsettings';
 		try {
-			$mapper         = new ObjectMapper();
-
+			$mapper = new ObjectMapper(new JsonSerializer());;
 
 			$response = self::getResponse();
 
 			$data = json_decode($response, true);
 			if (count($data['FileFormatSettings']) > 0) {
 				foreach ($data['FileFormatSettings'] as $dataValue) {
-					$fileformatsettings[] = $mapper->mapJson(json_encode($dataValue), \SDN3Q\Model\FileFormatSettings::class);
+					$fileformatsettings[] = $mapper->map(json_encode($dataValue), \SDN3Q\Model\FileFormatSettings::class);
 				}
 			}
 		} catch (\Exception $e) {
@@ -50,13 +50,12 @@ class FileFormatSettings extends BaseRequest {
 	 */
 	public static function getFileEncoderSetting(int $projectId, int $fileFormatId) {
 		$fileformatsetting = null;
-		parent::$subUrl = $projectId . '/fileformatsettings/' . $fileFormatId;
+		parent::$subUrl    = $projectId . '/fileformatsettings/' . $fileFormatId;
 		try {
-			$mapper         = new ObjectMapper();
-
+			$mapper = new ObjectMapper(new JsonSerializer());;
 
 			$response          = self::getResponse();
-			$fileformatsetting = $mapper->mapJson($response, \SDN3Q\Model\FileFormatSettings::class);
+			$fileformatsetting = $mapper->map($response, \SDN3Q\Model\FileFormatSettings::class);
 		} catch (\Exception $e) {
 			throw $e;
 		}
@@ -73,7 +72,7 @@ class FileFormatSettings extends BaseRequest {
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public static function putFileEncoderSetting(int $projectId, int $fileFormatId, $parms = []) {
-		parent::$subUrl = $projectId . '/fileformatsettings/' . $fileFormatId;
+		parent::$subUrl     = $projectId . '/fileformatsettings/' . $fileFormatId;
 		$fileformatsetting  = null;
 		self::$method       = 'put';
 		self::$possibleParm = [
@@ -88,17 +87,16 @@ class FileFormatSettings extends BaseRequest {
 			self::$requestParm[$key] = $value;
 		}
 		try {
-			$mapper             = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			self::$requestParm['projectId']    = $projectId;
 			self::$requestParm['FileFormatId'] = $fileFormatId;
 
-			$response = self::getResponse();
-			$fileformatsetting = $mapper->mapJson($response, \SDN3Q\Model\FileFormatSettings::class);
+			$response          = self::getResponse();
+			$fileformatsetting = $mapper->map($response, \SDN3Q\Model\FileFormatSettings::class);
 
 		} catch (\Exception $e) {
 			throw $e;
 		}
-
 
 		return $fileformatsetting;
 	}

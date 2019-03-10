@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class FileOutputURI extends BaseModel {
@@ -10,7 +10,7 @@ class FileOutputURI extends BaseModel {
 	 * Streaming
 	 *
 	 * @var array
-	 * @JsonField(name="Streaming", type="array")
+	 * @DataField(name="Streaming", type="array")
 	 */
 	public $streaming;
 
@@ -18,7 +18,7 @@ class FileOutputURI extends BaseModel {
 	 * Progressive
 	 *
 	 * @var array
-	 * @JsonField(name="Progressive", type="array")
+	 * @DataField(name="Progressive", type="array")
 	 */
 	public $progressive;
 
@@ -27,7 +27,7 @@ class FileOutputURI extends BaseModel {
 	 * ProgressiveWithSubclips
 	 *
 	 * @var array
-	 * @JsonField(name="ProgressiveWithSubclips", type="array")
+	 * @DataField(name="ProgressiveWithSubclips", type="array")
 	 */
 	public $progressiveWithSubclips;
 
@@ -35,7 +35,7 @@ class FileOutputURI extends BaseModel {
 	 * Download
 	 *
 	 * @var array
-	 * @JsonField(name="Download", type="array")
+	 * @DataField(name="Download", type="array")
 	 */
 	public $download;
 

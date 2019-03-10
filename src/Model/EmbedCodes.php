@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class EmbedCodes extends BaseModel {
 
@@ -9,7 +9,7 @@ class EmbedCodes extends BaseModel {
     * JavaScript
     *
     * @var string
-    * @JsonField(name="JavaScript", type="string")
+    * @DataField(name="JavaScript", type="string")
     */
    public $javaScript;
 
@@ -18,7 +18,7 @@ class EmbedCodes extends BaseModel {
     * iFrame
     *
     * @var string
-    * @JsonField(name="iFrame", type="string")
+    * @DataField(name="iFrame", type="string")
     */
    public $iFrame;
 
@@ -27,7 +27,7 @@ class EmbedCodes extends BaseModel {
     * PlayerURL
     *
     * @var string
-    * @JsonField(name="PlayerURL", type="string")
+    * @DataField(name="PlayerURL", type="string")
     */
    public $playerURL;
 

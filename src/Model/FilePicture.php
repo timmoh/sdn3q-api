@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class FilePicture extends BaseModel {
@@ -10,7 +10,7 @@ class FilePicture extends BaseModel {
 	 * FilePictureId
 	 *
 	 * @var int
-	 * @JsonField(name="FilePictureId", type="int")
+	 * @DataField(name="FilePictureId", type="int")
 	 */
 	public $filePictureId;
 
@@ -18,7 +18,7 @@ class FilePicture extends BaseModel {
 	 * URI of FilePicture
 	 *
 	 * @var string
-	 * @JsonField(name="URI", type="string")
+	 * @DataField(name="URI", type="string")
 	 */
 	public $uri;
 
@@ -27,7 +27,7 @@ class FilePicture extends BaseModel {
 	 * URI of a small version from the FilePicture
 	 *
 	 * @var string
-	 * @JsonField(name="ThumbURI", type="string")
+	 * @DataField(name="ThumbURI", type="string")
 	 */
 	public $thumbUri;
 
@@ -35,7 +35,7 @@ class FilePicture extends BaseModel {
 	 * If FilePicture was uploaded, that is the URI of the uploaded Picture
 	 *
 	 * @var string
-	 * @JsonField(name="SrcPictureURI", type="string")
+	 * @DataField(name="SrcPictureURI", type="string")
 	 */
 	public $srcPictureUri;
 
@@ -44,7 +44,7 @@ class FilePicture extends BaseModel {
 	 * This is the Standard (default) FilePicture
 	 *
 	 * @var boolean
-	 * @JsonField(name="IsStandard", type="boolean")
+	 * @DataField(name="IsStandard", type="boolean")
 	 */
 	public $isStandard;
 

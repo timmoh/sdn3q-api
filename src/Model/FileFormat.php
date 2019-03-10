@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class FileFormat extends BaseModel {
@@ -10,14 +10,14 @@ class FileFormat extends BaseModel {
 	 * FileFormatId
 	 *
 	 * @var int
-	 * @JsonField(name="FileFormatId", type="int")
+	 * @DataField(name="FileFormatId", type="int")
 	 */
 	public $fileFormatId;
 	/**
 	 * Title
 	 *
 	 * @var string
-	 * @JsonField(name="Label", type="string")
+	 * @DataField(name="Label", type="string")
 	 */
 	public $label;
 
@@ -25,7 +25,7 @@ class FileFormat extends BaseModel {
 	 * MIMEType
 	 *
 	 * @var string
-	 * @JsonField(name="MIME-Type", type="string")
+	 * @DataField(name="MIME-Type", type="string")
 	 */
 	public $mimeType;
 
@@ -33,7 +33,7 @@ class FileFormat extends BaseModel {
 	 * VideoCodec
 	 *
 	 * @var string
-	 * @JsonField(name="VideoCodec", type="string")
+	 * @DataField(name="VideoCodec", type="string")
 	 */
 	public $videoCodec;
 
@@ -41,7 +41,7 @@ class FileFormat extends BaseModel {
 	 * VideoHeight
 	 *
 	 * @var int
-	 * @JsonField(name="VideoHeight", type="int")
+	 * @DataField(name="VideoHeight", type="int")
 	 */
 	public $videoHeight;
 

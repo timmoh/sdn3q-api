@@ -1,13 +1,13 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class Category extends BaseModel {
 	/**
 	 * Category Id
 	 * @var int
-	 * @JsonField(name="Id", type="int")
+	 * @DataField(name="Id", type="int")
 	 */
 	public $id;
 
@@ -15,7 +15,7 @@ class Category extends BaseModel {
 	 * Title
 	 *
 	 * @var string
-	 * @JsonField(name="Label", type="string")
+	 * @DataField(name="Label", type="string")
 	 */
 	public $label;
 
@@ -24,14 +24,14 @@ class Category extends BaseModel {
 	 * Custom Catagory Id
 	 *
 	 * @var int
-	 * @JsonField(name="CustomId", type="int")
+	 * @DataField(name="CustomId", type="int")
 	 */
 	public $customId;
 	/**
 	 * URI of the Project Thumbnail
 	 *
 	 * @var string
-	 * @JsonField(name="ThumbURI", type="string")
+	 * @DataField(name="ThumbURI", type="string")
 	 */
 	public $thumbUri;
 }

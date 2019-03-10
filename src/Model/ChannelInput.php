@@ -2,7 +2,7 @@
 
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class ChannelInput extends BaseModel {
@@ -12,7 +12,7 @@ class ChannelInput extends BaseModel {
 	 * Type of Channel input
 	 *
 	 * @var string
-	 * @JsonField(name="StreamInType", type="string")
+	 * @DataField(name="StreamInType", type="string")
 	 */
 	public $streamInType;
 
@@ -21,7 +21,7 @@ class ChannelInput extends BaseModel {
 	 * Connection Details for Input
 	 *
 	 * @var \SDN3Q\Model\StreamInConnection
-	 * @JsonField(name="StreamInConnection", type="\SDN3Q\Model\StreamInConnection")
+	 * @DataField(name="StreamInConnection", type="\SDN3Q\Model\StreamInConnection")
 	 */
 	public $streamInConnection;
 

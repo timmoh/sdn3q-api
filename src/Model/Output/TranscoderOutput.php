@@ -2,7 +2,7 @@
 
 
 namespace SDN3Q\Model\Output;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 use SDN3Q\Model\BaseModel;
 
 

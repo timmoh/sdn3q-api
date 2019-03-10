@@ -2,7 +2,7 @@
 
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class ChannelTranscoderFormat extends BaseModel {
@@ -10,7 +10,7 @@ class ChannelTranscoderFormat extends BaseModel {
 	 * ChannelFormatId
 	 *
 	 * @var int
-	 * @JsonField(name="ChannelFormatId", type="int")
+	 * @DataField(name="ChannelFormatId", type="int")
 	 */
 	public $channelFormatId;
 
@@ -18,7 +18,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * Title
     *
     * @var string
-    * @JsonField(name="Label", type="string")
+    * @DataField(name="Label", type="string")
     */
    public $label;
 
@@ -26,7 +26,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * VideoBitRate
     *
     * @var int
-    * @JsonField(name="VideoBitRate", type="int")
+    * @DataField(name="VideoBitRate", type="int")
     */
    public $videoBitRate;
 
@@ -34,7 +34,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * VideoProfile
     *
     * @var string
-    * @JsonField(name="VideoProfile", type="string")
+    * @DataField(name="VideoProfile", type="string")
     */
    public $videoProfile;
 
@@ -42,7 +42,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * VideoCodec
     *
     * @var string
-    * @JsonField(name="VideoCodec", type="string")
+    * @DataField(name="VideoCodec", type="string")
     */
    public $videoCodec;
 
@@ -50,7 +50,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * VideoHeight
     *
     * @var int
-    * @JsonField(name="VideoHeight", type="int")
+    * @DataField(name="VideoHeight", type="int")
     */
    public $videoHeight;
 
@@ -58,7 +58,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * VideoFPS
     *
     * @var double
-    * @JsonField(name="VideoFPS", type="double|int")
+    * @DataField(name="VideoFPS", type="double|int")
     */
    public $videoFps;
 
@@ -68,7 +68,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * AudioCodec
     *
     * @var string
-    * @JsonField(name="AudioCodec", type="string")
+    * @DataField(name="AudioCodec", type="string")
     */
    public $audioCodec;
 
@@ -76,7 +76,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * AudioBitRate
     *
     * @var int
-    * @JsonField(name="AudioBitRate", type="int")
+    * @DataField(name="AudioBitRate", type="int")
     */
    public $audioBitRate;
 
@@ -84,7 +84,7 @@ class ChannelTranscoderFormat extends BaseModel {
     * AudioSampleRate
     *
     * @var int
-    * @JsonField(name="AudioSampleRate", type="int")
+    * @DataField(name="AudioSampleRate", type="int")
     */
    public $audioSampleRate;
 
@@ -93,7 +93,7 @@ class ChannelTranscoderFormat extends BaseModel {
 	 * AudioChannels
 	 *
 	 * @var int
-	 * @JsonField(name="AudioChannels", type="int")
+	 * @DataField(name="AudioChannels", type="int")
 	 */
 	public $audioChannels;
 
@@ -101,7 +101,7 @@ class ChannelTranscoderFormat extends BaseModel {
 	 * Amount
 	 *
 	 * @var int
-	 * @JsonField(name="Amount", type="int")
+	 * @DataField(name="Amount", type="int")
 	 */
 	public $amount;
 }

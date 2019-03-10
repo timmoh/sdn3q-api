@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Channels;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Exception\NoContent;
 use SDN3Q\Model\ChannelPicture;
 use SDN3Q\Request\BaseRequest;
@@ -25,10 +26,10 @@ class Picture extends BaseRequest {
 
 		$channelPicture = null;
 		try {
-			$mapper         = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			parent::$subUrl = $channelId . '/picture';
 			$response       = self::getResponse();
-			$channelPicture = $mapper->mapJson($response, ChannelPicture::class);
+			$channelPicture = $mapper->map($response, ChannelPicture::class);
 		} catch (NoContent $e) {
 			return null;
 		} catch (\Exception $e) {
@@ -46,19 +47,19 @@ class Picture extends BaseRequest {
 	 * @throws \Exception
 	 */
 	public static function putPicture(int $channelId, string $imagePath) {
-		$channelPicture                     = null;
+		$channelPicture              = null;
 		self::$method                = 'put';
 		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
 		try {
 			$mime = self::checkMimeType($imagePath);
 
 			self::$additionalHeader["Content-type"] = $mime;
-			$mapper                                 = new ObjectMapper();
-			parent::$subUrl                         = $channelId . '/picture';
+			$mapper                                 = new ObjectMapper(new JsonSerializer());;
+			parent::$subUrl = $channelId . '/picture';
 
 			$response = self::getResponse();
 
-			$channelPicture = $mapper->mapJson($response, ChannelPicture::class);
+			$channelPicture = $mapper->map($response, ChannelPicture::class);
 		} catch (\Exception $e) {
 			throw $e;
 		}

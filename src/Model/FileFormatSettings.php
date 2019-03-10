@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class FileFormatSettings extends BaseModel {
@@ -10,14 +10,14 @@ class FileFormatSettings extends BaseModel {
 	 * VideoBitRate
 	 *
 	 * @var int
-	 * @JsonField(name="VideoBitRate", type="int")
+	 * @DataField(name="VideoBitRate", type="int")
 	 */
 	public $videoBitRate;
 	/**
 	 * VideoProfile
 	 *
 	 * @var string
-	 * @JsonField(name="VideoProfile", type="string")
+	 * @DataField(name="VideoProfile", type="string")
 	 */
 	public $videoProfile;
 
@@ -26,7 +26,7 @@ class FileFormatSettings extends BaseModel {
 	 * VideoFPS
 	 *
 	 * @var string
-	 * @JsonField(name="VideoFPS", type="float")
+	 * @DataField(name="VideoFPS", type="float")
 	 */
 	public $videoFps;
 
@@ -34,7 +34,7 @@ class FileFormatSettings extends BaseModel {
 	 * AudioBitRate
 	 *
 	 * @var string
-	 * @JsonField(name="AudioBitRate", type="int")
+	 * @DataField(name="AudioBitRate", type="int")
 	 */
 	public $audioBitRate;
 
@@ -42,7 +42,7 @@ class FileFormatSettings extends BaseModel {
 	 * AudioSampleRate
 	 *
 	 * @var string
-	 * @JsonField(name="AudioSampleRate", type="int")
+	 * @DataField(name="AudioSampleRate", type="int")
 	 */
 	public $audioSampleRate;
 
@@ -50,7 +50,7 @@ class FileFormatSettings extends BaseModel {
 	 * AudioChannels
 	 *
 	 * @var string
-	 * @JsonField(name="AudioChannels", type="int")
+	 * @DataField(name="AudioChannels", type="int")
 	 */
 	public $audioChannels;
 
@@ -58,7 +58,7 @@ class FileFormatSettings extends BaseModel {
 	 * FileFormatId
 	 *
 	 * @var string
-	 * @JsonField(name="FileFormatId", type="int")
+	 * @DataField(name="FileFormatId", type="int")
 	 */
 	public $fileFormatId;
 
@@ -67,7 +67,7 @@ class FileFormatSettings extends BaseModel {
 	 * Label
 	 *
 	 * @var string
-	 * @JsonField(name="Label", type="string")
+	 * @DataField(name="Label", type="string")
 	 */
 	public $label;
 
@@ -75,7 +75,7 @@ class FileFormatSettings extends BaseModel {
 	 * MIMEType
 	 *
 	 * @var string
-	 * @JsonField(name="MIME-Type", type="string")
+	 * @DataField(name="MIME-Type", type="string")
 	 */
 	public $mimeType;
 
@@ -83,7 +83,7 @@ class FileFormatSettings extends BaseModel {
 	 * VideoCodec
 	 *
 	 * @var string
-	 * @JsonField(name="VideoCodec", type="string")
+	 * @DataField(name="VideoCodec", type="string")
 	 */
 	public $videoCodec;
 
@@ -91,7 +91,7 @@ class FileFormatSettings extends BaseModel {
 	 * VideoHeight
 	 *
 	 * @var int
-	 * @JsonField(name="VideoHeight", type="int")
+	 * @DataField(name="VideoHeight", type="int")
 	 */
 	public $videoHeight;
 

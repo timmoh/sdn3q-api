@@ -1,14 +1,14 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class VideoType {
    /**
     * Videotype Id
     *
     * @var int
-    * @JsonField(name="Id", type="int")
+    * @DataField(name="Id", type="int")
     */
    public $id;
 
@@ -16,7 +16,7 @@ class VideoType {
     * Videotype Label
     *
     * @var string
-    * @JsonField(name="Label", type="string")
+    * @DataField(name="Label", type="string")
     */
    public $label;
 }

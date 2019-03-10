@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Channels;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\ChannelTranscoderFormat;
 use SDN3Q\Request\BaseRequest;
 
@@ -22,12 +23,12 @@ class Transcoder extends BaseRequest {
 		$channelFormats = [];
 		parent::$subUrl = $channelId . '/formats';
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['ChannelFormats']) > 0) {
 				foreach ($data['ChannelFormats'] as $dataValue) {
-					$channelFormats[] = $mapper->mapJson(json_encode($dataValue), ChannelTranscoderFormat::class);
+					$channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
 				}
 			}
 		} catch (\Exception $e) {
@@ -51,12 +52,12 @@ class Transcoder extends BaseRequest {
 		parent::$subUrl = $channelId . '/formats/' . $channelFormatId;
 		self::$method   = 'link';
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['ChannelTranscoders']) > 0) {
 				foreach ($data['ChannelTranscoders'] as $dataValue) {
-					$channelFormats[] = $mapper->mapJson(json_encode($dataValue), ChannelTranscoderFormat::class);
+					$channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
 				}
 			}
 
@@ -85,12 +86,12 @@ class Transcoder extends BaseRequest {
 			'ChannelFormatId',
 		];
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['ChannelTranscoders']) > 0) {
 				foreach ($data['ChannelTranscoders'] as $dataValue) {
-					$channelFormats[] = $mapper->mapJson(json_encode($dataValue), ChannelTranscoderFormat::class);
+					$channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
 				}
 			}
 
@@ -114,12 +115,12 @@ class Transcoder extends BaseRequest {
 		$channelFormats = [];
 		parent::$subUrl = $channelId . '/transcoders';
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['ChannelTranscoders']) > 0) {
 				foreach ($data['ChannelTranscoders'] as $dataValue) {
-					$channelFormats[] = $mapper->mapJson(json_encode($dataValue), ChannelTranscoderFormat::class);
+					$channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
 				}
 			}
 		} catch (\Exception $e) {

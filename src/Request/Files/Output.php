@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Files;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\FileOutputURI;
 use SDN3Q\Request\BaseRequest;
 
@@ -24,12 +25,12 @@ class Output extends BaseRequest {
 		$fileOutputURIs = [];
 		parent::$subUrl = $projectId . '/files/' . $fileId . '/output';
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data) > 0) {
 				foreach ($data as $dataOutput) {
-					$fileOutputURIs[] = $mapper->mapJson(json_encode($dataOutput), FileOutputURI::class);
+					$fileOutputURIs[] = $mapper->map(json_encode($dataOutput), FileOutputURI::class);
 				}
 			}
 		} catch (\Exception $e) {

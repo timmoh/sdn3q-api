@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Projects;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\Project;
 use SDN3Q\Request\BaseRequest;
 
@@ -19,12 +20,12 @@ class Projects extends BaseRequest {
 	public static function getProjects() {
 		$projects = [];
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper   = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['Projects']) > 0) {
 				foreach ($data['Projects'] as $dataProject) {
-					$projects[] = $mapper->mapJson(json_encode($dataProject), Project::class);
+					$projects[] = $mapper->map(json_encode($dataProject), Project::class);
 				}
 			}
 		} catch (\Exception $e) {
@@ -45,11 +46,11 @@ class Projects extends BaseRequest {
 	public static function getProject(int $projectId) {
 		$project = null;
 		try {
-			$mapper         = new ObjectMapper();
+			$mapper         = new ObjectMapper(new JsonSerializer());;
 			parent::$subUrl = $projectId;
 
 			$response = self::getResponse();
-			$project  = $mapper->mapJson($response, Project::class);
+			$project  = $mapper->map($response, Project::class);
 		} catch (\Exception $e) {
 			throw $e;
 		}

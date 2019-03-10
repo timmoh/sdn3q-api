@@ -1,7 +1,7 @@
 <?php
 namespace SDN3Q\Model;
 
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class FileEncoding  extends BaseModel{
 
@@ -9,7 +9,7 @@ class FileEncoding  extends BaseModel{
 	/**
 	 * Activate encoding
 	 * @var boolean
-	 * @JsonField(name="UseEncoding", type="boolean")
+	 * @DataField(name="UseEncoding", type="boolean")
 	 */
 	public $useEncoding;
 
@@ -17,7 +17,7 @@ class FileEncoding  extends BaseModel{
 	/**
 	 * Activate premium encoding for this project (additional costs)
 	 * @var boolean
-	 * @JsonField(name="UsePremiumEncoding", type="boolean")
+	 * @DataField(name="UsePremiumEncoding", type="boolean")
 	 */
 	public $usePremiumEncoding;
 
@@ -25,14 +25,14 @@ class FileEncoding  extends BaseModel{
 	/**
 	 * Activate Pipeline
 	 * @var boolean
-	 * @JsonField(name="UsePreProcessing", type="boolean")
+	 * @DataField(name="UsePreProcessing", type="boolean")
 	 */
 	public $usePreProcessing;
 
 	/**
 	 * Deinterlace during Encoding
 	 * @var boolean
-	 * @JsonField(name="UseDeinterlace", type="boolean")
+	 * @DataField(name="UseDeinterlace", type="boolean")
 	 */
 	public $useDeinterlace;
 
@@ -40,28 +40,28 @@ class FileEncoding  extends BaseModel{
 	/**
 	 * Activate Two Pass Encoding
 	 * @var boolean
-	 * @JsonField(name="UseTwoPass", type="boolean")
+	 * @DataField(name="UseTwoPass", type="boolean")
 	 */
 	public $useTwoPass;
 
 	/**
 	 * Keep Original Frame Rate (Recommended)
 	 * @var boolean
-	 * @JsonField(name="Expires", type="boolean")
+	 * @DataField(name="Expires", type="boolean")
 	 */
 	public $useBPFrames;
 
 	/**
 	 * Package the Files for DRM
 	 * @var boolean
-	 * @JsonField(name="PackageForDRM", type="boolean")
+	 * @DataField(name="PackageForDRM", type="boolean")
 	 */
 	public $packageForDrm;
 
 	/**
 	 * Use Watermark
 	 * @var boolean
-	 * @JsonField(name="UseWatermark", type="boolean")
+	 * @DataField(name="UseWatermark", type="boolean")
 	 */
 	public $useWatermark;
 
@@ -70,7 +70,7 @@ class FileEncoding  extends BaseModel{
 	 * Watermark Picture URI
 	 *
 	 * @var string
-	 * @JsonField(name="WatermarkURI", type="string")
+	 * @DataField(name="WatermarkURI", type="string")
 	 */
 	public $watermarkUri;
 
@@ -79,7 +79,7 @@ class FileEncoding  extends BaseModel{
 	 * Position of Watermark
 	 *
 	 * @var string
-	 * @JsonField(name="WatermarkPosition", type="string")
+	 * @DataField(name="WatermarkPosition", type="string")
 	 */
 	public $watermarkPosition;
 
@@ -87,7 +87,7 @@ class FileEncoding  extends BaseModel{
 	 * Position of Watermark
 	 *
 	 * @var array
-	 * @JsonField(name="FileFormats", type="array")
+	 * @DataField(name="FileFormats", type="array")
 	 */
 	public $fileFormats = [];
 

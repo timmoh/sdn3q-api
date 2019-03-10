@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class File extends BaseModel {
@@ -10,7 +10,8 @@ class File extends BaseModel {
     * File Id
     *
     * @var integer
-    * @JsonField(name="Id", type="integer")
+    * @DataField(name="Id", type="integer|string")
+    * @DataField(name="FileId", type="integer|string")
     */
    public $id;
 
@@ -18,7 +19,7 @@ class File extends BaseModel {
     * File Name
     *
     * @var string
-    * @JsonField(name="Name", type="string")
+    * @DataField(name="Name", type="string")
     */
    public $name;
 
@@ -27,7 +28,7 @@ class File extends BaseModel {
     * Is Video processing (e.g. encoding) finished and Video is usable
     *
     * @var boolean
-    * @JsonField(name="IsFinished", type="boolean")
+    * @DataField(name="IsFinished", type="boolean")
     */
    public $isFinished;
 
@@ -35,7 +36,7 @@ class File extends BaseModel {
     * URI of FilePicture
     *
     * @var string
-    * @JsonField(name="URI", type="string")
+    * @DataField(name="URI", type="string")
     */
    public $uri;
 
@@ -44,7 +45,7 @@ class File extends BaseModel {
 	 * Properties
 	 *
 	 * @var \SDN3Q\Model\FileProperties
-	 * @JsonField(name="Properties", type="\SDN3Q\Model\FileProperties")
+	 * @DataField(name="Properties", type="\SDN3Q\Model\FileProperties")
 	 */
 	public $properties;
 
@@ -52,7 +53,7 @@ class File extends BaseModel {
     * Metadata
     *
     * @var \SDN3Q\Model\FileMetadata
-    * @JsonField(name="Metadata", type="\SDN3Q\Model\FileMetadata")
+    * @DataField(name="Metadata", type="\SDN3Q\Model\FileMetadata")
     */
    public $metadata;
 
@@ -61,7 +62,7 @@ class File extends BaseModel {
 	 * Creation Datetime
 	 *
 	 * @var \Datetime
-	 * @JsonField(name="CreatedAt", type="\Datetime")
+	 * @DataField(name="CreatedAt", type="\Datetime")
 	 */
 	public $createdAt;
 
@@ -69,7 +70,7 @@ class File extends BaseModel {
     * Last update Datetime
     *
     * @var \Datetime
-    * @JsonField(name="LastUpdateAt", type="\Datetime")
+    * @DataField(name="LastUpdateAt", type="\Datetime")
     */
    public $lastUpdateAt;
 
@@ -79,7 +80,7 @@ class File extends BaseModel {
 	 * Is Video marked as deleted (IsEnabled=false)
 	 *
 	 * @var boolean
-	 * @JsonField(name="IsEnabled", type="boolean")
+	 * @DataField(name="IsEnabled", type="boolean")
 	 */
 	public $isEnabled;
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class FileMetadata extends BaseModel {
 
@@ -9,7 +9,7 @@ class FileMetadata extends BaseModel {
     * Get the standard Picture of File
     *
     * @var \SDN3Q\Model\FilePicture
-    * @JsonField(name="StandardFilePicture", type="\SDN3Q\Model\FilePicture")
+    * @DataField(name="StandardFilePicture", type="\SDN3Q\Model\FilePicture")
     */
    public $standardFilePicture;
 
@@ -17,7 +17,7 @@ class FileMetadata extends BaseModel {
     * Meta Title
     *
     * @var string
-    * @JsonField(name="Title", type="string")
+    * @DataField(name="Title", type="string")
     */
    public $title;
 
@@ -25,7 +25,7 @@ class FileMetadata extends BaseModel {
     * Meta Description
     *
     * @var string
-    * @JsonField(name="Description", type="string")
+    * @DataField(name="Description", type="string")
     */
    public $description;
 
@@ -33,7 +33,7 @@ class FileMetadata extends BaseModel {
     * Display title (line 1)
     *
     * @var string
-    * @JsonField(name="DisplayTitle", type="string")
+    * @DataField(name="DisplayTitle", type="string")
     */
    public $displayTitle;
 
@@ -41,7 +41,7 @@ class FileMetadata extends BaseModel {
     * Display title (line 2)
     *
     * @var string
-    * @JsonField(name="DisplayTitleSecondLine", type="string")
+    * @DataField(name="DisplayTitleSecondLine", type="string")
     */
    public $displayTitleSecondLine;
 
@@ -49,7 +49,7 @@ class FileMetadata extends BaseModel {
     * Meta Tags, comma separated
     *
     * @var string
-    * @JsonField(name="Tags", type="string")
+    * @DataField(name="Tags", type="string")
     */
    public $tags;
 
@@ -57,7 +57,7 @@ class FileMetadata extends BaseModel {
     * Meta Genre
     *
     * @var string
-    * @JsonField(name="Genre", type="string")
+    * @DataField(name="Genre", type="string")
     */
    public $genre;
 
@@ -65,7 +65,7 @@ class FileMetadata extends BaseModel {
     * Meta Studio
     *
     * @var string
-    * @JsonField(name="Studio", type="string")
+    * @DataField(name="Studio", type="string")
     */
    public $studio;
 
@@ -74,7 +74,7 @@ class FileMetadata extends BaseModel {
     * Publication from (date)
     *
     * @var \Datetime
-    * @JsonField(name="IsPublicAt", type="\Datetime")
+    * @DataField(name="IsPublicAt", type="\Datetime")
     */
    public $isPublicAt;
 
@@ -82,7 +82,7 @@ class FileMetadata extends BaseModel {
     * Publication until (date)
     *
     * @var \Datetime
-    * @JsonField(name="IsPublicUntil", type="\Datetime")
+    * @DataField(name="IsPublicUntil", type="\Datetime")
     */
    public $isPublicUntil;
 
@@ -91,7 +91,7 @@ class FileMetadata extends BaseModel {
     * File Categories
     *
     * @var \SDN3Q\Model\Category[]
-    * @JsonField(name="Category", type="\SDN3Q\Model\Category[]")
+    * @DataField(name="Category", type="\SDN3Q\Model\Category[]")
     */
    public $category;
 
@@ -99,7 +99,7 @@ class FileMetadata extends BaseModel {
     * Media Feeds
     *
     * @var \SDN3Q\Model\Share[]
-    * @JsonField(name="Category", type="\SDN3Q\Model\Share[]")
+    * @DataField(name="Category", type="\SDN3Q\Model\Share[]")
     */
    public $share;
 
@@ -108,7 +108,7 @@ class FileMetadata extends BaseModel {
     * Meta Series
     *
     * @var string
-    * @JsonField(name="Series", type="string")
+    * @DataField(name="Series", type="string")
     */
    public $series;
 
@@ -116,28 +116,28 @@ class FileMetadata extends BaseModel {
     * Meta Production Country
     *
     * @var string
-    * @JsonField(name="ProductionCountry", type="string")
+    * @DataField(name="ProductionCountry", type="string")
     */
    public $productionCountry;
    /**
     * Meta native Language
     *
     * @var string
-    * @JsonField(name="NativeLanguage", type="string")
+    * @DataField(name="NativeLanguage", type="string")
     */
    public $nativeLanguage;
    /**
     * Meta individual Program Id
     *
     * @var string
-    * @JsonField(name="ProgramId", type="string")
+    * @DataField(name="ProgramId", type="string")
     */
    public $programId;
    /**
     * Source of Video File
     *
     * @var string
-    * @JsonField(name="Source", type="string")
+    * @DataField(name="Source", type="string")
     */
    public $source;
 
@@ -145,7 +145,7 @@ class FileMetadata extends BaseModel {
     *   Licensor of Video
     *
     * @var string
-    * @JsonField(name="Licensor", type="string")
+    * @DataField(name="Licensor", type="string")
     */
    public $licensor;
 
@@ -153,7 +153,7 @@ class FileMetadata extends BaseModel {
     * License Area of Video File, comma separated
     *
     * @var string
-    * @JsonField(name="LicenseArea", type="string")
+    * @DataField(name="LicenseArea", type="string")
     */
    public $licenseArea;
 
@@ -161,7 +161,7 @@ class FileMetadata extends BaseModel {
     * Relationship of Video File
     *
     * @var string
-    * @JsonField(name="RelationShip", type="string")
+    * @DataField(name="RelationShip", type="string")
     */
    public $relationShip;
 
@@ -169,7 +169,7 @@ class FileMetadata extends BaseModel {
     * Meta Rating
     *
     * @var float
-    * @JsonField(name="Rating", type="float")
+    * @DataField(name="Rating", type="float")
     */
    public $rating;
 
@@ -177,7 +177,7 @@ class FileMetadata extends BaseModel {
     * Geo Latitude
     *
     * @var float
-    * @JsonField(name="Latitude", type="float")
+    * @DataField(name="Latitude", type="float")
     */
    public $latitude;
 
@@ -185,7 +185,7 @@ class FileMetadata extends BaseModel {
     * Geo Longitude
     *
     * @var float
-    * @JsonField(name="Longitude", type="float")
+    * @DataField(name="Longitude", type="float")
     */
    public $longitude;
 
@@ -193,7 +193,7 @@ class FileMetadata extends BaseModel {
     * Videotype
     *
     * @var \SDN3Q\Model\VideoType[]
-    * @JsonField(name="Videotype", type="\SDN3Q\Model\VideoType[]")
+    * @DataField(name="Videotype", type="\SDN3Q\Model\VideoType[]")
     */
    public $videotype;
 

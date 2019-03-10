@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Files;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\FilePicture;
 use SDN3Q\Request\BaseRequest;
 
@@ -24,12 +25,12 @@ class Picture extends BaseRequest {
 		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures';
 		$filePictures   = [];
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['FilePictures']) > 0) {
 				foreach ($data['FilePictures'] as $dataFiles) {
-					$filePictures[] = $mapper->mapJson(json_encode($dataFiles), FilePicture::class);
+					$filePictures[] = $mapper->map(json_encode($dataFiles), FilePicture::class);
 				}
 			}
 
@@ -61,9 +62,9 @@ class Picture extends BaseRequest {
 
 			self::$additionalHeader["Content-type"] = $mime;
 
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
-			$picture  = $mapper->mapJson($response, FilePicture::class);
+			$picture  = $mapper->map($response, FilePicture::class);
 			return $picture;
 		} catch (\Exception $e) {
 			throw $e;
@@ -84,9 +85,9 @@ class Picture extends BaseRequest {
 		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/standard';
 		$filePicture    = null;
 		try {
-			$mapper      = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response    = self::getResponse();
-			$filePicture = $mapper->mapJson($response, FilePicture::class);
+			$filePicture = $mapper->map($response, FilePicture::class);
 		} catch (\Exception $e) {
 			throw $e;
 		}
@@ -110,9 +111,9 @@ class Picture extends BaseRequest {
 		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/' . $filePictureId . '';
 		$filePicture    = null;
 		try {
-			$mapper      = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response    = self::getResponse();
-			$filePicture = $mapper->mapJson($response, FilePicture::class);
+			$filePicture = $mapper->map($response, FilePicture::class);
 		} catch (\Exception $e) {
 			throw $e;
 		}
@@ -135,9 +136,9 @@ class Picture extends BaseRequest {
 		parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/' . $filePictureId . '/standard';
 		$filePicture    = null;
 		try {
-			$mapper      = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response    = self::getResponse();
-			$filePicture = $mapper->mapJson($response, FilePicture::class);
+			$filePicture = $mapper->map($response, FilePicture::class);
 		} catch (\Exception $e) {
 			throw $e;
 		}

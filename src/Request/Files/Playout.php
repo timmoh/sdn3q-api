@@ -2,11 +2,11 @@
 
 namespace SDN3Q\Request\Files;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\EmbedCodes;
 use SDN3Q\Model\FilePlayout;
 use SDN3Q\Request\BaseRequest;
-
 
 class Playout extends BaseRequest {
 
@@ -26,12 +26,12 @@ class Playout extends BaseRequest {
 		$playouts       = [];
 
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['FilePlayouts']) > 0) {
 				foreach ($data['FilePlayouts'] as $dataFiles) {
-					$playouts[] = $mapper->mapJson(json_encode($dataFiles), FilePlayout::class);
+					$playouts[] = $mapper->map(json_encode($dataFiles), FilePlayout::class);
 				}
 			}
 
@@ -45,7 +45,7 @@ class Playout extends BaseRequest {
 	/**
 	 * Return the Embed Codes of the default Playout of a File
 	 *
-	 * @param int $projectId
+	 * @param int   $projectId
 	 * @param int   $fileId
 	 * @param array $parms
 	 *
@@ -53,11 +53,11 @@ class Playout extends BaseRequest {
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
 	public static function getPlayoutDefault(int $projectId, int $fileId, $parms = []) {
-		$embed = null;
-		parent::$subUrl     = $projectId . '/files/' . $fileId . '/playouts/default/embed';
+		$embed                    = null;
+		parent::$subUrl           = $projectId . '/files/' . $fileId . '/playouts/default/embed';
 		self::$requestParmAsJson  = false;
 		self::$requestParmAsQuery = true;
-		self::$possibleParm = [
+		self::$possibleParm       = [
 			'ContainerId',//	string	false		ID of player DIV tag
 			'Width',//	integer	false		Player width
 			'Height',//	integer	false		Player height
@@ -72,10 +72,10 @@ class Playout extends BaseRequest {
 		}
 
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
-			$embed = $mapper->mapJson(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+			$embed    = $mapper->map(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
 			return $embed;
 
 		} catch (\Exception $e) {
@@ -88,7 +88,7 @@ class Playout extends BaseRequest {
 	/**
 	 * Return the Embed Codes of the Playout of a File
 	 *
-	 * @param int $projectId
+	 * @param int         $projectId
 	 * @param int         $fileId
 	 * @param string|null $playoutId
 	 * @param array       $parms
@@ -100,7 +100,7 @@ class Playout extends BaseRequest {
 		if (is_null($playoutId)) {
 			return self::getPlayoutDefault($projectId, $fileId);
 		}
-		$embed=null;
+		$embed              = null;
 		parent::$subUrl     = $projectId . '/files/' . $fileId . '/playouts/' . $playoutId . '/embed';
 		self::$possibleParm = [
 			'ContainerId',//	string	false		ID of player DIV tag
@@ -118,10 +118,10 @@ class Playout extends BaseRequest {
 		}
 
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
-			$embed = $mapper->mapJson(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+			$embed    = $mapper->map(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
 			return $embed;
 
 		} catch (\Exception $e) {

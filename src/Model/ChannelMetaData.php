@@ -2,7 +2,7 @@
 
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class ChannelMetaData extends BaseModel {
@@ -12,7 +12,7 @@ class ChannelMetaData extends BaseModel {
 	 * Channel Title
 	 *
 	 * @var string
-	 * @JsonField(name="Title", type="string")
+	 * @DataField(name="Title", type="string")
 	 */
 	public $title;
 
@@ -21,7 +21,7 @@ class ChannelMetaData extends BaseModel {
 	 * Description of the Channel
 	 *
 	 * @var string
-	 * @JsonField(name="Description", type="string")
+	 * @DataField(name="Description", type="string")
 	 */
 	public $description;
 
@@ -29,7 +29,7 @@ class ChannelMetaData extends BaseModel {
 	 * Comma separated Tags of the Channel
 	 *
 	 * @var string
-	 * @JsonField(name="Tags", type="string")
+	 * @DataField(name="Tags", type="string")
 	 */
 	public $tag;
 
@@ -37,7 +37,7 @@ class ChannelMetaData extends BaseModel {
 	 * Title Player first line
 	 *
 	 * @var string
-	 * @JsonField(name="DisplayTitle", type="string")
+	 * @DataField(name="DisplayTitle", type="string")
 	 */
 	public $displayTitle;
 
@@ -45,7 +45,7 @@ class ChannelMetaData extends BaseModel {
 	 * Title Player second line
 	 *
 	 * @var string
-	 * @JsonField(name="DisplayTitleSecondLine", type="string")
+	 * @DataField(name="DisplayTitleSecondLine", type="string")
 	 */
 	public $displayTitleSecondLine;
 
@@ -53,7 +53,7 @@ class ChannelMetaData extends BaseModel {
 	 * State of Player Embed Code
 	 *
 	 * @var string
-	 * @JsonField(name="PlayoutState", type="string")
+	 * @DataField(name="PlayoutState", type="string")
 	 */
 	public $playoutState;
 
@@ -61,7 +61,7 @@ class ChannelMetaData extends BaseModel {
 	 * Show Channel Credits as lower third
 	 *
 	 * @var bool
-	 * @JsonField(name="ShowChannelCredits", type="bool")
+	 * @DataField(name="ShowChannelCredits", type="bool")
 	 */
 	public $showChannelCredits;
 
@@ -69,7 +69,7 @@ class ChannelMetaData extends BaseModel {
 	 * Channel Credits first line
 	 *
 	 * @var string
-	 * @JsonField(name="ChannelCredits", type="string")
+	 * @DataField(name="ChannelCredits", type="string")
 	 */
 	public $channelCredits;
 
@@ -77,7 +77,7 @@ class ChannelMetaData extends BaseModel {
 	 * Channel credits second line
 	 *
 	 * @var string
-	 * @JsonField(name="ChannelCreditsSecondLine", type="string")
+	 * @DataField(name="ChannelCreditsSecondLine", type="string")
 	 */
 	public $channelCreditsSecondLine;
 
@@ -85,7 +85,7 @@ class ChannelMetaData extends BaseModel {
 	 * Channel Credits Logo URI
 	 *
 	 * @var string
-	 * @JsonField(name="CreditsURI", type="string")
+	 * @DataField(name="CreditsURI", type="string")
 	 */
 	public $creditsURI;
 
@@ -93,7 +93,7 @@ class ChannelMetaData extends BaseModel {
 	 * Title of Board first line
 	 *
 	 * @var string
-	 * @JsonField(name="BoardTitle", type="string")
+	 * @DataField(name="BoardTitle", type="string")
 	 */
 	public $boardTitle;
 
@@ -101,7 +101,7 @@ class ChannelMetaData extends BaseModel {
 	 * Title of Board second line
 	 *
 	 * @var string
-	 * @JsonField(name="BoardTitleSecondLine", type="string")
+	 * @DataField(name="BoardTitleSecondLine", type="string")
 	 */
 	public $boardTitleSecondLine;
 
@@ -109,7 +109,7 @@ class ChannelMetaData extends BaseModel {
 	 * DateTime of Countdouwn end
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="CountdownEnd", type="\DateTime")
+	 * @DataField(name="CountdownEnd", type="\DateTime")
 	 */
 	public $countdownEnd;
 
@@ -118,7 +118,7 @@ class ChannelMetaData extends BaseModel {
 	 * Board Background Picture URI
 	 *
 	 * @var string
-	 * @JsonField(name="BoardURI", type="string")
+	 * @DataField(name="BoardURI", type="string")
 	 */
 	public $BoardUri;
 
@@ -126,7 +126,7 @@ class ChannelMetaData extends BaseModel {
 	 * Datetime of creation
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="CreatedAt", type="\DateTime")
+	 * @DataField(name="CreatedAt", type="\DateTime")
 	 */
 	public $CreatedAt;
 
@@ -134,7 +134,7 @@ class ChannelMetaData extends BaseModel {
 	 * Datetime of last update
 	 *
 	 * @var \DateTime
-	 * @JsonField(name="LastUpdatedAt", type="\DateTime")
+	 * @DataField(name="LastUpdatedAt", type="\DateTime")
 	 */
 	public $LastUpdatedAt;
 

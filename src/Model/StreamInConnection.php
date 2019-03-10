@@ -1,14 +1,14 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class StreamInConnection extends BaseModel {
    /**
     * ServerURI
     *
     * @var string
-    * @JsonField(name="ServerURI", type="string")
+    * @DataField(name="ServerURI", type="string")
     */
    public $serverURI;
 
@@ -16,7 +16,7 @@ class StreamInConnection extends BaseModel {
     * BackupServerURI
     *
     * @var string
-    * @JsonField(name="BackupServerURI", type="string")
+    * @DataField(name="BackupServerURI", type="string")
     */
    public $backupServerURI;
 
@@ -24,7 +24,7 @@ class StreamInConnection extends BaseModel {
     * StreamName
     *
     * @var string
-    * @JsonField(name="StreamName", type="string")
+    * @DataField(name="StreamName", type="string")
     */
    public $streamName;
 }

@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Channels;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Enum\PlayoutState;
 use SDN3Q\Model\EmbedCodes;
 use SDN3Q\Request\BaseRequest;
@@ -40,11 +41,11 @@ class Embed extends BaseRequest {
 		}
 
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper   = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 
 			$data  = json_decode($response, true);
-			$embed = $mapper->mapJson(json_encode($data['ChannelEmbedCodes']), EmbedCodes::class);
+			$embed = $mapper->map(json_encode($data['ChannelEmbedCodes']), EmbedCodes::class);
 			return $embed;
 		} catch (\Exception $e) {
 			throw $e;

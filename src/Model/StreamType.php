@@ -1,13 +1,13 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 class StreamType {
    /**
     * Stream Type ID
     * @var int
-    * @JsonField(name="Id", type="int")
+    * @DataField(name="Id", type="int")
     */
    public $id;
 
@@ -15,7 +15,7 @@ class StreamType {
     * Title
     *
     * @var string
-    * @JsonField(name="Label", type="string")
+    * @DataField(name="Label", type="string")
     */
    public $label;
 }

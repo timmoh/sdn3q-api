@@ -1,9 +1,9 @@
 <?php
 namespace SDN3Q\Request\Files;
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\FileMetadata;
 use SDN3Q\Request\BaseRequest;
-
 
 class Metadata extends BaseRequest{
 	protected static $endpoint ='projects';
@@ -21,10 +21,10 @@ class Metadata extends BaseRequest{
 		$fileMeta = null;
 		parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper   = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
-			$fileMeta     = $mapper->mapJson(json_encode($data), FileMetadata::class);
+			$fileMeta     = $mapper->map(json_encode($data), FileMetadata::class);
 			return $fileMeta;
 
 		} catch (\Exception $e) {
@@ -74,10 +74,10 @@ class Metadata extends BaseRequest{
 		}
 
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper   = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
-			$fileMeta     = $mapper->mapJson(json_encode($data), FileMetadata::class);
+			$fileMeta     = $mapper->map(json_encode($data), FileMetadata::class);
 			return $fileMeta;
 
 		} catch (\Exception $e) {

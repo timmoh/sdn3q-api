@@ -1,7 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\JOM\JsonField;
+use MintWare\DMM\DataField;
 
 
 class Share extends BaseModel {
@@ -9,7 +9,7 @@ class Share extends BaseModel {
     * Share Id
     *
     * @var integer
-    * @JsonField(name="Id", type="integer")
+    * @DataField(name="Id", type="integer")
     */
    public $id;
 
@@ -17,7 +17,7 @@ class Share extends BaseModel {
     * Feed Label for internal use
     *
     * @var string
-    * @JsonField(name="Label", type="string")
+    * @DataField(name="Label", type="string")
     */
    public $label;
 
@@ -25,7 +25,7 @@ class Share extends BaseModel {
     * Key for the Feed URI
     *
     * @var string
-    * @JsonField(name="AccessKey", type="string")
+    * @DataField(name="AccessKey", type="string")
     */
    public $accessKey;
 }
