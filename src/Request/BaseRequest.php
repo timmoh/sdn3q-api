@@ -66,6 +66,12 @@ class BaseRequest {
 	protected static $method = 'get';
 
 	/**
+	 * Response Type
+	 * @var string
+	 */
+	protected static $expected_response = 'json';
+
+	/**
 	 * BaseRequest constructor.
 	 *
 	 * @param \SDN3Q\Client $client
@@ -85,10 +91,17 @@ class BaseRequest {
 
 	/**
 	 * Build complete URL for Api Endpoint
+	 *
+	 * @param string $url
+	 *
 	 * @return string
 	 */
-	protected static function apiUrlRequest() {
-		$url = [static::apiBaseUrl()];
+	protected static function apiUrlRequest($url = null) {
+		if (!is_null($url)) {
+			$url = [$url];
+		} else {
+			$url = [static::apiBaseUrl()];
+		}
 
 		if (!empty(static::$endpoint)) {
 			$url[] = static::$endpoint;
@@ -138,13 +151,15 @@ class BaseRequest {
 	/**
 	 * Get Response form HTTP Api Request and Check if it's valid
 	 *
-	 * @return null|string
+	 * @param string $url
+	 *
+	 * @return string|null
 	 * @throws ApiException
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	protected static function getResponse() {
+	protected static function getResponse($url = null) {
 		try {
-			$url          = static::apiUrlRequest();
+			$url          = static::apiUrlRequest($url);
 			$request      = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
 			$requestParms = [];
 			if (!empty(self::buildHeader())) {
@@ -224,9 +239,18 @@ class BaseRequest {
 	 * @throws InvalidReturnCode
 	 */
 	protected static function checkResponse(string $content) {
-		json_decode($content);
-		if (json_last_error() != JSON_ERROR_NONE) {
-			throw new InvalidReturnCode();
+
+
+		switch (self::$expected_response) {
+			case 'json':
+				json_decode($content);
+				if (json_last_error() != JSON_ERROR_NONE) {
+					throw new InvalidReturnCode();
+				}
+				break;
+			default:
+				break;
 		}
+
 	}
 }
