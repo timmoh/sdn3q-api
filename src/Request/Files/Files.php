@@ -98,7 +98,7 @@ class Files extends BaseRequest {
 	 * @param string $fileName   original File Name
 	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
-	 * @return string|null
+	 * @return File|null
 	 * @throws \Exception
 	 */
 	public static function postFile(int $projectId, string $fileName, string $fileFormat) {
@@ -156,7 +156,7 @@ class Files extends BaseRequest {
 	 * @param string $fileName   original File Name
 	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
-	 * @return string|null
+	 * @return File|null
 	 * @throws \Exception
 	 */
 	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
