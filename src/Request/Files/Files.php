@@ -2,7 +2,8 @@
 
 namespace SDN3Q\Request\Files;
 
-use MintWare\JOM\ObjectMapper;
+use MintWare\DMM\ObjectMapper;
+use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\File;
 use SDN3Q\Request\BaseRequest;
 
@@ -17,7 +18,7 @@ class Files extends BaseRequest {
 	 * @param array $parms
 	 *
 	 * @return File[]|array
-	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \Exception
 	 */
 	public static function getFiles(int $projectId, $parms = []) {
 		$files              = [];
@@ -49,12 +50,12 @@ class Files extends BaseRequest {
 		}
 
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['Files']) > 0) {
 				foreach ($data['Files'] as $dataFiles) {
-					$files[] = $mapper->mapJson(json_encode($dataFiles), File::class);
+					$files[] = $mapper->map(json_encode($dataFiles), File::class);
 				}
 			}
 
@@ -72,16 +73,16 @@ class Files extends BaseRequest {
 	 * @param int $fileId
 	 *
 	 * @return File|null
-	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \Exception
 	 */
 	public static function getFile(int $projectId, int $fileId) {
 		$file           = null;
 		parent::$subUrl = $projectId . '/files/' . $fileId;
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
-			$file     = $mapper->mapJson(json_encode($data), File::class);
+			$file     = $mapper->map(json_encode($data), File::class);
 			return $file;
 
 		} catch (\Exception $e) {
@@ -98,29 +99,55 @@ class Files extends BaseRequest {
 	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
 	 * @return string|null
-	 * @throws \SDN3Q\Exception\NotImplemented
+	 * @throws \Exception
 	 */
 	public static function postFile(int $projectId, string $fileName, string $fileFormat) {
-		$uri                       = null;
+		$url                       = null;
+		$file                      = null;
 		self::$method              = 'post';
 		parent::$requestParmAsJson = true;
 		parent::$subUrl            = $projectId . '/files';
 
+		self::$expected_response         = 'header';
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
-			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
 			$header   = self::$responseHeader;
-			$uri      = $header['Location'][0];
-			return $uri;
+			$url      = $header['Location'][0];
+			$file = self::getFileFromUpload($url);
 
 		} catch (\Exception $e) {
 			throw $e;
 		}
-		return $uri;
+		return $file;
 	}
-	
+
+	/**
+	 * GetFile from
+	 * @param $url
+	 *
+	 * @return mixed|null
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	private function getFileFromUpload($url) {
+		$endpoint       = self::$endpoint;
+		self::$endpoint = '';
+		$file           = null;
+		try {
+			$mapper = new ObjectMapper(new JsonSerializer());;
+			$response = self::getResponse($url);
+			$data     = json_decode($response, true);
+			$file     = $mapper->map(json_encode($data), File::class);
+
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		self::$endpoint = $endpoint;
+		return $file;
+
+	}
+
 	/**
 	 * Return the File Upload URI in the Location Header to replace the source Video File
 	 *
@@ -130,10 +157,11 @@ class Files extends BaseRequest {
 	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
 	 * @return string|null
-	 * @throws \SDN3Q\Exception\NotImplemented
+	 * @throws \Exception
 	 */
 	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
-		$uri                       = null;
+		$url                       = null;
+		$file                      = null;
 		self::$method              = 'post';
 		parent::$requestParmAsJson = true;
 		parent::$subUrl            = $projectId . '/files/' . $fileId . '/replace';
@@ -141,16 +169,15 @@ class Files extends BaseRequest {
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
-			$mapper   = new ObjectMapper();
 			$response = self::getResponse();
 			$header   = self::$responseHeader;
-			$uri      = $header['Location'][0];
-			return $uri;
+			$url      = $header['Location'][0];
+			$file = self::getFileFromUpload($url);
 
 		} catch (\Exception $e) {
 			throw $e;
 		}
-		return $uri;
+		return $file;
 	}
 
 	/**
@@ -160,17 +187,17 @@ class Files extends BaseRequest {
 	 * @param int $fileId
 	 *
 	 * @return File|null
-	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 * @throws \Exception
 	 */
 	public static function deleteFile(int $projectId, int $fileId) {
 		$file           = null;
 		self::$method   = 'delete';
 		parent::$subUrl = $projectId . '/files/' . $fileId;
 		try {
-			$mapper   = new ObjectMapper();
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
-			$file     = $mapper->mapJson(json_encode($data), File::class);
+			$file     = $mapper->map(json_encode($data), File::class);
 			return $file;
 
 		} catch (\Exception $e) {
