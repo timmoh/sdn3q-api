@@ -39,23 +39,23 @@ class Input extends BaseRequest {
 	 * @param int    $channelId
 	 * @param string $streamInType
 	 * @param bool   $useIngestVersion2
-	 * @param int    $dvrWindow
+	 * @param int    $timeshiftDuration
 	 *
 	 * @return ChannelInput
 	 * @throws \Exception
 	 */
-	public static function changeInput(int $channelId, string $streamInType, bool $useIngestVersion2 = false, int $dvrWindow = 0) {
+	public static function changeInput(int $channelId, string $streamInType, bool $useIngestVersion2 = false, int $timeshiftDuration = 0) {
 		parent::$subUrl     = $channelId . '/input';
 		self::$method       = 'put';
 		self::$possibleParm = [
 			'StreamInType',
 			'UseIngestVersion2',
-			'DVRWindow',
+			'TimeshiftDuration',
 		];
 		try {
 			self::$requestParm['StreamInType']      = $streamInType;
 			self::$requestParm['UseIngestVersion2'] = $useIngestVersion2;
-			self::$requestParm['DVRWindow']         = $dvrWindow;
+			self::$requestParm['TimeshiftDuration'] = $timeshiftDuration;
 			$mapper                                 = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$input    = $mapper->map($response, ChannelInput::class);
