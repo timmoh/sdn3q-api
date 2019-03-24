@@ -53,8 +53,8 @@ class FileProperties extends BaseModel {
 	/**
 	 * VideoFPS
 	 *
-	 * @var float
-	 * @DataField(name="VideoFPS", type="float")
+	 * @var integer
+	 * @DataField(name="VideoFPS", type="integer")
 	 */
 	public $videoFPS;
 
