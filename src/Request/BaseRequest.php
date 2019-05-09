@@ -7,6 +7,7 @@ use SDN3Q\Exception\ApiException;
 use SDN3Q\Exception\InvalidApiKey;
 use SDN3Q\Exception\InvalidReturnCode;
 use SDN3Q\Exception\NoContent;
+use SDN3Q\Exception\ParameterRequired;
 
 class BaseRequest {
 
@@ -54,6 +55,12 @@ class BaseRequest {
 	 * @var array
 	 */
 	protected static $possibleParm = [];
+
+	/**
+	 * parameter that must be filled
+	 * @var array
+	 */
+	protected static $requiredParm = [];
 	/**
 	 * API Endpoint
 	 * @var string|null
@@ -139,9 +146,13 @@ class BaseRequest {
 	 */
 	protected static function buildReqeustParm() {
 		$parms = [];
-		foreach (static::$possibleParm AS $key) {
-			if (isset(static::$requestParm[$key]) && !empty(static::$requestParm[$key])) {
-				$parms[$key] = static::$requestParm[$key];
+		$parameters = array_merge(self::$requiredParm, self::$possibleParm);
+		foreach ($parameters AS $key) {
+			if (in_array($key,self::$requiredParm,true) && empty(self::$requestParm[$key])) {
+				throw new ParameterRequired($key);
+			}
+			elseif (isset(self::$requestParm[$key]) && !empty(self::$requestParm[$key])) {
+				$parms[$key] = self::$requestParm[$key];
 			}
 		}
 
@@ -159,14 +170,14 @@ class BaseRequest {
 	 */
 	protected static function getResponse($url = null) {
 		try {
-			$url          = static::apiUrlRequest($url);
+			$url = static::apiUrlRequest($url);
 			$request      = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
 			$requestParms = [];
 			if (!empty(self::buildHeader())) {
 				$requestParms = ['headers' => self::buildHeader()];
 			}
 			if (self::$requestParmAsJson) {
-				$requestParms['json'] = static::$requestParm;
+				$requestParms['json'] = self::buildReqeustParm();
 			}
 			$requestParms['on_stats'] = function (TransferStats $stats) use (&$effectiveUrl) {
 				$effectiveUrl = $stats->getEffectiveUri();

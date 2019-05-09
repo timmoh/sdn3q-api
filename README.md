@@ -106,6 +106,22 @@ PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a Waterm
 
 ✅ GET /api/v2/channels/{ChannelId}/transcoders Return enabled Channel Transcoders
 
+
+**3.7 Channel Distribution**
+
+✅ GET /api/v2/channels/distributions Return enabled Channel Distributions
+
+✅ POST /api/v2/channels/{ChannelId}/distributions Create a new ChannelDistribution
+
+✅ DELETE /api/v2/channels/{ChannelId}/distributions/{ChannelDistributionId} Delete a ChannelDistribution by Id
+
+✅ GET /api/v2/channels/{ChannelId}/distributions/{ChannelDistributionId} Return a ChannelDistribution by Id
+
+✅ PUT /api/v2/channels/{ChannelId}/distributions/{ChannelDistributionId} Edit a ChannelDistribution
+
+✅ PUT /api/v2/channels/{ChannelId}/distributions/{ChannelDistributionId}/StartStop Starts or stops a ChannelDistribution
+
+
 **4.0 Files**
 
 ✅ GET /api/v2/projects/{ProjectId}/files Return a collection of Files in Project.
