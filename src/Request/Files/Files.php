@@ -107,6 +107,10 @@ class Files extends BaseRequest {
 		self::$method              = 'post';
 		parent::$requestParmAsJson = true;
 		parent::$subUrl            = $projectId . '/files';
+		
+                self::$possibleParm = [
+                        'FileName', 'FileFormat',
+                ];
 
 		self::$expected_response         = 'header';
 		self::$requestParm['FileName']   = $fileName;
@@ -130,7 +134,7 @@ class Files extends BaseRequest {
 	 * @return mixed|null
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	private function getFileFromUpload($url) {
+	private static function getFileFromUpload($url) {
 		$endpoint       = self::$endpoint;
 		self::$endpoint = '';
 		$file           = null;
