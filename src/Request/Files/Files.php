@@ -4,6 +4,7 @@ namespace SDN3Q\Request\Files;
 
 use MintWare\DMM\ObjectMapper;
 use MintWare\DMM\Serializer\JsonSerializer;
+use SDN3Q\Enum\FileFormat;
 use SDN3Q\Model\File;
 use SDN3Q\Request\BaseRequest;
 
@@ -78,6 +79,7 @@ class Files extends BaseRequest {
 	public static function getFile(int $projectId, int $fileId) {
 		$file           = null;
 		parent::$subUrl = $projectId . '/files/' . $fileId;
+
 		try {
 			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
@@ -96,21 +98,22 @@ class Files extends BaseRequest {
 	 *
 	 * @param int    $projectId  Format of the Video File
 	 * @param string $fileName   original File Name
-	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
+	 * @param FileFormat $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
 	 * @return File|null
 	 * @throws \Exception
 	 */
-	public static function postFile(int $projectId, string $fileName, string $fileFormat) {
+	public static function postFile(int $projectId, string $fileName, FileFormat $fileFormat) {
 		$url                       = null;
 		$file                      = null;
 		self::$method              = 'post';
 		parent::$requestParmAsJson = true;
 		parent::$subUrl            = $projectId . '/files';
-		
-                self::$possibleParm = [
-                        'FileName', 'FileFormat',
-                ];
+
+		self::$possibleParm = [
+			'FileName',
+			'FileFormat',
+		];
 
 		self::$expected_response         = 'header';
 		self::$requestParm['FileName']   = $fileName;
@@ -119,8 +122,12 @@ class Files extends BaseRequest {
 			$response = self::getResponse();
 			$header   = self::$responseHeader;
 			$url      = $header['Location'][0];
-			$file = self::getFileFromUpload($url);
-
+			$file     = self::getFileFromUpload($url);
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		try {
+			return self::getFile($projectId,$file->id);
 		} catch (\Exception $e) {
 			throw $e;
 		}
@@ -129,6 +136,7 @@ class Files extends BaseRequest {
 
 	/**
 	 * GetFile from
+	 *
 	 * @param $url
 	 *
 	 * @return mixed|null
@@ -158,26 +166,34 @@ class Files extends BaseRequest {
 	 * @param int    $projectId  Project Id
 	 * @param int    $fileId     File Id to get replaced
 	 * @param string $fileName   original File Name
-	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
+	 * @param FileFormat $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
 	 * @return File|null
 	 * @throws \Exception
 	 */
-	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
+	public static function replaceFile(int $projectId, int $fileId, string $fileName, FileFormat $fileFormat) {
 		$url                       = null;
 		$file                      = null;
 		self::$method              = 'post';
 		parent::$requestParmAsJson = true;
 		parent::$subUrl            = $projectId . '/files/' . $fileId . '/replace';
-
+		self::$possibleParm = [
+			'FileName',
+			'FileFormat',
+		];
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
 			$response = self::getResponse();
 			$header   = self::$responseHeader;
 			$url      = $header['Location'][0];
-			$file = self::getFileFromUpload($url);
+			$file     = self::getFileFromUpload($url);
 
+		} catch (\Exception $e) {
+			throw $e;
+		}
+		try {
+			return self::getFile($projectId,$file->id);
 		} catch (\Exception $e) {
 			throw $e;
 		}
