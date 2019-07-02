@@ -1,45 +1,43 @@
 <?php
 
 namespace SDN3Q\Model;
-use MintWare\DMM\DataField;
 
+use MintWare\DMM\DataField;
 
 class File extends BaseModel {
 
-   /**
-    * File Id
-    *
-    * @var integer
-    * @DataField(name="Id", type="integer|string")
-    * @DataField(name="FileId", type="integer|string")
-    */
-   public $id;
+	/**
+	 * File Id
+	 *
+	 * @var integer
+	 * @DataField(name="Id", type="integer|string")
+	 * @DataField(name="FileId", type="integer|string")
+	 */
+	public $id;
 
-   /**
-    * File Name
-    *
-    * @var string
-    * @DataField(name="Name", type="string")
-    */
-   public $name;
+	/**
+	 * File Name
+	 *
+	 * @var string
+	 * @DataField(name="Name", type="string")
+	 */
+	public $name;
 
+	/**
+	 * Is Video processing (e.g. encoding) finished and Video is usable
+	 *
+	 * @var boolean
+	 * @DataField(name="IsFinished", type="boolean")
+	 */
+	public $isFinished;
 
-   /**
-    * Is Video processing (e.g. encoding) finished and Video is usable
-    *
-    * @var boolean
-    * @DataField(name="IsFinished", type="boolean")
-    */
-   public $isFinished;
-
-   /**
-    * URI of FilePicture
-    *
-    * @var string
-    * @DataField(name="URI", type="string")
-    */
-   public $uri;
-
+	/**
+	 * URI of FilePicture
+	 *
+	 * @var string
+	 * @DataField(name="URI", type="string")
+	 */
+	public $uri;
 
 	/**
 	 * Properties
@@ -49,14 +47,13 @@ class File extends BaseModel {
 	 */
 	public $properties;
 
-   /**
-    * Metadata
-    *
-    * @var \SDN3Q\Model\FileMetadata
-    * @DataField(name="Metadata", type="\SDN3Q\Model\FileMetadata")
-    */
-   public $metadata;
-
+	/**
+	 * Metadata
+	 *
+	 * @var \SDN3Q\Model\FileMetadata
+	 * @DataField(name="Metadata", type="\SDN3Q\Model\FileMetadata")
+	 */
+	public $metadata;
 
 	/**
 	 * Creation Datetime
@@ -66,15 +63,13 @@ class File extends BaseModel {
 	 */
 	public $createdAt;
 
-   /**
-    * Last update Datetime
-    *
-    * @var \Datetime
-    * @DataField(name="LastUpdateAt", type="\Datetime")
-    */
-   public $lastUpdateAt;
-
-
+	/**
+	 * Last update Datetime
+	 *
+	 * @var \Datetime
+	 * @DataField(name="LastUpdateAt", type="\Datetime")
+	 */
+	public $lastUpdateAt;
 
 	/**
 	 * Is Video marked as deleted (IsEnabled=false)
@@ -84,6 +79,11 @@ class File extends BaseModel {
 	 */
 	public $isEnabled;
 
-
+	/**
+	 * upload url
+	 *
+	 * @var null|string
+	 */
+	public $uploadUrl = null;
 
 }

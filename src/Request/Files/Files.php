@@ -4,7 +4,6 @@ namespace SDN3Q\Request\Files;
 
 use MintWare\DMM\ObjectMapper;
 use MintWare\DMM\Serializer\JsonSerializer;
-use SDN3Q\Enum\FileFormat;
 use SDN3Q\Model\File;
 use SDN3Q\Request\BaseRequest;
 
@@ -114,20 +113,21 @@ class Files extends BaseRequest {
 			'FileName',
 			'FileFormat',
 		];
-
+		$uploadUrl = null;
 		self::$expected_response         = 'header';
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
-			$response = self::getResponse();
-			$header   = self::$responseHeader;
-			$url      = $header['Location'][0];
-			$file     = self::getFileFromUpload($url);
+			$response  = self::getResponse();
+			$header    = self::$responseHeader;
+			$uploadUrl = $header['Location'][0];
+			$file = self::getFileFromUpload($uploadUrl);
 		} catch (\Exception $e) {
 			throw $e;
 		}
 		try {
-			return self::getFile($projectId,$file->id);
+			$file            = self::getFile($projectId, $file->id);
+			$file->uploadUrl = $uploadUrl;
 		} catch (\Exception $e) {
 			throw $e;
 		}
@@ -172,28 +172,30 @@ class Files extends BaseRequest {
 	 * @throws \Exception
 	 */
 	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
-		$url                       = null;
-		$file                      = null;
-		self::$method              = 'post';
-		parent::$requestParmAsJson = true;
-		parent::$subUrl            = $projectId . '/files/' . $fileId . '/replace';
-		self::$possibleParm = [
+		$url                             = null;
+		$file                            = null;
+		self::$method                    = 'post';
+		parent::$requestParmAsJson       = true;
+		parent::$subUrl                  = $projectId . '/files/' . $fileId . '/replace';
+		self::$possibleParm              = [
 			'FileName',
 			'FileFormat',
 		];
+		$uploadUrl = null;
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
 			$response = self::getResponse();
 			$header   = self::$responseHeader;
-			$url      = $header['Location'][0];
-			$file     = self::getFileFromUpload($url);
+			$uploadUrl      = $header['Location'][0];
+			$file     = self::getFileFromUpload($uploadUrl);
 
 		} catch (\Exception $e) {
 			throw $e;
 		}
 		try {
-			return self::getFile($projectId,$file->id);
+			$file            = self::getFile($projectId, $file->id);
+			$file->uploadUrl = $uploadUrl;
 		} catch (\Exception $e) {
 			throw $e;
 		}
