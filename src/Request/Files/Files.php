@@ -174,7 +174,7 @@ class Files extends BaseRequest {
 	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
 		$url                             = null;
 		$file                            = null;
-		self::$method                    = 'post';
+		self::$method                    = 'put';
 		parent::$requestParmAsJson       = true;
 		parent::$subUrl                  = $projectId . '/files/' . $fileId . '/replace';
 		self::$possibleParm              = [
