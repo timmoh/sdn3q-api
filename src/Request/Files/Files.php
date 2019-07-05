@@ -99,12 +99,11 @@ class Files extends BaseRequest {
 	 * @param string $fileName   original File Name
 	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
-	 * @return File|null
+	 * @return string|null
 	 * @throws \Exception
 	 */
 	public static function postFile(int $projectId, string $fileName, string $fileFormat) {
-		$url                       = null;
-		$file                      = null;
+		$uploadUrl                 = null;
 		self::$method              = 'post';
 		parent::$requestParmAsJson = true;
 		parent::$subUrl            = $projectId . '/files';
@@ -121,43 +120,10 @@ class Files extends BaseRequest {
 			$response  = self::getResponse();
 			$header    = self::$responseHeader;
 			$uploadUrl = $header['Location'][0];
-			$file = self::getFileFromUpload($uploadUrl);
 		} catch (\Exception $e) {
 			throw $e;
 		}
-		try {
-			$file            = self::getFile($projectId, $file->id);
-			$file->uploadUrl = $uploadUrl;
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return $file;
-	}
-
-	/**
-	 * GetFile from
-	 *
-	 * @param $url
-	 *
-	 * @return mixed|null
-	 * @throws \GuzzleHttp\Exception\GuzzleException
-	 */
-	private static function getFileFromUpload($url) {
-		$endpoint       = self::$endpoint;
-		self::$endpoint = '';
-		$file           = null;
-		try {
-			$mapper = new ObjectMapper(new JsonSerializer());;
-			$response = self::getResponse($url);
-			$data     = json_decode($response, true);
-			$file     = $mapper->map(json_encode($data), File::class);
-
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		self::$endpoint = $endpoint;
-		return $file;
-
+		return $uploadUrl;
 	}
 
 	/**
@@ -168,16 +134,15 @@ class Files extends BaseRequest {
 	 * @param string $fileName   original File Name
 	 * @param string $fileFormat Format of the Video File ("mp4","avi","mov","webm","mp3","wav","aac")
 	 *
-	 * @return File|null
+	 * @return string|null
 	 * @throws \Exception
 	 */
 	public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat) {
-		$url                             = null;
-		$file                            = null;
-		self::$method                    = 'put';
-		parent::$requestParmAsJson       = true;
-		parent::$subUrl                  = $projectId . '/files/' . $fileId . '/replace';
-		self::$possibleParm              = [
+		$uploadUrl                 = null;
+		self::$method              = 'put';
+		parent::$requestParmAsJson = true;
+		parent::$subUrl            = $projectId . '/files/' . $fileId . '/replace';
+		self::$possibleParm        = [
 			'FileName',
 			'FileFormat',
 		];
@@ -185,21 +150,14 @@ class Files extends BaseRequest {
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
-			$response = self::getResponse();
-			$header   = self::$responseHeader;
-			$uploadUrl      = $header['Location'][0];
-			$file     = self::getFileFromUpload($uploadUrl);
+			$response  = self::getResponse();
+			$header    = self::$responseHeader;
+			$uploadUrl = $header['Location'][0];
 
 		} catch (\Exception $e) {
 			throw $e;
 		}
-		try {
-			$file            = self::getFile($projectId, $file->id);
-			$file->uploadUrl = $uploadUrl;
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return $file;
+		return $uploadUrl;
 	}
 
 	/**
