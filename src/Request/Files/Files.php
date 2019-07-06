@@ -147,6 +147,7 @@ class Files extends BaseRequest {
 			'FileFormat',
 		];
 		$uploadUrl = null;
+		self::$expected_response         = 'header';
 		self::$requestParm['FileName']   = $fileName;
 		self::$requestParm['FileFormat'] = $fileFormat;
 		try {
