@@ -18,10 +18,10 @@ class ChannelOutput extends BaseModel {
 
 
    /**
-    * MBROutput
+    * MbrOutput
     *
-    * @var \SDN3Q\Model\Output\MBROutput
-    * @DataField(name="MBROutput",type="\SDN3Q\Model\Output\MBROutput")
+    * @var \SDN3Q\Model\Output\MbrOutput
+    * @DataField(name="MBROutput",type="\SDN3Q\Model\Output\MbrOutput")
     */
    public $mbrOutput;
 
