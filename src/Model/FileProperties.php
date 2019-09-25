@@ -9,7 +9,7 @@ class FileProperties extends BaseModel {
 	 * Length
 	 *
 	 * @var float
-	 * @DataField(name="Length", type="float")
+	 * @DataField(name="Length", type="float", preTransformer="\SDN3Q\Transformer\FloatTransformer")
 	 */
 	public $length;
 
