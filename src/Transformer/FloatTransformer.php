@@ -2,7 +2,9 @@
 
 namespace SDN3Q\Transformer;
 
-class FloatTransformer implements MintWare\DMM\TransformerInterface {
+use MintWare\DMM\TransformerInterface;
+
+class FloatTransformer implements TransformerInterface {
 
 	public static function transform($data) {
 		return (float)$data;
