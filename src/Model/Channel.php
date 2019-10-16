@@ -12,8 +12,8 @@ class Channel extends BaseModel {
 	public $id;
 	/**
 	 * Status of the Channel
-	 * @var \SDN3Q\Model\ChannelStatus
-	 * @DataField(name="ChannelStatus",type="\SDN3Q\Model\ChannelStatus")
+	 * @var \SDN3Q\Model\ChannelStatus[]
+	 * @DataField(name="ChannelStatus",type="\SDN3Q\Model\ChannelStatus[]")
 	 */
 	public $channelStatus;
 
