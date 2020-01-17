@@ -46,6 +46,11 @@ class BaseRequest {
 	 */
 	protected static $requestParmAsJson = true;
 	/**
+	 * JSON body
+	 * @var string
+	 */
+	protected static $jsonBody = null;
+	/**
 	 * send parameter as via query (true)
 	 * @var bool
 	 */
@@ -178,6 +183,9 @@ class BaseRequest {
 			}
 			if (self::$requestParmAsJson) {
 				$requestParms['json'] = self::buildReqeustParm();
+			}
+			if (self::$jsonBody) {
+				$requestParms['body'] = self::$jsonBody;
 			}
 			$requestParms['on_stats'] = function (TransferStats $stats) use (&$effectiveUrl) {
 				$effectiveUrl = $stats->getEffectiveUri();
