@@ -7,8 +7,8 @@ class StreamInConnection extends BaseModel {
    /**
     * ServerURI
     *
-    * @var string
-    * @DataField(name="ServerURI", type="string")
+    * @var mixed
+    * @DataField(name="ServerURI")
     */
    public $serverURI;
 
