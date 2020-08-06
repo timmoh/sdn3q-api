@@ -18,9 +18,11 @@ class Projects extends BaseRequest {
 	 * @throws \Exception
 	 */
 	public static function getProjects() {
-		$projects = [];
+		$projects           = [];
+		self::$requiredParm = [];
+
 		try {
-			$mapper   = new ObjectMapper(new JsonSerializer());;
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			$response = self::getResponse();
 			$data     = json_decode($response, true);
 			if (count($data['Projects']) > 0) {
@@ -46,7 +48,7 @@ class Projects extends BaseRequest {
 	public static function getProject(int $projectId) {
 		$project = null;
 		try {
-			$mapper         = new ObjectMapper(new JsonSerializer());;
+			$mapper = new ObjectMapper(new JsonSerializer());;
 			parent::$subUrl = $projectId;
 
 			$response = self::getResponse();
