@@ -25,6 +25,7 @@ class StreamInConnection extends BaseModel {
     *
     * @var string
     * @DataField(name="StreamName", type="string")
+    * @DataField(name="srtPassword", type="string")
     */
    public $streamName;
 }
