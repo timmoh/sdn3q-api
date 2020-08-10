@@ -41,8 +41,8 @@ class Ingest extends BaseRequest {
 	 * @param string $streamInType
 	 * @param bool   $useIngestVersion2
 	 * @param int    $timeshiftDuration
-	 * @param bool   $failoverStitching
 	 * @param int    $srtRecoveryBuffer
+	 * @param bool   $srtPasswordProtection
 	 *
 	 * @return ChannelInput
 	 * @throws \Exception
@@ -50,10 +50,10 @@ class Ingest extends BaseRequest {
 	public static function changeIngest(
 		int $channelId,
 		string $streamInType,
-		bool $useIngestVersion2 = false,
+		bool $useIngestVersion2 = true,
 		int $timeshiftDuration = 0,
-		bool $failoverStitching = false,
-		int $srtRecoveryBuffer = 0
+		int $srtRecoveryBuffer = 0,
+		bool $srtPasswordProtection = false
 	) {
 		parent::$subUrl     = $channelId . '/ingest';
 		self::$method       = 'put';
@@ -61,16 +61,16 @@ class Ingest extends BaseRequest {
 			'StreamInType',
 			'UseIngestVersion2',
 			'TimeshiftDuration',
-			'FailoverStitching',
 			'srtRecoveryBuffer',
+			'srtPasswordProtection',
 		];
 
 		try {
-			self::$requestParm['StreamInType']      = $streamInType;
-			self::$requestParm['UseIngestVersion2'] = $useIngestVersion2;
-			self::$requestParm['TimeshiftDuration'] = $timeshiftDuration;
-			self::$requestParm['FailoverStitching'] = $failoverStitching;
-			self::$requestParm['srtRecoveryBuffer'] = $srtRecoveryBuffer;
+			self::$requestParm['StreamInType']          = $streamInType;
+			self::$requestParm['UseIngestVersion2']     = $useIngestVersion2;
+			self::$requestParm['TimeshiftDuration']     = $timeshiftDuration;
+			self::$requestParm['srtRecoveryBuffer']     = $srtRecoveryBuffer;
+			self::$requestParm['srtPasswordProtection'] = $srtPasswordProtection;
 
 			$mapper   = new ObjectMapper(new JsonSerializer());
 			$response = self::getResponse();
