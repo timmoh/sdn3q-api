@@ -4,6 +4,7 @@ namespace SDN3Q\Request\Channels;
 
 use MintWare\DMM\ObjectMapper;
 use MintWare\DMM\Serializer\JsonSerializer;
+use SDN3Q\Model\ChannelFormatSetting;
 use SDN3Q\Model\ChannelTranscoderFormat;
 use SDN3Q\Request\BaseRequest;
 
@@ -129,4 +130,38 @@ class Transcoder extends BaseRequest {
 
 		return $channelFormats;
 	}
+
+	/**
+	 * Set TranscoderFormatSetting of a ChannelTranscoder
+	 *
+	 * @param int $channelId
+	 * @param int $channelFormatId
+	 * @param int $videoBitRate
+	 * @param int $audioBitRate
+	 *
+	 * @return ChannelTranscoderFormat|null
+	 * @throws \Exception
+	 */
+	public static function putFormatSettings(int $channelId, int $channelFormatId, int $videoBitRate, int $audioBitRate) {
+		$channelFormat                     = [];
+		parent::$subUrl                    = $channelId . '/formats/' . $channelFormatId . '/formatsettings';
+		self::$method                      = 'put';
+		self::$possibleParm                = [
+			'VideoBitRate',
+			'AudioBitRate',
+		];
+		self::$requestParm['VideoBitRate'] = $videoBitRate;
+		self::$requestParm['AudioBitRate'] = $audioBitRate;
+
+		try {
+			$mapper = new ObjectMapper(new JsonSerializer());;
+			$response      = self::getResponse();
+			$channelFormat = $mapper->map($response, ChannelFormatSetting::class);
+		} catch (\Exception $e) {
+			throw $e;
+		}
+
+		return $channelFormat;
+	}
+
 }
