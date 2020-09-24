@@ -24,12 +24,20 @@ class File extends BaseModel {
 	public $name;
 
 	/**
-	 * Is Video processing (e.g. encoding) finished and Video is usable
+	 * Is Video processing finished
 	 *
 	 * @var boolean
 	 * @DataField(name="IsFinished", type="boolean")
 	 */
 	public $isFinished;
+
+	/**
+	 * Is Video transcoding finished and Video is usable
+	 *
+	 * @var boolean
+	 * @DataField(name="IsEncoded", type="boolean")
+	 */
+	public $isEncoded;
 
 	/**
 	 * URI of FilePicture
