@@ -156,7 +156,7 @@ class BaseRequest {
 			if (in_array($key,self::$requiredParm,true) && empty(self::$requestParm[$key])) {
 				throw new ParameterRequired($key);
 			}
-			elseif (isset(self::$requestParm[$key]) && !empty(self::$requestParm[$key])) {
+			elseif (isset(self::$requestParm[$key]) && (!empty(self::$requestParm[$key]) || is_bool(self::$requestParm[$key]))) {
 				$parms[$key] = self::$requestParm[$key];
 			}
 		}
