@@ -18,6 +18,7 @@ class FileView extends BaseRequest
     public static function getFileViews(int $projectId)
     {
         parent::$subUrl = 'projects/' . $projectId . '/fileviews';
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 
@@ -32,6 +33,7 @@ class FileView extends BaseRequest
     public static function getFileView(int $projectId, int $fileId)
     {
         parent::$subUrl = 'projects/' . $projectId . '/fileviews/' . $fileId;
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 }

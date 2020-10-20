@@ -6,11 +6,10 @@ use MintWare\DMM\DataField;
 
 class File extends BaseModel
 {
-
     /**
      * File Id
      *
-     * @var integer
+     * @var int
      * @DataField(name="Id", type="integer|string")
      * @DataField(name="FileId", type="integer|string")
      */
@@ -27,7 +26,7 @@ class File extends BaseModel
     /**
      * Is Video processing finished
      *
-     * @var boolean
+     * @var bool
      * @DataField(name="IsFinished", type="boolean")
      */
     public $isFinished;
@@ -35,7 +34,7 @@ class File extends BaseModel
     /**
      * Is Video transcoding finished and Video is usable
      *
-     * @var boolean
+     * @var bool
      * @DataField(name="IsEncoded", type="boolean")
      */
     public $isEncoded;
@@ -83,7 +82,7 @@ class File extends BaseModel
     /**
      * Is Video marked as deleted (IsEnabled=false)
      *
-     * @var boolean
+     * @var bool
      * @DataField(name="IsEnabled", type="boolean")
      */
     public $isEnabled;

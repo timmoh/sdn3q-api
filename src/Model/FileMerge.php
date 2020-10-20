@@ -4,7 +4,6 @@ namespace SDN3Q\Model;
 
 class FileMerge implements \JsonSerializable
 {
-
     /**
      * @var int
      */
@@ -30,8 +29,8 @@ class FileMerge implements \JsonSerializable
     public function __construct(int $fileId, int $start, int $end)
     {
         $this->fileId = $fileId;
-        $this->start  = $start;
-        $this->end    = $end;
+        $this->start = $start;
+        $this->end = $end;
     }
 
     /**
@@ -41,8 +40,8 @@ class FileMerge implements \JsonSerializable
     {
         return [
             'FileId' => $this->fileId,
-            'start'  => $this->start,
-            'end'    => $this->end,
+            'start' => $this->start,
+            'end' => $this->end,
         ];
     }
 }

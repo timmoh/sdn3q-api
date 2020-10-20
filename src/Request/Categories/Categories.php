@@ -6,7 +6,8 @@ use SDN3Q\Request\BaseRequest;
 class Categories extends BaseRequest
 {
     use \SDN3Q\Request\UploadRequest;
-    protected static $endpoint ='categories';
+
+    protected static $endpoint = 'categories';
 
     /**
      * Return a collection of available Categories
@@ -26,7 +27,8 @@ class Categories extends BaseRequest
      */
     public static function getCategorie(int $categoryId)
     {
-        parent::$subUrl           = $categoryId ;
+        parent::$subUrl = $categoryId ;
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 
@@ -39,10 +41,11 @@ class Categories extends BaseRequest
      *
      * @throws \SDN3Q\Exception\NotImplemented
      */
-    public static function changeCategorie(int $categoryId, $parm=[])
+    public static function changeCategorie(int $categoryId, $parm = [])
     {
-        parent::$subUrl           = $categoryId ;
-        self::$method              = 'put';
+        parent::$subUrl = $categoryId ;
+        self::$method = 'put';
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 
@@ -56,13 +59,14 @@ class Categories extends BaseRequest
      */
     public static function addCategoriePicture(int $categoryId, string $imagePath)
     {
-        parent::$subUrl           = $categoryId . '/picture';
-        self::$method              = 'put';
+        parent::$subUrl = $categoryId . '/picture';
+        self::$method = 'put';
         self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
 
         $mime = self::checkMimeType($imagePath);
 
         self::$additionalHeader["Content-type"] = $mime;
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 }

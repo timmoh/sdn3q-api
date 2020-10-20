@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class FilePicture extends BaseModel
 {
-
     /**
      * FilePictureId
      *
@@ -22,7 +21,6 @@ class FilePicture extends BaseModel
      * @DataField(name="URI", type="string")
      */
     public $uri;
-
 
     /**
      * URI of a small version from the FilePicture
@@ -40,11 +38,10 @@ class FilePicture extends BaseModel
      */
     public $srcPictureUri;
 
-
     /**
      * This is the Standard (default) FilePicture
      *
-     * @var boolean
+     * @var bool
      * @DataField(name="IsStandard", type="boolean")
      */
     public $isStandard;

@@ -21,7 +21,6 @@ class Category extends BaseModel
      */
     public $label;
 
-
     /**
      * Custom Catagory Id
      *
@@ -29,6 +28,7 @@ class Category extends BaseModel
      * @DataField(name="CustomId", type="int")
      */
     public $customId;
+
     /**
      * URI of the Project Thumbnail
      *

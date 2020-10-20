@@ -21,8 +21,9 @@ class MetadataVideotype extends BaseRequest
     public static function linkMetadataVideotype(int $projectId, int $fileId, $videotypeId)
     {
         $fileMeta = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata/videotype/'.$videotypeId;
-        self::$method              = 'link';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/metadata/videotype/'.$videotypeId;
+        self::$method = 'link';
+
         throw new \SDN3Q\Exception\NotImplemented();
 
         return $fileMeta;
@@ -41,8 +42,9 @@ class MetadataVideotype extends BaseRequest
     public static function unlinkMetadataVideotype(int $projectId, int $fileId, $videotypeId)
     {
         $fileMeta = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata/videotype/'.$videotypeId;
-        self::$method              = 'unlink';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/metadata/videotype/'.$videotypeId;
+        self::$method = 'unlink';
+
         throw new \SDN3Q\Exception\NotImplemented();
 
         return $fileMeta;

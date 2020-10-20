@@ -5,7 +5,7 @@ use SDN3Q\Request\BaseRequest;
 
 class User extends BaseRequest
 {
-    protected static $endpoint ='reporting';
+    protected static $endpoint = 'reporting';
 
     /**
      * Return FileView Reportings from Users for a Vod Project
@@ -16,6 +16,7 @@ class User extends BaseRequest
     public static function getUsers(int $projectId)
     {
         parent::$subUrl = 'projects/'. $projectId . '/fileuserviews';
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 
@@ -30,6 +31,7 @@ class User extends BaseRequest
     public static function getUser(int $projectId, string $userToken)
     {
         parent::$subUrl = 'projects/'. $projectId . '/fileuserviews/'.$userToken;
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 }

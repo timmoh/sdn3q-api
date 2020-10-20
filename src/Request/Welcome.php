@@ -14,9 +14,10 @@ class Welcome extends BaseRequest
     public static function textConnection()
     {
         $data = [];
+
         try {
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
         } catch (\Exception $e) {
             throw $e;
         }

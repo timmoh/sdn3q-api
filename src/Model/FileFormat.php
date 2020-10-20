@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class FileFormat extends BaseModel
 {
-
     /**
      * FileFormatId
      *
@@ -14,6 +13,7 @@ class FileFormat extends BaseModel
      * @DataField(name="FileFormatId", type="int")
      */
     public $fileFormatId;
+
     /**
      * Title
      *

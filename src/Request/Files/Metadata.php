@@ -8,7 +8,7 @@ use SDN3Q\Request\BaseRequest;
 
 class Metadata extends BaseRequest
 {
-    protected static $endpoint ='projects';
+    protected static $endpoint = 'projects';
 
     /**
      * Return Metadata of a File
@@ -22,17 +22,20 @@ class Metadata extends BaseRequest
     public static function getMetadata(int $projectId, int $fileId)
     {
         $fileMeta = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/metadata';
+
         try {
-            $mapper   = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $fileMeta     = $mapper->map(json_encode($data), FileMetadata::class);
+            $data = json_decode($response, true);
+            $fileMeta = $mapper->map(json_encode($data), FileMetadata::class);
+
             return $fileMeta;
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $fileMeta;
     }
 
@@ -49,8 +52,8 @@ class Metadata extends BaseRequest
     public static function changeMetadata(int $projectId, int $fileId, $parms = [])
     {
         $fileMeta = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata';
-        self::$method              = 'put';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/metadata';
+        self::$method = 'put';
         parent::$requestParmAsJson = true;
         self::$possibleParm = [
             'Title',//	string	true		Title
@@ -71,22 +74,24 @@ class Metadata extends BaseRequest
             'IsPublicAt',//	datetime	false		Release from (Date)
             'IsPublicUntil',//	datetime	false		Release from (Date)
             'Lat',//	float	false		Latitude
-            'Lang'//
+            'Lang',//
         ];
         foreach ($parms as $key => $value) {
             self::$requestParm[$key] = $value;
         }
 
         try {
-            $mapper   = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $fileMeta     = $mapper->map(json_encode($data), FileMetadata::class);
+            $data = json_decode($response, true);
+            $fileMeta = $mapper->map(json_encode($data), FileMetadata::class);
+
             return $fileMeta;
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $fileMeta;
     }
 }

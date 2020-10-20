@@ -6,7 +6,6 @@ use MintWare\DMM\ObjectMapper;
 use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\File;
 use SDN3Q\Model\FileMerge;
-use SDN3Q\Model\FileOutputURI;
 use SDN3Q\Request\BaseRequest;
 
 class Merge extends BaseRequest
@@ -26,28 +25,30 @@ class Merge extends BaseRequest
     {
         $fileId = 0;
 
-        self::$method              = 'post';
+        self::$method = 'post';
         parent::$requestParmAsJson = false;
-        parent::$subUrl            = $projectId . '/files/merge';
+        parent::$subUrl = $projectId . '/files/merge';
 
-        self::$possibleParm      = [
+        self::$possibleParm = [
             'FileName',
             'FileFormat',
         ];
-        $uploadUrl               = null;
+        $uploadUrl = null;
         self::$expected_response = 'header';
-        self::$jsonBody          = json_encode($files);
+        self::$jsonBody = json_encode($files);
+
         try {
-            $mapper   = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $file     = $mapper->map(json_encode($data), File::class);
+            $data = json_decode($response, true);
+            $file = $mapper->map(json_encode($data), File::class);
             if ($file) {
                 $fileId = $file->id;
             }
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $fileId;
     }
 }

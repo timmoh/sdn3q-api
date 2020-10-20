@@ -20,6 +20,7 @@ class Channel extends BaseRequest
     public static function getChannels(int $projectId)
     {
         parent::$subUrl = 'projects/' . $projectId . '/views';
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 }

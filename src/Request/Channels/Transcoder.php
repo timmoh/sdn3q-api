@@ -24,11 +24,12 @@ class Transcoder extends BaseRequest
     {
         $channelFormats = [];
         parent::$subUrl = $channelId . '/formats';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['ChannelFormats']) > 0) {
                 foreach ($data['ChannelFormats'] as $dataValue) {
                     $channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
@@ -54,12 +55,13 @@ class Transcoder extends BaseRequest
     {
         $channelFormats = [];
         parent::$subUrl = $channelId . '/formats/' . $channelFormatId;
-        self::$method   = 'link';
+        self::$method = 'link';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['ChannelTranscoders']) > 0) {
                 foreach ($data['ChannelTranscoders'] as $dataValue) {
                     $channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
@@ -83,18 +85,19 @@ class Transcoder extends BaseRequest
      */
     public static function unlinkFormat(int $channelId, int $channelFormatId)
     {
-        $channelFormats     = [];
-        parent::$subUrl     = $channelId . '/formats/' . $channelFormatId;
-        self::$method       = 'unlink';
+        $channelFormats = [];
+        parent::$subUrl = $channelId . '/formats/' . $channelFormatId;
+        self::$method = 'unlink';
         self::$possibleParm = [
             'ChannelId',
             'ChannelFormatId',
         ];
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['ChannelTranscoders']) > 0) {
                 foreach ($data['ChannelTranscoders'] as $dataValue) {
                     $channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
@@ -119,11 +122,12 @@ class Transcoder extends BaseRequest
     {
         $channelFormats = [];
         parent::$subUrl = $channelId . '/transcoders';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['ChannelTranscoders']) > 0) {
                 foreach ($data['ChannelTranscoders'] as $dataValue) {
                     $channelFormats[] = $mapper->map(json_encode($dataValue), ChannelTranscoderFormat::class);
@@ -149,10 +153,10 @@ class Transcoder extends BaseRequest
      */
     public static function putFormatSettings(int $channelId, int $channelFormatId, int $videoBitRate, int $audioBitRate)
     {
-        $channelFormat                     = [];
-        parent::$subUrl                    = $channelId . '/formats/' . $channelFormatId . '/formatsettings';
-        self::$method                      = 'put';
-        self::$possibleParm                = [
+        $channelFormat = [];
+        parent::$subUrl = $channelId . '/formats/' . $channelFormatId . '/formatsettings';
+        self::$method = 'put';
+        self::$possibleParm = [
             'VideoBitRate',
             'AudioBitRate',
         ];
@@ -162,7 +166,7 @@ class Transcoder extends BaseRequest
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response      = self::getResponse();
+            $response = self::getResponse();
             $channelFormat = $mapper->map($response, ChannelFormatSetting::class);
         } catch (\Exception $e) {
             throw $e;

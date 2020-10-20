@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class FileFormatSettings extends BaseModel
 {
-
     /**
      * VideoBitRate
      *
@@ -14,6 +13,7 @@ class FileFormatSettings extends BaseModel
      * @DataField(name="VideoBitRate", type="int")
      */
     public $videoBitRate;
+
     /**
      * VideoProfile
      *
@@ -21,7 +21,6 @@ class FileFormatSettings extends BaseModel
      * @DataField(name="VideoProfile", type="string")
      */
     public $videoProfile;
-
 
     /**
      * VideoFPS
@@ -62,7 +61,6 @@ class FileFormatSettings extends BaseModel
      * @DataField(name="FileFormatId", type="int")
      */
     public $fileFormatId;
-
 
     /**
      * Label

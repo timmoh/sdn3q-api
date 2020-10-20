@@ -24,13 +24,13 @@ class Playout extends BaseRequest
     public static function getPlayouts(int $projectId, int $fileId)
     {
         parent::$subUrl = $projectId . '/files/' . $fileId . '/playouts';
-        $playouts       = [];
+        $playouts = [];
 
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['FilePlayouts']) > 0) {
                 foreach ($data['FilePlayouts'] as $dataFiles) {
                     $playouts[] = $mapper->map(json_encode($dataFiles), FilePlayout::class);
@@ -55,11 +55,11 @@ class Playout extends BaseRequest
      */
     public static function getPlayoutDefault(int $projectId, int $fileId, $parms = [])
     {
-        $embed                    = null;
-        parent::$subUrl           = $projectId . '/files/' . $fileId . '/playouts/default/embed';
-        self::$requestParmAsJson  = false;
+        $embed = null;
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/playouts/default/embed';
+        self::$requestParmAsJson = false;
         self::$requestParmAsQuery = true;
-        self::$possibleParm       = [
+        self::$possibleParm = [
             'ContainerId',//	string	false		ID of player DIV tag
             'Width',//	integer	false		Player width
             'Height',//	integer	false		Player height
@@ -77,8 +77,9 @@ class Playout extends BaseRequest
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $embed    = $mapper->map(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+            $data = json_decode($response, true);
+            $embed = $mapper->map(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+
             return $embed;
         } catch (\Exception $e) {
             throw $e;
@@ -103,8 +104,8 @@ class Playout extends BaseRequest
         if (is_null($playoutId)) {
             return self::getPlayoutDefault($projectId, $fileId);
         }
-        $embed              = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/playouts/' . $playoutId . '/embed';
+        $embed = null;
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/playouts/' . $playoutId . '/embed';
         self::$possibleParm = [
             'ContainerId',//	string	false		ID of player DIV tag
             'Width',//	integer	false		Player width
@@ -124,8 +125,9 @@ class Playout extends BaseRequest
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $embed    = $mapper->map(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+            $data = json_decode($response, true);
+            $embed = $mapper->map(json_encode($data['FileEmbedCodes']), EmbedCodes::class);
+
             return $embed;
         } catch (\Exception $e) {
             throw $e;

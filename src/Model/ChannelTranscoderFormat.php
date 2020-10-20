@@ -58,12 +58,10 @@ class ChannelTranscoderFormat extends BaseModel
     /**
      * VideoFPS
      *
-     * @var double
+     * @var float
      * @DataField(name="VideoFPS", type="double|int")
      */
     public $videoFps;
-
-
 
     /**
      * AudioCodec
@@ -88,7 +86,6 @@ class ChannelTranscoderFormat extends BaseModel
      * @DataField(name="AudioSampleRate", type="int")
      */
     public $audioSampleRate;
-
 
     /**
      * AudioChannels

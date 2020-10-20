@@ -17,7 +17,7 @@ PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a Waterm
 
 class FileEncoderPipeline extends BaseRequest
 {
-    protected static $endpoint ='projects';
+    protected static $endpoint = 'projects';
     
     public static function getFileEncoderPipelines(int $projectId)
     {

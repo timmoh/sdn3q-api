@@ -7,8 +7,6 @@ use MintWare\DMM\DataField;
 
 class ChannelMetaData extends BaseModel
 {
-
-
     /**
      * Channel Title
      *
@@ -16,7 +14,6 @@ class ChannelMetaData extends BaseModel
      * @DataField(name="Title", type="string")
      */
     public $title;
-
 
     /**
      * Description of the Channel
@@ -113,7 +110,6 @@ class ChannelMetaData extends BaseModel
      * @DataField(name="CountdownEnd", type="\DateTime")
      */
     public $countdownEnd;
-
 
     /**
      * Board Background Picture URI

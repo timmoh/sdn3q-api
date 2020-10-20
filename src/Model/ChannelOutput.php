@@ -7,8 +7,6 @@ use MintWare\DMM\DataField;
 
 class ChannelOutput extends BaseModel
 {
-
-
     /**
      * SourceOutput
      *
@@ -16,7 +14,6 @@ class ChannelOutput extends BaseModel
      * @DataField(name="SourceOutput",type="\SDN3Q\Model\Output\SourceOutput")
      */
     public $sourceOutput;
-
 
     /**
      * MbrOutput

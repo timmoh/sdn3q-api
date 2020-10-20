@@ -22,8 +22,8 @@ class Files extends BaseRequest
      */
     public static function getFiles(int $projectId, $parms = [])
     {
-        $files              = [];
-        parent::$subUrl     = $projectId . '/files';
+        $files = [];
+        parent::$subUrl = $projectId . '/files';
         self::$possibleParm = [
             'IncludeDeleted',
             //	boolean	false		Include Files that are marked as deleted
@@ -54,7 +54,7 @@ class Files extends BaseRequest
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['Files']) > 0) {
                 foreach ($data['Files'] as $dataFiles) {
                     $files[] = $mapper->map(json_encode($dataFiles), File::class);
@@ -78,19 +78,21 @@ class Files extends BaseRequest
      */
     public static function getFile(int $projectId, int $fileId)
     {
-        $file           = null;
+        $file = null;
         parent::$subUrl = $projectId . '/files/' . $fileId;
 
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $file     = $mapper->map(json_encode($data), File::class);
+            $data = json_decode($response, true);
+            $file = $mapper->map(json_encode($data), File::class);
+
             return $file;
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $file;
     }
 
@@ -106,26 +108,28 @@ class Files extends BaseRequest
      */
     public static function postFile(int $projectId, string $fileName, string $fileFormat)
     {
-        $uploadUrl                 = null;
-        self::$method              = 'post';
+        $uploadUrl = null;
+        self::$method = 'post';
         parent::$requestParmAsJson = true;
-        parent::$subUrl            = $projectId . '/files';
+        parent::$subUrl = $projectId . '/files';
 
         self::$possibleParm = [
             'FileName',
             'FileFormat',
         ];
         $uploadUrl = null;
-        self::$expected_response         = 'header';
-        self::$requestParm['FileName']   = $fileName;
+        self::$expected_response = 'header';
+        self::$requestParm['FileName'] = $fileName;
         self::$requestParm['FileFormat'] = $fileFormat;
+
         try {
-            $response  = self::getResponse();
-            $header    = self::$responseHeader;
+            $response = self::getResponse();
+            $header = self::$responseHeader;
             $uploadUrl = $header['Location'][0];
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $uploadUrl;
     }
 
@@ -142,25 +146,27 @@ class Files extends BaseRequest
      */
     public static function replaceFile(int $projectId, int $fileId, string $fileName, string $fileFormat)
     {
-        $uploadUrl                 = null;
-        self::$method              = 'put';
+        $uploadUrl = null;
+        self::$method = 'put';
         parent::$requestParmAsJson = true;
-        parent::$subUrl            = $projectId . '/files/' . $fileId . '/replace';
-        self::$possibleParm        = [
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/replace';
+        self::$possibleParm = [
             'FileName',
             'FileFormat',
         ];
         $uploadUrl = null;
-        self::$expected_response         = 'header';
-        self::$requestParm['FileName']   = $fileName;
+        self::$expected_response = 'header';
+        self::$requestParm['FileName'] = $fileName;
         self::$requestParm['FileFormat'] = $fileFormat;
+
         try {
-            $response  = self::getResponse();
-            $header    = self::$responseHeader;
+            $response = self::getResponse();
+            $header = self::$responseHeader;
             $uploadUrl = $header['Location'][0];
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $uploadUrl;
     }
 
@@ -175,19 +181,22 @@ class Files extends BaseRequest
      */
     public static function deleteFile(int $projectId, int $fileId)
     {
-        $file           = null;
-        self::$method   = 'delete';
+        $file = null;
+        self::$method = 'delete';
         parent::$subUrl = $projectId . '/files/' . $fileId;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
-            $file     = $mapper->map(json_encode($data), File::class);
+            $data = json_decode($response, true);
+            $file = $mapper->map(json_encode($data), File::class);
+
             return $file;
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $file;
     }
 }

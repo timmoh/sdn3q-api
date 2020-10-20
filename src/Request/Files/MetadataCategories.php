@@ -5,7 +5,7 @@ use SDN3Q\Request\BaseRequest;
 
 class MetadataCategories extends BaseRequest
 {
-    protected static $endpoint ='projects';
+    protected static $endpoint = 'projects';
 
     /**
      * Add (link) Category to File Metadata
@@ -20,8 +20,9 @@ class MetadataCategories extends BaseRequest
     public static function linkMetadataCategories(int $projectId, int $fileId, int $categoryId)
     {
         $fileMeta = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata/category/'.$categoryId;
-        self::$method              = 'link';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/metadata/category/'.$categoryId;
+        self::$method = 'link';
+
         throw new \SDN3Q\Exception\NotImplemented();
 
         return $fileMeta;
@@ -40,8 +41,9 @@ class MetadataCategories extends BaseRequest
     public static function unlinkMetadataCategories(int $projectId, int $fileId, int $categoryId)
     {
         $fileMeta = null;
-        parent::$subUrl     = $projectId . '/files/' . $fileId . '/metadata/category/'.$categoryId;
-        self::$method              = 'unlink';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/metadata/category/'.$categoryId;
+        self::$method = 'unlink';
+
         throw new \SDN3Q\Exception\NotImplemented();
 
         return $fileMeta;

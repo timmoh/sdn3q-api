@@ -11,7 +11,6 @@ use SDN3Q\Exception\ParameterRequired;
 
 class BaseRequest
 {
-
     /**
      * @var \GuzzleHttp\Client|null
      */
@@ -21,41 +20,49 @@ class BaseRequest
      * @var string|null
      */
     protected static $response = null;
+
     /**
      * @var array|null
      */
     protected static $responseHeader = null;
+
     /**
      * @var \SDN3Q\Client|null
      */
     protected static $client = null;
 
     protected static $subUrl = '';
+
     /**
      * additional http header
      * @var array
      */
     protected static $additionalHeader = [];
+
     /**
      * parameter to send via post/put
      * @var array
      */
     protected static $requestParm = [];
+
     /**
      * send parameter as via json (true)
      * @var bool
      */
     protected static $requestParmAsJson = true;
+
     /**
      * JSON body
      * @var string
      */
     protected static $jsonBody = null;
+
     /**
      * send parameter as via query (true)
      * @var bool
      */
     protected static $requestParmAsQuery = false;
+
     /**
      * possible parameter that could be filled
      * @var array
@@ -67,11 +74,13 @@ class BaseRequest
      * @var array
      */
     protected static $requiredParm = [];
+
     /**
      * API Endpoint
      * @var string|null
      */
     protected static $endpoint = null;
+
     /**
      * HTTP Method
      * @var string
@@ -91,7 +100,7 @@ class BaseRequest
      */
     public function __construct(\SDN3Q\Client $client)
     {
-        self::$client     = $client;
+        self::$client = $client;
         self::$httpclient = new \GuzzleHttp\Client();
     }
 
@@ -113,16 +122,16 @@ class BaseRequest
      */
     protected static function apiUrlRequest($url = null)
     {
-        if (!is_null($url)) {
+        if (! is_null($url)) {
             $url = [$url];
         } else {
             $url = [static::apiBaseUrl()];
         }
 
-        if (!empty(static::$endpoint)) {
+        if (! empty(static::$endpoint)) {
             $url[] = static::$endpoint;
         }
-        if (!empty(static::$subUrl)) {
+        if (! empty(static::$subUrl)) {
             $url[] = static::$subUrl;
         }
         $returnUrl = implode('/', $url);
@@ -160,7 +169,7 @@ class BaseRequest
         foreach ($parameters as $key) {
             if (in_array($key, self::$requiredParm, true) && empty(self::$requestParm[$key])) {
                 throw new ParameterRequired($key);
-            } elseif (isset(self::$requestParm[$key]) && (!empty(self::$requestParm[$key]) || is_bool(self::$requestParm[$key]))) {
+            } elseif (isset(self::$requestParm[$key]) && (! empty(self::$requestParm[$key]) || is_bool(self::$requestParm[$key]))) {
                 $parms[$key] = self::$requestParm[$key];
             }
         }
@@ -181,9 +190,9 @@ class BaseRequest
     {
         try {
             $url = static::apiUrlRequest($url);
-            $request      = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
+            $request = new \GuzzleHttp\Psr7\Request(strtoupper(self::$method), $url);
             $requestParms = [];
-            if (!empty(self::buildHeader())) {
+            if (! empty(self::buildHeader())) {
                 $requestParms = ['headers' => self::buildHeader()];
             }
             if (self::$requestParmAsJson) {
@@ -195,15 +204,17 @@ class BaseRequest
             $requestParms['on_stats'] = function (TransferStats $stats) use (&$effectiveUrl) {
                 $effectiveUrl = $stats->getEffectiveUri();
             };
-            $response                 = self::$httpclient->send($request, $requestParms);
+            $response = self::$httpclient->send($request, $requestParms);
             self::checkStatusCode($response->getStatusCode());
             self::checkEffectiveUrl($effectiveUrl);
             self::$response = $response->getBody()->getContents();
             self::checkResponse(self::$response);
             self::$responseHeader = $response->getHeaders();
+
             return self::$response;
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             $errorResponse = json_decode($e->getResponse()->getBody(true)->getContents(), true);
+
             throw new ApiException($errorResponse['message'], $e->getResponse()->getStatusCode());
         } catch (\Exception $e) {
             throw $e;
@@ -217,14 +228,14 @@ class BaseRequest
      */
     protected static function resetRequestParameter()
     {
-        self::$subUrl             = '';
-        self::$additionalHeader   = [];
-        self::$requestParm        = [];
-        self::$requestParmAsJson  = true;
+        self::$subUrl = '';
+        self::$additionalHeader = [];
+        self::$requestParm = [];
+        self::$requestParmAsJson = true;
         self::$requestParmAsQuery = false;
-        self::$possibleParm       = [];
-        self::$endpoint           = null;
-        self::$method             = 'get';
+        self::$possibleParm = [];
+        self::$endpoint = null;
+        self::$method = 'get';
     }
 
     /**
@@ -269,6 +280,7 @@ class BaseRequest
                 if (json_last_error() != JSON_ERROR_NONE) {
                     throw new InvalidReturnCode();
                 }
+
                 break;
             default:
                 break;

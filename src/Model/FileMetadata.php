@@ -6,13 +6,12 @@ use MintWare\DMM\DataField;
 
 class FileMetadata extends BaseModel
 {
-
-   /**
-    * Get the standard Picture of File
-    *
-    * @var \SDN3Q\Model\FilePicture
-    * @DataField(name="StandardFilePicture", type="\SDN3Q\Model\FilePicture")
-    */
+    /**
+     * Get the standard Picture of File
+     *
+     * @var \SDN3Q\Model\FilePicture
+     * @DataField(name="StandardFilePicture", type="\SDN3Q\Model\FilePicture")
+     */
     public $standardFilePicture;
 
     /**
@@ -71,7 +70,6 @@ class FileMetadata extends BaseModel
      */
     public $studio;
 
-
     /**
      * Publication from (date)
      *
@@ -87,7 +85,6 @@ class FileMetadata extends BaseModel
      * @DataField(name="IsPublicUntil", type="\Datetime")
      */
     public $isPublicUntil;
-
 
     /**
      * File Categories
@@ -105,7 +102,6 @@ class FileMetadata extends BaseModel
      */
     public $share;
 
-
     /**
      * Meta Series
      *
@@ -121,6 +117,7 @@ class FileMetadata extends BaseModel
      * @DataField(name="ProductionCountry", type="string")
      */
     public $productionCountry;
+
     /**
      * Meta native Language
      *
@@ -128,6 +125,7 @@ class FileMetadata extends BaseModel
      * @DataField(name="NativeLanguage", type="string")
      */
     public $nativeLanguage;
+
     /**
      * Meta individual Program Id
      *
@@ -135,6 +133,7 @@ class FileMetadata extends BaseModel
      * @DataField(name="ProgramId", type="string")
      */
     public $programId;
+
     /**
      * Source of Video File
      *

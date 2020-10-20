@@ -3,6 +3,6 @@ namespace SDN3Q\Enum;
 
 class ChannelDistributionAction
 {
-    const START ='start';
-    const STOP ='stop';
+    const START = 'start';
+    const STOP = 'stop';
 }

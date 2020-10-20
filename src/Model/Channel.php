@@ -12,6 +12,7 @@ class Channel extends BaseModel
      * @DataField(name="Id", type="int")
      */
     public $id;
+
     /**
      * Status of the Channel
      * @var \SDN3Q\Model\ChannelStatus[]
@@ -26,6 +27,7 @@ class Channel extends BaseModel
      * @DataField(name="Project",type="\SDN3Q\Model\Project")
      */
     public $project;
+
     /**
      * Time of creation
      *
@@ -33,6 +35,7 @@ class Channel extends BaseModel
      * @DataField(name="CreatedAt", type="\DateTime")
      */
     public $createdAt;
+
     /**
      * Time of last update
      * @var \DateTime

@@ -20,11 +20,12 @@ class Channels extends BaseRequest
     public static function getChannels()
     {
         $channels = [];
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['Channels']) > 0) {
                 foreach ($data['Channels'] as $dataProject) {
                     $channels[] = $mapper->map(json_encode($dataProject), Channel::class);
@@ -47,8 +48,9 @@ class Channels extends BaseRequest
      */
     public static function getChannel(int $channelId)
     {
-        $channel        = null;
+        $channel = null;
         parent::$subUrl = $channelId;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;

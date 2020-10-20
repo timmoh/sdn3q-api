@@ -22,11 +22,12 @@ class Input extends BaseRequest
     public static function getInput(int $channelId)
     {
         parent::$subUrl = $channelId . '/input';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $input    = $mapper->map($response, ChannelInput::class);
+            $input = $mapper->map($response, ChannelInput::class);
         } catch (\Exception $e) {
             throw $e;
         }
@@ -47,21 +48,22 @@ class Input extends BaseRequest
      */
     public static function changeInput(int $channelId, string $streamInType, bool $useIngestVersion2 = false, int $timeshiftDuration = 0)
     {
-        parent::$subUrl     = $channelId . '/input';
-        self::$method       = 'put';
+        parent::$subUrl = $channelId . '/input';
+        self::$method = 'put';
         self::$possibleParm = [
             'StreamInType',
             'UseIngestVersion2',
             'TimeshiftDuration',
         ];
+
         try {
-            self::$requestParm['StreamInType']      = $streamInType;
+            self::$requestParm['StreamInType'] = $streamInType;
             self::$requestParm['UseIngestVersion2'] = $useIngestVersion2;
             self::$requestParm['TimeshiftDuration'] = $timeshiftDuration;
-            $mapper                                 = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $input    = $mapper->map($response, ChannelInput::class);
+            $input = $mapper->map($response, ChannelInput::class);
         } catch (\Exception $e) {
             throw $e;
         }

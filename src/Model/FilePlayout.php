@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class FilePlayout extends BaseModel
 {
-
     /**
      * ID
      *
@@ -14,6 +13,7 @@ class FilePlayout extends BaseModel
      * @DataField(name="Id", type="string")
      */
     public $Id;
+
     /**
      * Label
      *

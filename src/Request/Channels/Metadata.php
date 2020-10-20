@@ -10,6 +10,7 @@ use SDN3Q\Request\BaseRequest;
 class Metadata extends BaseRequest
 {
     protected static $endpoint = 'channels';
+
     use \SDN3Q\Request\UploadRequest;
 
     /**
@@ -22,8 +23,9 @@ class Metadata extends BaseRequest
      */
     public static function getMetadata(int $channelId)
     {
-        $metaData       = null;
+        $metaData = null;
         parent::$subUrl = $channelId . '/metadata';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
@@ -47,8 +49,8 @@ class Metadata extends BaseRequest
      */
     public static function changeMetadata(int $channelId, array $parms = [])
     {
-        $metaData           = null;
-        self::$method       = 'put';
+        $metaData = null;
+        self::$method = 'put';
         self::$possibleParm = [
             'Title',
             'Description',
@@ -62,7 +64,8 @@ class Metadata extends BaseRequest
             'ChannelCredits',
             'ChannelCreditsSecondLine',
         ];
-        parent::$subUrl     = $channelId . '/metadata';
+        parent::$subUrl = $channelId . '/metadata';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
@@ -71,6 +74,7 @@ class Metadata extends BaseRequest
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $metaData;
     }
 
@@ -85,10 +89,11 @@ class Metadata extends BaseRequest
      */
     public static function putBoardPicture(int $channelId, string $imagePath)
     {
-        $metaData                    = null;
-        self::$method                = 'put';
-        parent::$subUrl              = $channelId . '/metadata/boardpicture';
+        $metaData = null;
+        self::$method = 'put';
+        parent::$subUrl = $channelId . '/metadata/boardpicture';
         self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+
         try {
             $mime = self::checkMimeType($imagePath);
 
@@ -101,6 +106,7 @@ class Metadata extends BaseRequest
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $metaData;
     }
 
@@ -115,10 +121,11 @@ class Metadata extends BaseRequest
      */
     public static function putCreditsPicture(int $channelId, string $imagePath)
     {
-        $metaData                    = null;
-        self::$method                = 'put';
-        parent::$subUrl              = $channelId . '/metadata/creditspicture';
+        $metaData = null;
+        self::$method = 'put';
+        parent::$subUrl = $channelId . '/metadata/creditspicture';
         self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+
         try {
             $mime = self::checkMimeType($imagePath);
 
@@ -131,6 +138,7 @@ class Metadata extends BaseRequest
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $metaData;
     }
 }

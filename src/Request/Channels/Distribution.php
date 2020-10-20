@@ -21,13 +21,14 @@ class Distribution extends BaseRequest
      */
     public static function getDistributions()
     {
-        parent::$subUrl        = 'distributions';
+        parent::$subUrl = 'distributions';
         $channelsDistributions = [];
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             print_r($data);
             if (count($data['ChannelDistributions']) > 0) {
                 foreach ($data['ChannelDistributions'] as $distribution) {
@@ -52,12 +53,13 @@ class Distribution extends BaseRequest
      */
     public static function getDistribution(int $channelId, int $channelDistributionId)
     {
-        parent::$subUrl      = $channelId . '/distributions/' . $channelDistributionId;
+        parent::$subUrl = $channelId . '/distributions/' . $channelDistributionId;
         $channelDistribution = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response            = self::getResponse();
+            $response = self::getResponse();
             $channelDistribution = $mapper->map($response, ChannelDistribution::class);
         } catch (\Exception $e) {
             throw $e;
@@ -77,13 +79,14 @@ class Distribution extends BaseRequest
      */
     public static function deleteDistribution(int $channelId, int $channelDistributionId)
     {
-        parent::$subUrl      = $channelId . '/distributions/' . $channelDistributionId;
+        parent::$subUrl = $channelId . '/distributions/' . $channelDistributionId;
         $channelDistribution = null;
-        self::$method        = 'delete';
+        self::$method = 'delete';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response            = self::getResponse();
+            $response = self::getResponse();
             $channelDistribution = $mapper->map($response, ChannelDistribution::class);
         } catch (\Exception $e) {
             throw $e;
@@ -103,18 +106,19 @@ class Distribution extends BaseRequest
      */
     public static function changeDistribution(int $channelId, int $channelDistributionId, array $parms = [])
     {
-        parent::$subUrl      = $channelId . '/distributions/' . $channelDistributionId;
+        parent::$subUrl = $channelId . '/distributions/' . $channelDistributionId;
         $channelDistribution = null;
-        self::$method        = 'put';
+        self::$method = 'put';
         self::$possibleParm = ['ReceiverPreviewURL', 'AutoDistributing'];
         self::$requiredParm = ['Label', 'ReceiverURL', 'ReceiverKey'];
         foreach ($parms as $key => $value) {
             self::$requestParm[$key] = $value;
         }
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response            = self::getResponse();
+            $response = self::getResponse();
             $channelDistribution = $mapper->map($response, ChannelDistribution::class);
         } catch (\Exception $e) {
             throw $e;
@@ -171,16 +175,17 @@ class Distribution extends BaseRequest
      */
     public static function actionDistribution(int $channelId, int $channelDistributionId, string $action)
     {
-        parent::$subUrl              = $channelId . '/distributions/' . $channelDistributionId . '/StartStop';
-        self::$method                = 'put';
-        self::$requiredParm          = ['Action'];
+        parent::$subUrl = $channelId . '/distributions/' . $channelDistributionId . '/StartStop';
+        self::$method = 'put';
+        self::$requiredParm = ['Action'];
         self::$requestParm['Action'] = $action;
-        $channelDistribution         = null;
+        $channelDistribution = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response            = self::getResponse();
-            $json                = json_decode($response, true);
+            $response = self::getResponse();
+            $json = json_decode($response, true);
             $channelDistribution = $mapper->map($response, ChannelDistribution::class);
         } catch (\Exception $e) {
             throw $e;
@@ -200,19 +205,20 @@ class Distribution extends BaseRequest
      */
     public static function postDistribution(int $channelId, array $parms = [])
     {
-        parent::$subUrl     = $channelId . '/distributions';
-        self::$method       = 'post';
+        parent::$subUrl = $channelId . '/distributions';
+        self::$method = 'post';
         self::$possibleParm = ['ReceiverPreviewURL', 'AutoDistributing'];
         self::$requiredParm = ['Label', 'ReceiverURL', 'ReceiverKey'];
         foreach ($parms as $key => $value) {
             self::$requestParm[$key] = $value;
         }
         $channelDistribution = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response            = self::getResponse();
-            $json                = json_decode($response, true);
+            $response = self::getResponse();
+            $json = json_decode($response, true);
             $channelDistribution = $mapper->map($response, ChannelDistribution::class);
         } catch (\Exception $e) {
             throw $e;

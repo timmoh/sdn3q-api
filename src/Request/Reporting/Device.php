@@ -18,6 +18,7 @@ class Device extends BaseRequest
     public static function getDevices(int $projectId)
     {
         parent::$subUrl = 'projects/' . $projectId . '/devices';
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 }

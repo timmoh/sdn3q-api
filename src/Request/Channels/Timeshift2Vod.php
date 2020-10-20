@@ -24,7 +24,7 @@ class Timeshift2Vod extends BaseRequest
         parent::$subUrl = $channelId . '/timeshift2vod/timeshiftwindow';
 
         try {
-            $mapper   = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             $response = json_decode(self::getResponse());
 
             return $mapper->map(json_encode($response->TimeshiftWindowDimensions), TimeshiftWindowDimensions::class);
@@ -45,8 +45,8 @@ class Timeshift2Vod extends BaseRequest
      */
     public static function postTimeshift2Vod(int $channelId, int $vodProjectId, array $params = [])
     {
-        parent::$subUrl     = $channelId . '/timeshift2vod/' . $vodProjectId;
-        self::$method       = 'post';
+        parent::$subUrl = $channelId . '/timeshift2vod/' . $vodProjectId;
+        self::$method = 'post';
         self::$requiredParm = ['Start', 'End'];
 
         foreach ($params as $key => $value) {
@@ -55,7 +55,7 @@ class Timeshift2Vod extends BaseRequest
 
         try {
             $response = self::getResponse();
-            $json     = json_decode($response, true);
+            $json = json_decode($response, true);
 
             if ($json && isset($json['Id'])) {
                 return (int)$json['Id'];

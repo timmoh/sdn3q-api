@@ -22,12 +22,13 @@ class Output extends BaseRequest
     public static function getOutput(int $channelId)
     {
         $channelOutputURIs = [];
-        parent::$subUrl    = $channelId . '/output';
+        parent::$subUrl = $channelId . '/output';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
 
             if (count($data) > 0) {
                 foreach ($data as $dataOutput) {

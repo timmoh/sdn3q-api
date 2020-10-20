@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class FileOutputURI extends BaseModel
 {
-
     /**
      * Streaming
      *
@@ -22,7 +21,6 @@ class FileOutputURI extends BaseModel
      * @DataField(name="Progressive", type="array")
      */
     public $progressive;
-
 
     /**
      * ProgressiveWithSubclips

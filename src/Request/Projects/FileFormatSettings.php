@@ -21,7 +21,8 @@ class FileFormatSettings extends BaseRequest
     public static function getFileFormatSettings(int $projectId)
     {
         $fileformatsettings = [];
-        parent::$subUrl     = $projectId . '/fileformatsettings';
+        parent::$subUrl = $projectId . '/fileformatsettings';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
@@ -53,12 +54,13 @@ class FileFormatSettings extends BaseRequest
     public static function getFileEncoderSetting(int $projectId, int $fileFormatId)
     {
         $fileformatsetting = null;
-        parent::$subUrl    = $projectId . '/fileformatsettings/' . $fileFormatId;
+        parent::$subUrl = $projectId . '/fileformatsettings/' . $fileFormatId;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
 
-            $response          = self::getResponse();
+            $response = self::getResponse();
             $fileformatsetting = $mapper->map($response, \SDN3Q\Model\FileFormatSettings::class);
         } catch (\Exception $e) {
             throw $e;
@@ -77,9 +79,9 @@ class FileFormatSettings extends BaseRequest
      */
     public static function putFileEncoderSetting(int $projectId, int $fileFormatId, $parms = [])
     {
-        parent::$subUrl     = $projectId . '/fileformatsettings/' . $fileFormatId;
-        $fileformatsetting  = null;
-        self::$method       = 'put';
+        parent::$subUrl = $projectId . '/fileformatsettings/' . $fileFormatId;
+        $fileformatsetting = null;
+        self::$method = 'put';
         self::$possibleParm = [
             'VideoBitRate',
             'VideoProfile',
@@ -91,13 +93,14 @@ class FileFormatSettings extends BaseRequest
         foreach ($parms as $key => $value) {
             self::$requestParm[$key] = $value;
         }
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            self::$requestParm['projectId']    = $projectId;
+            self::$requestParm['projectId'] = $projectId;
             self::$requestParm['FileFormatId'] = $fileFormatId;
 
-            $response          = self::getResponse();
+            $response = self::getResponse();
             $fileformatsetting = $mapper->map($response, \SDN3Q\Model\FileFormatSettings::class);
         } catch (\Exception $e) {
             throw $e;

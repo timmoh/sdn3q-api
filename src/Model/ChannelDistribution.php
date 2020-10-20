@@ -54,20 +54,19 @@ class ChannelDistribution extends BaseModel
     public $receiverPreviewUrl;
 
     /**
-     * @var boolean
+     * @var bool
      * @DataField(name="IsDistributing", type="boolean")
      */
     public $isDistributing;
 
-
     /**
-     * @var boolean
+     * @var bool
      * @DataField(name="IsStarting", type="boolean")
      */
     public $isStarting;
 
     /**
-     * @var boolean
+     * @var bool
      * @DataField(name="IsStoping", type="boolean")
      */
     public $isStoping;
@@ -75,7 +74,7 @@ class ChannelDistribution extends BaseModel
     /**
      * Start Automatically
      *
-     * @var boolean
+     * @var bool
      * @DataField(name="AutoDistributing", type="boolean")
      */
     public $autoDistributing;

@@ -7,8 +7,6 @@ use MintWare\DMM\DataField;
 
 class ChannelInput extends BaseModel
 {
-
-
     /**
      * Type of Channel input
      *
@@ -16,7 +14,6 @@ class ChannelInput extends BaseModel
      * @DataField(name="StreamInType", type="string")
      */
     public $streamInType;
-
 
     /**
      * Connection Details for Input

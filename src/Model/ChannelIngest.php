@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class ChannelIngest extends BaseModel
 {
-
     /**
      * Type of Channel input
      *

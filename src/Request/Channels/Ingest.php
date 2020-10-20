@@ -23,11 +23,12 @@ class Ingest extends BaseRequest
     public static function getIngest(int $channelId)
     {
         parent::$subUrl = $channelId . '/ingest';
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $input    = $mapper->map($response, ChannelIngest::class);
+            $input = $mapper->map($response, ChannelIngest::class);
         } catch (\Exception $e) {
             throw $e;
         }
@@ -58,8 +59,8 @@ class Ingest extends BaseRequest
         bool $srtPasswordProtection = false,
         bool $automaticTranscoding = false
     ) {
-        parent::$subUrl     = $channelId . '/ingest';
-        self::$method       = 'put';
+        parent::$subUrl = $channelId . '/ingest';
+        self::$method = 'put';
         self::$possibleParm = [
             'StreamInType',
             'UseIngestVersion2',
@@ -70,16 +71,16 @@ class Ingest extends BaseRequest
         ];
 
         try {
-            self::$requestParm['StreamInType']          = $streamInType;
-            self::$requestParm['UseIngestVersion2']     = $useIngestVersion2;
-            self::$requestParm['TimeshiftDuration']     = $timeshiftDuration;
-            self::$requestParm['srtRecoveryBuffer']     = $srtRecoveryBuffer;
+            self::$requestParm['StreamInType'] = $streamInType;
+            self::$requestParm['UseIngestVersion2'] = $useIngestVersion2;
+            self::$requestParm['TimeshiftDuration'] = $timeshiftDuration;
+            self::$requestParm['srtRecoveryBuffer'] = $srtRecoveryBuffer;
             self::$requestParm['srtPasswordProtection'] = $srtPasswordProtection;
-            self::$requestParm['AutomaticTranscoding']  = $automaticTranscoding;
+            self::$requestParm['AutomaticTranscoding'] = $automaticTranscoding;
 
-            $mapper   = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             $response = self::getResponse();
-            $input    = $mapper->map($response, ChannelIngest::class);
+            $input = $mapper->map($response, ChannelIngest::class);
         } catch (\Exception $e) {
             throw $e;
         }

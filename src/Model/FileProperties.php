@@ -6,7 +6,6 @@ use MintWare\DMM\DataField;
 
 class FileProperties extends BaseModel
 {
-
     /**
      * Length
      *
@@ -21,7 +20,6 @@ class FileProperties extends BaseModel
      * @var string
      * @DataField(name="Size", type="string")
      */
-
     public $size;
 
     /**
@@ -31,31 +29,35 @@ class FileProperties extends BaseModel
      * @DataField(name="videoFormat", type="string")
      */
     public $VideoFormat;
+
     /**
      * VideoBitRate
      *
-     * @var integer
+     * @var int
      * @DataField(name="VideoBitRate", type="integer")
      */
     public $videoBitRate;
+
     /**
      * VideoWidth
      *
-     * @var integer
+     * @var int
      * @DataField(name="VideoWidth", type="integer")
      */
     public $VideoWidth;
+
     /**
      * VideoHeight
      *
-     * @var integer
+     * @var int
      * @DataField(name="VideoHeight", type="integer")
      */
     public $videoHeight;
+
     /**
      * VideoFPS
      *
-     * @var integer
+     * @var int
      * @DataField(name="VideoFPS", type="integer")
      */
     public $videoFPS;
@@ -67,24 +69,27 @@ class FileProperties extends BaseModel
      * @DataField(name="AudioFormat", type="string")
      */
     public $audioFormat;
+
     /**
      * AudioBitRate
      *
-     * @var integer
+     * @var int
      * @DataField(name="AudioBitRate", type="integer")
      */
     public $audioBitRate;
+
     /**
      * AudioSampleRate
      *
-     * @var integer
+     * @var int
      * @DataField(name="AudioSampleRate", type="integer")
      */
     public $audioSampleRate;
+
     /**
      * AudioChannels
      *
-     * @var integer
+     * @var int
      * @DataField(name="AudioChannels", type="integer")
      */
     public $audioChannels;

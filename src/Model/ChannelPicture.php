@@ -14,6 +14,7 @@ class ChannelPicture extends BaseModel
      * @DataField(name="UseOnlinePicture", type="bool")
      */
     public $useOnlinePicture;
+
     /**
      * URI of Channel Picture
      *

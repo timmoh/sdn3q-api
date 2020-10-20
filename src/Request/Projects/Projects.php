@@ -19,14 +19,14 @@ class Projects extends BaseRequest
      */
     public static function getProjects()
     {
-        $projects           = [];
+        $projects = [];
         self::$requiredParm = [];
 
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['Projects']) > 0) {
                 foreach ($data['Projects'] as $dataProject) {
                     $projects[] = $mapper->map(json_encode($dataProject), Project::class);
@@ -50,13 +50,14 @@ class Projects extends BaseRequest
     public static function getProject(int $projectId)
     {
         $project = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             parent::$subUrl = $projectId;
 
             $response = self::getResponse();
-            $project  = $mapper->map($response, Project::class);
+            $project = $mapper->map($response, Project::class);
         } catch (\Exception $e) {
             throw $e;
         }
@@ -75,15 +76,16 @@ class Projects extends BaseRequest
      */
     public static function postProject(string $label, int $streamTypeId)
     {
-        self::$method       = 'post';
+        self::$method = 'post';
         self::$possibleParm = ['label', 'streamTypeId'];
-        $projectId          = null;
+        $projectId = null;
+
         try {
-            self::$requestParm['label']        = $label;
+            self::$requestParm['label'] = $label;
             self::$requestParm['streamTypeId'] = $streamTypeId;
 
-            $response  = self::getResponse();
-            $json      = json_decode($response, true);
+            $response = self::getResponse();
+            $json = json_decode($response, true);
             $projectId = $json['ProjectId'];
         } catch (\Exception $e) {
             throw $e;
@@ -103,12 +105,14 @@ class Projects extends BaseRequest
     public static function deleteProject(int $projectId)
     {
         self::$method = 'delete';
+
         try {
             parent::$subUrl = $projectId;
-            $response       = self::getResponse();
+            $response = self::getResponse();
         } catch (\Exception $e) {
             throw $e;
         }
+
         return true;
     }
 
@@ -125,15 +129,17 @@ class Projects extends BaseRequest
     public static function putProject(int $projectId, string $label, bool $tokenSecurity = false)
     {
         self::$method = 'put';
+
         try {
             parent::$subUrl = $projectId;
 
-            self::$requestParm['label']         = $label;
+            self::$requestParm['label'] = $label;
             self::$requestParm['TokenSecurity'] = $tokenSecurity;
-            $response                           = self::getResponse();
+            $response = self::getResponse();
         } catch (\Exception $e) {
             throw $e;
         }
+
         return true;
     }
 
@@ -158,6 +164,7 @@ class Projects extends BaseRequest
                 $channelId = $channel->id;
             }
         }
+
         return $channelId;
     }
 }

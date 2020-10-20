@@ -4,37 +4,42 @@ namespace SDN3Q;
 
 class Client
 {
-
     /**
      * @var string
      */
     protected $apiVersion = '2';
+
     /**
      * @var null|string
      */
-    protected $apiKey     = null;
+    protected $apiKey = null;
 
     /**
      * @var string
      */
-    protected $apiProtocol     = 'https';
+    protected $apiProtocol = 'https';
+
     /**
      * @var string
      */
-    protected $baseUrl         = 'sdn.3qsdn.com/api';
+    protected $baseUrl = 'sdn.3qsdn.com/api';
+
     /**
      * @var null|string
      */
-    protected $userName        = null;
+    protected $userName = null;
+
     /**
      * @var null|string
      */
-    protected $userPassword    = null;
+    protected $userPassword = null;
+
     /**
      * use api key (true) as header auth
      * @var bool
      */
     protected $useHeaderApiKey = true;
+
     /**
      * use use user/passwort (true) as header auth
      * @var bool
@@ -49,10 +54,9 @@ class Client
      */
     public function __construct($apiKey = null, $apiVersion = 2)
     {
-        $this->apiKey     = $apiKey;
+        $this->apiKey = $apiKey;
         $this->apiVersion = $apiVersion;
     }
-
 
     public function __get(string $name)
     {
@@ -87,6 +91,7 @@ class Client
     public function apiHeader()
     {
         $header = [];
+
         try {
             if ($this->useHeaderApiKey) {
                 $header = $this->apiKeyHeader();
@@ -96,6 +101,7 @@ class Client
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $header;
     }
 

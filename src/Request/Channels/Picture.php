@@ -25,11 +25,12 @@ class Picture extends BaseRequest
     public static function getPicture(int $channelId)
     {
         $channelPicture = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             parent::$subUrl = $channelId . '/picture';
-            $response       = self::getResponse();
+            $response = self::getResponse();
             $channelPicture = $mapper->map($response, ChannelPicture::class);
         } catch (NoContent $e) {
             return null;
@@ -49,14 +50,15 @@ class Picture extends BaseRequest
      */
     public static function putPicture(int $channelId, string $imagePath)
     {
-        $channelPicture              = null;
-        self::$method                = 'put';
+        $channelPicture = null;
+        self::$method = 'put';
         self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+
         try {
             $mime = self::checkMimeType($imagePath);
 
             self::$additionalHeader["Content-type"] = $mime;
-            $mapper                                 = new ObjectMapper(new JsonSerializer());
+            $mapper = new ObjectMapper(new JsonSerializer());
             ;
             parent::$subUrl = $channelId . '/picture';
 

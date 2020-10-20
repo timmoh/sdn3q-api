@@ -8,7 +8,7 @@ class ChannelStatus extends BaseModel
 {
     /**
      * Online Status of the Channel
-     * @var boolean
+     * @var bool
      * @DataField(name="IsOnline", type="boolean")
      */
     public $isOnline;

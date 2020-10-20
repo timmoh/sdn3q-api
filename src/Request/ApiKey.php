@@ -13,12 +13,13 @@ class ApiKey extends BaseRequest
      */
     public static function getApiKey()
     {
-        $data                          = [];
+        $data = [];
         self::$client->useHeaderApiKey = false;
         self::$client->useHeaderUserPW = true;
+
         try {
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
         } catch (\Exception $e) {
             throw $e;
         }
@@ -33,13 +34,14 @@ class ApiKey extends BaseRequest
      */
     public static function deleteApiKey()
     {
-        self::$method                  = 'delete';
+        self::$method = 'delete';
         self::$client->useHeaderApiKey = false;
         self::$client->useHeaderUserPW = true;
-        $data                          = [];
+        $data = [];
+
         try {
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
         } catch (\Exception $e) {
             throw $e;
         }

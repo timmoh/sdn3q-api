@@ -14,7 +14,7 @@ PUT /api/v2/projects/{ProjectId}/fileformatsettings/{FileFormatId} Set a FileFor
 */
 class FileEncoderSettings extends BaseRequest
 {
-    protected static $endpoint ='projects';
+    protected static $endpoint = 'projects';
     
     public static function getFileEncoderSettings(int $projectId)
     {

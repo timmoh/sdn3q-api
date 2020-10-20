@@ -9,7 +9,7 @@ class Share extends BaseModel
     /**
      * Share Id
      *
-     * @var integer
+     * @var int
      * @DataField(name="Id", type="integer")
      */
     public $id;

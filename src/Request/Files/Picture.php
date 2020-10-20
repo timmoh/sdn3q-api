@@ -10,6 +10,7 @@ use SDN3Q\Request\BaseRequest;
 class Picture extends BaseRequest
 {
     protected static $endpoint = 'projects';
+
     use \SDN3Q\Request\UploadRequest;
 
     /**
@@ -24,12 +25,13 @@ class Picture extends BaseRequest
     public static function getPictures(int $projectId, int $fileId)
     {
         parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures';
-        $filePictures   = [];
+        $filePictures = [];
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $data     = json_decode($response, true);
+            $data = json_decode($response, true);
             if (count($data['FilePictures']) > 0) {
                 foreach ($data['FilePictures'] as $dataFiles) {
                     $filePictures[] = $mapper->map(json_encode($dataFiles), FilePicture::class);
@@ -54,10 +56,11 @@ class Picture extends BaseRequest
      */
     public static function postPicture(int $projectId, int $fileId, string $imagePath)
     {
-        self::$method                = 'post';
-        parent::$subUrl              = $projectId . '/files/' . $fileId . '/pictures';
+        self::$method = 'post';
+        parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures';
         self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
-        $picture                     = null;
+        $picture = null;
+
         try {
             $mime = self::checkMimeType($imagePath);
 
@@ -66,11 +69,13 @@ class Picture extends BaseRequest
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
             $response = self::getResponse();
-            $picture  = $mapper->map($response, FilePicture::class);
+            $picture = $mapper->map($response, FilePicture::class);
+
             return $picture;
         } catch (\Exception $e) {
             throw $e;
         }
+
         return $picture;
     }
 
@@ -86,11 +91,12 @@ class Picture extends BaseRequest
     public static function getPictureDefault(int $projectId, int $fileId)
     {
         parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/standard';
-        $filePicture    = null;
+        $filePicture = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response    = self::getResponse();
+            $response = self::getResponse();
             $filePicture = $mapper->map($response, FilePicture::class);
         } catch (\Exception $e) {
             throw $e;
@@ -111,13 +117,14 @@ class Picture extends BaseRequest
      */
     public static function deletePicture(int $projectId, int $fileId, int $filePictureId)
     {
-        self::$method   = 'delete';
+        self::$method = 'delete';
         parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/' . $filePictureId . '';
-        $filePicture    = null;
+        $filePicture = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response    = self::getResponse();
+            $response = self::getResponse();
             $filePicture = $mapper->map($response, FilePicture::class);
         } catch (\Exception $e) {
             throw $e;
@@ -138,13 +145,14 @@ class Picture extends BaseRequest
      */
     public static function putPicture(int $projectId, int $fileId, int $filePictureId)
     {
-        self::$method   = 'put';
+        self::$method = 'put';
         parent::$subUrl = $projectId . '/files/' . $fileId . '/pictures/' . $filePictureId . '/standard';
-        $filePicture    = null;
+        $filePicture = null;
+
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
             ;
-            $response    = self::getResponse();
+            $response = self::getResponse();
             $filePicture = $mapper->map($response, FilePicture::class);
         } catch (\Exception $e) {
             throw $e;

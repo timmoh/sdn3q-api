@@ -18,6 +18,7 @@ class Country extends BaseRequest
     public static function getCountries(int $projectId)
     {
         parent::$subUrl = 'projects/' . $projectId . '/countries';
+
         throw new \SDN3Q\Exception\NotImplemented();
     }
 }

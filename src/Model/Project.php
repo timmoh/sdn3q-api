@@ -42,7 +42,6 @@ class Project extends BaseModel
      */
     public $securityKey;
 
-
     /**
      * URI of the Project Thumbnail
      *
@@ -69,7 +68,7 @@ class Project extends BaseModel
 
     /**
      * expires enabled
-     * @var boolean
+     * @var bool
      * @DataField(name="Expires", type="boolean")
      */
     public $expires;

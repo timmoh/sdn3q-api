@@ -17,7 +17,7 @@ trait UploadRequest
     {
         try {
             $mimeType = mime_content_type($file);
-            if (!in_array($mimeType, self::$allowedUploadMimeType, true)) {
+            if (! in_array($mimeType, self::$allowedUploadMimeType, true)) {
                 throw new \SDN3Q\Exception\WrongMimeType();
             }
         } catch (\Exception $e) {
