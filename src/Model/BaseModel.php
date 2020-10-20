@@ -1,6 +1,7 @@
 <?php
 
 namespace SDN3Q\Model;
+
 use MintWare\DMM\DataField;
 
 /**
@@ -8,8 +9,6 @@ use MintWare\DMM\DataField;
  * Class BaseModel
  * @package SDN3Q\Model
  */
-class BaseModel {
-
-
-
+class BaseModel
+{
 }

@@ -8,65 +8,65 @@ use SDN3Q\Exception\NoContent;
 use SDN3Q\Model\ChannelPicture;
 use SDN3Q\Request\BaseRequest;
 
-class Picture extends BaseRequest {
+class Picture extends BaseRequest
+{
+    use \SDN3Q\Request\UploadRequest;
 
-	use \SDN3Q\Request\UploadRequest;
+    protected static $endpoint = 'channels';
 
-	protected static $endpoint = 'channels';
+    /**
+     * Return Channel Picture
+     *
+     * @param int $channelId
+     *
+     * @return ChannelPicture|null
+     * @throws \Exception
+     */
+    public static function getPicture(int $channelId)
+    {
+        $channelPicture = null;
+        try {
+            $mapper = new ObjectMapper(new JsonSerializer());
+            ;
+            parent::$subUrl = $channelId . '/picture';
+            $response       = self::getResponse();
+            $channelPicture = $mapper->map($response, ChannelPicture::class);
+        } catch (NoContent $e) {
+            return null;
+        } catch (\Exception $e) {
+            throw $e;
+        }
 
-	/**
-	 * Return Channel Picture
-	 *
-	 * @param int $channelId
-	 *
-	 * @return ChannelPicture|null
-	 * @throws \Exception
-	 */
-	public static function getPicture(int $channelId) {
+        return $channelPicture;
+    }
 
-		$channelPicture = null;
-		try {
-			$mapper = new ObjectMapper(new JsonSerializer());;
-			parent::$subUrl = $channelId . '/picture';
-			$response       = self::getResponse();
-			$channelPicture = $mapper->map($response, ChannelPicture::class);
-		} catch (NoContent $e) {
-			return null;
-		} catch (\Exception $e) {
-			throw $e;
-		}
+    /**
+     * @param int    $channelId
+     * @param string $pathToImage
+     *
+     * @return ChannelPicture|null
+     * @throws \Exception
+     */
+    public static function putPicture(int $channelId, string $imagePath)
+    {
+        $channelPicture              = null;
+        self::$method                = 'put';
+        self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+        try {
+            $mime = self::checkMimeType($imagePath);
 
-		return $channelPicture;
-	}
+            self::$additionalHeader["Content-type"] = $mime;
+            $mapper                                 = new ObjectMapper(new JsonSerializer());
+            ;
+            parent::$subUrl = $channelId . '/picture';
 
-	/**
-	 * @param int    $channelId
-	 * @param string $pathToImage
-	 *
-	 * @return ChannelPicture|null
-	 * @throws \Exception
-	 */
-	public static function putPicture(int $channelId, string $imagePath) {
-		$channelPicture              = null;
-		self::$method                = 'put';
-		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
-		try {
-			$mime = self::checkMimeType($imagePath);
+            $response = self::getResponse();
 
-			self::$additionalHeader["Content-type"] = $mime;
-			$mapper                                 = new ObjectMapper(new JsonSerializer());;
-			parent::$subUrl = $channelId . '/picture';
+            $channelPicture = $mapper->map($response, ChannelPicture::class);
+        } catch (\Exception $e) {
+            throw $e;
+        }
 
-			$response = self::getResponse();
-
-			$channelPicture = $mapper->map($response, ChannelPicture::class);
-		} catch (\Exception $e) {
-			throw $e;
-		}
-
-		return $channelPicture;
-	}
-
+        return $channelPicture;
+    }
 }
-
-
