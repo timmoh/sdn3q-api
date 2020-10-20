@@ -4,94 +4,94 @@ namespace SDN3Q\Model;
 
 use MintWare\DMM\DataField;
 
-class File extends BaseModel {
+class File extends BaseModel
+{
 
-	/**
-	 * File Id
-	 *
-	 * @var integer
-	 * @DataField(name="Id", type="integer|string")
-	 * @DataField(name="FileId", type="integer|string")
-	 */
-	public $id;
+    /**
+     * File Id
+     *
+     * @var integer
+     * @DataField(name="Id", type="integer|string")
+     * @DataField(name="FileId", type="integer|string")
+     */
+    public $id;
 
-	/**
-	 * File Name
-	 *
-	 * @var string
-	 * @DataField(name="Name", type="string")
-	 */
-	public $name;
+    /**
+     * File Name
+     *
+     * @var string
+     * @DataField(name="Name", type="string")
+     */
+    public $name;
 
-	/**
-	 * Is Video processing finished
-	 *
-	 * @var boolean
-	 * @DataField(name="IsFinished", type="boolean")
-	 */
-	public $isFinished;
+    /**
+     * Is Video processing finished
+     *
+     * @var boolean
+     * @DataField(name="IsFinished", type="boolean")
+     */
+    public $isFinished;
 
-	/**
-	 * Is Video transcoding finished and Video is usable
-	 *
-	 * @var boolean
-	 * @DataField(name="IsEncoded", type="boolean")
-	 */
-	public $isEncoded;
+    /**
+     * Is Video transcoding finished and Video is usable
+     *
+     * @var boolean
+     * @DataField(name="IsEncoded", type="boolean")
+     */
+    public $isEncoded;
 
-	/**
-	 * URI of FilePicture
-	 *
-	 * @var string
-	 * @DataField(name="URI", type="string")
-	 */
-	public $uri;
+    /**
+     * URI of FilePicture
+     *
+     * @var string
+     * @DataField(name="URI", type="string")
+     */
+    public $uri;
 
-	/**
-	 * Properties
-	 *
-	 * @var \SDN3Q\Model\FileProperties
-	 * @DataField(name="Properties", type="\SDN3Q\Model\FileProperties")
-	 */
-	public $properties;
+    /**
+     * Properties
+     *
+     * @var \SDN3Q\Model\FileProperties
+     * @DataField(name="Properties", type="\SDN3Q\Model\FileProperties")
+     */
+    public $properties;
 
-	/**
-	 * Metadata
-	 *
-	 * @var \SDN3Q\Model\FileMetadata
-	 * @DataField(name="Metadata", type="\SDN3Q\Model\FileMetadata")
-	 */
-	public $metadata;
+    /**
+     * Metadata
+     *
+     * @var \SDN3Q\Model\FileMetadata
+     * @DataField(name="Metadata", type="\SDN3Q\Model\FileMetadata")
+     */
+    public $metadata;
 
-	/**
-	 * Creation Datetime
-	 *
-	 * @var \Datetime
-	 * @DataField(name="CreatedAt", type="\Datetime")
-	 */
-	public $createdAt;
+    /**
+     * Creation Datetime
+     *
+     * @var \Datetime
+     * @DataField(name="CreatedAt", type="\Datetime")
+     */
+    public $createdAt;
 
-	/**
-	 * Last update Datetime
-	 *
-	 * @var \Datetime
-	 * @DataField(name="LastUpdateAt", type="\Datetime")
-	 */
-	public $lastUpdateAt;
+    /**
+     * Last update Datetime
+     *
+     * @var \Datetime
+     * @DataField(name="LastUpdateAt", type="\Datetime")
+     */
+    public $lastUpdateAt;
 
-	/**
-	 * Is Video marked as deleted (IsEnabled=false)
-	 *
-	 * @var boolean
-	 * @DataField(name="IsEnabled", type="boolean")
-	 */
-	public $isEnabled;
+    /**
+     * Is Video marked as deleted (IsEnabled=false)
+     *
+     * @var boolean
+     * @DataField(name="IsEnabled", type="boolean")
+     */
+    public $isEnabled;
 
-	/**
-	 * upload url
-	 *
-	 * @var null|string
-	 */
-	public $uploadUrl = null;
-
+    /**
+     * upload url
+     *
+     * @var null|string
+     */
+    public $uploadUrl = null;
 }

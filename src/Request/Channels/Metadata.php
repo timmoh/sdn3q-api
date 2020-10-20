@@ -7,130 +7,130 @@ use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\ChannelMetaData;
 use SDN3Q\Request\BaseRequest;
 
-class Metadata extends BaseRequest {
+class Metadata extends BaseRequest
+{
+    protected static $endpoint = 'channels';
+    use \SDN3Q\Request\UploadRequest;
 
-	protected static $endpoint = 'channels';
-	use \SDN3Q\Request\UploadRequest;
+    /**
+     * Return Metadata of a Channel
+     *
+     * @param int $channelId
+     *
+     * @return ChannelMetaData|null
+     * @throws \Exception
+     */
+    public static function getMetadata(int $channelId)
+    {
+        $metaData       = null;
+        parent::$subUrl = $channelId . '/metadata';
+        try {
+            $mapper = new ObjectMapper(new JsonSerializer());
+            ;
+            $response = self::getResponse();
+            $metaData = $mapper->map($response, ChannelMetaData::class);
+        } catch (\Exception $e) {
+            throw $e;
+        }
 
-	/**
-	 * Return Metadata of a Channel
-	 *
-	 * @param int $channelId
-	 *
-	 * @return ChannelMetaData|null
-	 * @throws \Exception
-	 */
-	public static function getMetadata(int $channelId) {
-		$metaData       = null;
-		parent::$subUrl = $channelId . '/metadata';
-		try {
-			$mapper = new ObjectMapper(new JsonSerializer());;
-			$response = self::getResponse();
-			$metaData = $mapper->map($response, ChannelMetaData::class);
+        return $metaData;
+    }
 
-		} catch (\Exception $e) {
-			throw $e;
-		}
+    /**
+     * Change Channel Metadata
+     *
+     * @param int   $channelId
+     * @param array $parms
+     *
+     * @return ChannelMetaData|null
+     * @throws \Exception
+     */
+    public static function changeMetadata(int $channelId, array $parms = [])
+    {
+        $metaData           = null;
+        self::$method       = 'put';
+        self::$possibleParm = [
+            'Title',
+            'Description',
+            'Tags',
+            'DisplayTitle',
+            'DisplayTitleSecondLine',
+            'BoardTitle',
+            'BoardTitleSecondLine',
+            'CountdownEnd',
+            'ShowChannelCredits',
+            'ChannelCredits',
+            'ChannelCreditsSecondLine',
+        ];
+        parent::$subUrl     = $channelId . '/metadata';
+        try {
+            $mapper = new ObjectMapper(new JsonSerializer());
+            ;
+            $response = self::getResponse();
+            $metaData = $mapper->map($response, ChannelMetaData::class);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $metaData;
+    }
 
-		return $metaData;
-	}
+    /**
+     * Put a ChannelMetadata BoardPicture
+     *
+     * @param int    $channelId
+     * @param string $imagePath
+     *
+     * @return ChannelMetaData|null
+     * @throws \Exception
+     */
+    public static function putBoardPicture(int $channelId, string $imagePath)
+    {
+        $metaData                    = null;
+        self::$method                = 'put';
+        parent::$subUrl              = $channelId . '/metadata/boardpicture';
+        self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+        try {
+            $mime = self::checkMimeType($imagePath);
 
-	/**
-	 * Change Channel Metadata
-	 *
-	 * @param int   $channelId
-	 * @param array $parms
-	 *
-	 * @return ChannelMetaData|null
-	 * @throws \Exception
-	 */
-	public static function changeMetadata(int $channelId, array $parms = []) {
-		$metaData           = null;
-		self::$method       = 'put';
-		self::$possibleParm = [
-			'Title',
-			'Description',
-			'Tags',
-			'DisplayTitle',
-			'DisplayTitleSecondLine',
-			'BoardTitle',
-			'BoardTitleSecondLine',
-			'CountdownEnd',
-			'ShowChannelCredits',
-			'ChannelCredits',
-			'ChannelCreditsSecondLine',
-		];
-		parent::$subUrl     = $channelId . '/metadata';
-		try {
-			$mapper = new ObjectMapper(new JsonSerializer());;
-			$response = self::getResponse();
-			$metaData = $mapper->map($response, ChannelMetaData::class);
+            self::$additionalHeader["Content-type"] = $mime;
 
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return $metaData;
-	}
+            $mapper = new ObjectMapper(new JsonSerializer());
+            ;
+            $response = self::getResponse();
+            $metaData = $mapper->map($response, ChannelMetaData::class);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $metaData;
+    }
 
-	/**
-	 * Put a ChannelMetadata BoardPicture
-	 *
-	 * @param int    $channelId
-	 * @param string $imagePath
-	 *
-	 * @return ChannelMetaData|null
-	 * @throws \Exception
-	 */
-	public static function putBoardPicture(int $channelId, string $imagePath) {
-		$metaData                    = null;
-		self::$method                = 'put';
-		parent::$subUrl              = $channelId . '/metadata/boardpicture';
-		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
-		try {
+    /**
+     * Put a ChannelMetadata CreditsPicture
+     *
+     * @param int    $channelId
+     * @param string $imagePath
+     *
+     * @return ChannelMetaData|null
+     * @throws \Exception
+     */
+    public static function putCreditsPicture(int $channelId, string $imagePath)
+    {
+        $metaData                    = null;
+        self::$method                = 'put';
+        parent::$subUrl              = $channelId . '/metadata/creditspicture';
+        self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
+        try {
+            $mime = self::checkMimeType($imagePath);
 
-			$mime = self::checkMimeType($imagePath);
+            self::$additionalHeader["Content-type"] = $mime;
 
-			self::$additionalHeader["Content-type"] = $mime;
-
-			$mapper = new ObjectMapper(new JsonSerializer());;
-			$response = self::getResponse();
-			$metaData = $mapper->map($response, ChannelMetaData::class);
-
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return $metaData;
-	}
-
-	/**
-	 * Put a ChannelMetadata CreditsPicture
-	 *
-	 * @param int    $channelId
-	 * @param string $imagePath
-	 *
-	 * @return ChannelMetaData|null
-	 * @throws \Exception
-	 */
-	public static function putCreditsPicture(int $channelId, string $imagePath) {
-		$metaData                    = null;
-		self::$method                = 'put';
-		parent::$subUrl              = $channelId . '/metadata/creditspicture';
-		self::$allowedUploadMimeType = ['image/jpeg', 'image/png'];
-		try {
-			$mime = self::checkMimeType($imagePath);
-
-			self::$additionalHeader["Content-type"] = $mime;
-
-			$mapper = new ObjectMapper(new JsonSerializer());;
-			$response = self::getResponse();
-			$metaData = $mapper->map($response, ChannelMetaData::class);
-
-		} catch (\Exception $e) {
-			throw $e;
-		}
-		return $metaData;
-
-	}
+            $mapper = new ObjectMapper(new JsonSerializer());
+            ;
+            $response = self::getResponse();
+            $metaData = $mapper->map($response, ChannelMetaData::class);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $metaData;
+    }
 }
-
-

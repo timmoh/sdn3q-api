@@ -15,32 +15,37 @@ UNLINK /api/v2/projects/{ProjectId}/pipeline/{FileId}/fileformat/{FileFormatId} 
 PUT /api/v2/projects/{ProjectId}/pipeline/{FileId}/watermarkpicture Put a WatermarkPicture to Pipeline Asset
 */
 
-class FileEncoderPipeline extends BaseRequest{
-	protected static $endpoint ='projects';
-	
-	public static function getFileEncoderPipelines(int $projectId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	public static function getFileEncoderPipeline(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	public static function putFileEncoderPipeline(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	public static function linkFileEncoderPipelineFileformat(int $projectId,int $fileId,int $fileFormatId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	public static function unlinkFileEncoderPipelineFileformat(int $projectId,int $fileId,int $fileFormatId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
-	
-	public static function putFileEncoderPipelineWatermarkPicture(int $projectId,int $fileId){
-		throw new \SDN3Q\Exception\NotImplemented();
-	}
+class FileEncoderPipeline extends BaseRequest
+{
+    protected static $endpoint ='projects';
+    
+    public static function getFileEncoderPipelines(int $projectId)
+    {
+        throw new \SDN3Q\Exception\NotImplemented();
+    }
+    
+    public static function getFileEncoderPipeline(int $projectId, int $fileId)
+    {
+        throw new \SDN3Q\Exception\NotImplemented();
+    }
+    
+    public static function putFileEncoderPipeline(int $projectId, int $fileId)
+    {
+        throw new \SDN3Q\Exception\NotImplemented();
+    }
+    
+    public static function linkFileEncoderPipelineFileformat(int $projectId, int $fileId, int $fileFormatId)
+    {
+        throw new \SDN3Q\Exception\NotImplemented();
+    }
+    
+    public static function unlinkFileEncoderPipelineFileformat(int $projectId, int $fileId, int $fileFormatId)
+    {
+        throw new \SDN3Q\Exception\NotImplemented();
+    }
+    
+    public static function putFileEncoderPipelineWatermarkPicture(int $projectId, int $fileId)
+    {
+        throw new \SDN3Q\Exception\NotImplemented();
+    }
 }
-
-
