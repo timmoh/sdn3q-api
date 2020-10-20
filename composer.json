@@ -26,6 +26,7 @@
     "mintware-de/dmm-json": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~6.0"
+    "friendsofphp/php-cs-fixer": "^2.16",
+    "phpunit/phpunit": "~8.0"
   }
 }
