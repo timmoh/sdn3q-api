@@ -4,10 +4,10 @@ namespace SDN3Q\Request\Projects;
 
 use MintWare\DMM\ObjectMapper;
 use MintWare\DMM\Serializer\JsonSerializer;
-use SDN3Q\Model\ProjectUsage;
+use SDN3Q\Model\ProjectUsageModel;
 use SDN3Q\Request\BaseRequest;
 
-class Usage extends BaseRequest {
+class ProjectUsage extends BaseRequest {
 
 	protected static $endpoint = 'projects';
 
@@ -37,7 +37,7 @@ class Usage extends BaseRequest {
 
 			if (count($data['Data']) > 0) {
 				foreach ($data['Data'] as $dataUsage) {
-					$usage[] = $mapper->map(json_encode($dataUsage), ProjectUsage::class);
+					$usage[] = $mapper->map(json_encode($dataUsage), ProjectUsageModel::class);
 				}
 			}
 		} catch (\Exception $e) {
