@@ -3,7 +3,7 @@
 namespace SDN3Q\Model;
 use MintWare\DMM\DataField;
 
-class ProjectUsage extends BaseModel {
+class ProjectUsageModel extends BaseModel {
 
 	/**
 	 * @var string
