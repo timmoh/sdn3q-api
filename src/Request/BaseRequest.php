@@ -234,6 +234,7 @@ class BaseRequest
         self::$requestParmAsJson = true;
         self::$requestParmAsQuery = false;
         self::$possibleParm = [];
+        self::$requiredParm = [];
         self::$endpoint = null;
         self::$method = 'get';
     }
