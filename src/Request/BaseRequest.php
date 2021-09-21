@@ -213,9 +213,16 @@ class BaseRequest
 
             return self::$response;
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            $errorResponse = json_decode($e->getResponse()->getBody(true)->getContents(), true);
+            $message = $e->getMessage();
 
-            throw new ApiException($errorResponse['message'], $e->getResponse()->getStatusCode());
+            if ($e->getResponse()) {
+                $errorResponse = json_decode($e->getResponse()->getBody(true)->getContents(), true);
+                if (isset($errorResponse['message'])) {
+                    $message = $errorResponse['message'] . ', statusCode=' . $e->getResponse()->getStatusCode();
+                }
+            }
+
+            throw new ApiException($message . ' on ' . $url . ' with ' . json_encode($requestParms), $e->getResponse()->getStatusCode());
         } catch (\Exception $e) {
             throw $e;
         } finally {
