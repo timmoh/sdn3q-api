@@ -222,7 +222,7 @@ class BaseRequest
                 }
             }
 
-            throw new ApiException($message . ' on ' . $url . ' with ' . json_encode($requestParms), $e->getResponse()->getStatusCode());
+            throw new ApiException($message . ' on ' . $url . ' with ' . json_encode($requestParms));
         } catch (\Exception $e) {
             throw $e;
         } finally {
