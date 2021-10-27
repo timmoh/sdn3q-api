@@ -70,6 +70,7 @@ class Timeshift2Vod extends BaseRequest
     {
         parent::$subUrl = $channelId . '/timeshift2vod/' . $vodProjectId;
         self::$method = 'post';
+        self::$possibleParm = ['TimeshiftId'];
         self::$requiredParm = ['Start', 'End'];
 
         foreach ($params as $key => $value) {
