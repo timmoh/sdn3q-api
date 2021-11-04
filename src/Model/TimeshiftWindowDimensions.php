@@ -25,4 +25,11 @@ class TimeshiftWindowDimensions extends BaseModel
      * @DataField(name="End", type="string")
      */
     public $endDateTime;
+    
+    /**
+     * @var string
+     * @DataField(name="Source", type="string")
+     */
+    public $source;
+    
 }
