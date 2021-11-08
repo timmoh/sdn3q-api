@@ -20,7 +20,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "guzzlehttp/guzzle": "~6.0",
+    "guzzlehttp/guzzle": "~6.0|~7.0",
     "guzzlehttp/psr7": "^1.4",
     "mintware-de/data-model-mapper": "^1.0",
     "mintware-de/dmm-json": "^1.0"
