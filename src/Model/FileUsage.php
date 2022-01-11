@@ -6,10 +6,10 @@ use MintWare\DMM\DataField;
 class FileUsage extends BaseModel {
 
     /**
-     * @var string
-     * @DataField(name="TotalBytes", type="string")
+     * @var int
+     * @DataField(name="TotalBytes", type="int")
      */
-    public $totalBytes;
+    public $totalBytes = 0;
 
 	/**
 	 * @var \SDN3Q\Model\BandwidthData[]

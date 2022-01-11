@@ -41,7 +41,7 @@ class ProjectUsageFileList extends BaseRequest
             $data = json_decode($response, true);
             if (count($data['Data']) > 0) {
                 foreach ($data['Data'] as $fileId => $fileData) {
-                    $list[$fileId] = $list = $mapper->map(json_encode($data), FileUsage::class);
+                    $list[$fileId] = $mapper->map(json_encode($fileData), FileUsage::class);
                 }
             }
         } catch (\Exception $e) {
