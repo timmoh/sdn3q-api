@@ -33,7 +33,27 @@ class Timeshift2Vod extends BaseRequest
             throw $e;
         }
     }
-    
+
+	/**
+	 * @param int $channelId
+	 *
+	 * @return TimeshiftWindowDimensions[]
+	 * @throws \GuzzleHttp\Exception\GuzzleException
+	 */
+	public static function getTimeshift2VodWindowHistory(int $channelId) {
+		parent::$subUrl = $channelId . '/timeshift2vod/timeshiftwindowhistory';
+
+		try {
+			$mapper   = new ObjectMapper(new JsonSerializer());
+			$response = json_decode(self::getResponse());
+
+			$data = $mapper->map(json_encode($response), TimeshiftWindow::class);
+			return $data->dimensionsHistory;
+		} catch (\Exception $e) {
+			throw $e;
+		}
+	}
+
 	/**
 	 * Get the Timeshift2Vod window with history
 	 *
@@ -42,7 +62,7 @@ class Timeshift2Vod extends BaseRequest
 	 * @return TimeshiftWindow
 	 * @throws \GuzzleHttp\Exception\GuzzleException
 	 */
-	public static function getTimeshift2VodWindowHistory(int $channelId)
+	public static function getTimeshift2VodWindowWithHistory(int $channelId)
 	{
 		parent::$subUrl = $channelId . '/timeshift2vod/timeshiftwindow';
 
