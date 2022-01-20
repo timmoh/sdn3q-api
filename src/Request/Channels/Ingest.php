@@ -57,7 +57,8 @@ class Ingest extends BaseRequest
         int $timeshiftDuration = 0,
         int $srtRecoveryBuffer = 0,
         bool $srtPasswordProtection = false,
-        bool $automaticTranscoding = false
+        bool $automaticTranscoding = false,
+	    bool $sourceStabilizing = false
     ) {
         parent::$subUrl = $channelId . '/ingest';
         self::$method = 'put';
@@ -68,6 +69,7 @@ class Ingest extends BaseRequest
             'srtRecoveryBuffer',
             'srtPasswordProtection',
             'AutomaticTranscoding',
+	        'SourceStabilizing',
         ];
 
         try {
@@ -77,6 +79,7 @@ class Ingest extends BaseRequest
             self::$requestParm['srtRecoveryBuffer'] = $srtRecoveryBuffer;
             self::$requestParm['srtPasswordProtection'] = $srtPasswordProtection;
             self::$requestParm['AutomaticTranscoding'] = $automaticTranscoding;
+	        self::$requestParm['SourceStabilizing'] = $sourceStabilizing;
 
             $mapper = new ObjectMapper(new JsonSerializer());
             $response = self::getResponse();
