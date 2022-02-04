@@ -5,7 +5,6 @@ namespace SDN3Q\Request\Channels;
 use MintWare\DMM\ObjectMapper;
 use MintWare\DMM\Serializer\JsonSerializer;
 use SDN3Q\Model\ChannelIngest;
-use SDN3Q\Model\ChannelInput;
 use SDN3Q\Request\BaseRequest;
 
 class Ingest extends BaseRequest
@@ -13,11 +12,11 @@ class Ingest extends BaseRequest
     protected static $endpoint = 'channels';
 
     /**
-     * Return Input of a Channel
+     * Return Ingest of a Channel
      *
      * @param int $channelId
      *
-     * @return ChannelInput
+     * @return ChannelIngest
      * @throws \Exception
      */
     public static function getIngest(int $channelId)
@@ -26,7 +25,6 @@ class Ingest extends BaseRequest
 
         try {
             $mapper = new ObjectMapper(new JsonSerializer());
-            ;
             $response = self::getResponse();
             $input = $mapper->map($response, ChannelIngest::class);
         } catch (\Exception $e) {
@@ -37,7 +35,7 @@ class Ingest extends BaseRequest
     }
 
     /**
-     * Change Channel Input
+     * Change Channel Ingest
      *
      * @param int    $channelId
      * @param string $streamInType
@@ -47,7 +45,7 @@ class Ingest extends BaseRequest
      * @param bool   $srtPasswordProtection
      * @param bool   $automaticTranscoding
      *
-     * @return ChannelInput
+     * @return ChannelIngest
      * @throws \Exception
      */
     public static function changeIngest(
